@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://www.cnblogs.com/zeq912/p/9606105.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="origin">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <title>NFS网络文件系统详解 - Alan.zhang - 博客园</title>
+    <meta property="og:description" content="第1章 NFS基本概述 1.1 什么是nfs NFS是Network File System的缩写及网络文件系统。 主要功能是通过局域网络让不同的主机系统之间可以共享文件或目录。 NFS系统和Wind">
+    <link type="text/css" rel="stylesheet" href="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/blog-common.css">
+<link type="text/css" rel="stylesheet" href="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/443008.css">
+
+    <link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/zeq912/rss">
+    <link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/zeq912/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/zeq912/wlwmanifest.xml">
+    <script src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/amp4ads-host-v0.js.下载"></script><script src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/pubads_impl_rendering_2019073001.js.下载"></script><script async="" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/encoder.js.下载"></script><script src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+    <script>var currentBlogId=443008;var currentBlogApp='zeq912',cb_enable_mathjax=false;var isLogined=false;</script>
+    <script src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+<link rel="preload" href="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/f.txt" as="script"><script type="text/javascript" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/f.txt"></script><script src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/pubads_impl_2019073001.js.下载" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-35/html/container.html"></head>
+<body style="padding-left: 290px;">
+<a name="top"></a>
+
+<!--PageBeginHtml Block Begin-->
+<!-- 背景动画 -->
+<canvas id="c_n9" width="1920" height="990" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
+<script src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/canvas-nest.min.js.下载"></script><canvas id="c_n4" width="1033" height="878" style="position: fixed; top: 0px; left: 0px; z-index: -1; opacity: 0.5;"></canvas>
+<script src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/tctip-1.0.0.min.js.下载"></script>
+
+<script type="text/javascript">$("#mobile-style").remove();</script>
+<link href="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/font-awesome.min.css" rel="stylesheet">
+<link href="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/lnh.cnblogs.css" rel="stylesheet">
+<!--PageBeginHtml Block End-->
+
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+		
+<!--done-->
+<div class="title"><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/zeq912/">Alan.Zhang</a></div>
+<div class="subtitle">一个linux小白的辛酸运维之路</div>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+	<div id="navigator">
+		
+<ul id="navList">
+<li id="nav_sitehome"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+<li id="nav_myhome"><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/zeq912/">首页</a></li>
+<li id="nav_newpost"><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li id="nav_contact"><a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/Alan.zhang">联系</a></li>
+<li id="nav_rss"><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/zeq912/rss">订阅</a>
+<!--<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/zeq912/rss"><img src="//www.cnblogs.com/images/xml.gif" alt="订阅" /></a>--></li>
+<li id="nav_admin"><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+		<div class="blogStats">
+			
+			<div id="blog_stats">
+<!--done-->
+随笔-39&nbsp;
+文章-0&nbsp;
+评论-11&nbsp;
+</div>
+			
+		</div><!--end: blogStats -->
+	</div><!--end: navigator 博客导航栏 -->
+</div><!--end: header 头部 -->
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		
+        <div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/zeq912/p/9606105.html">NFS网络文件系统详解</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="post-categoty-tags"><div class="post-categoty">分类: <a href="https://www.cnblogs.com/zeq912/category/1294405.html" target="_blank">集群架构</a></div><div class="post-tags"></div></div><div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><h1 id="auto_id_0">第1章 NFS基本概述</h1>
+<h2 id="auto_id_1">1.1 什么是nfs</h2>
+<p>NFS是Network File System的缩写及网络文件系统。</p>
+<p>主要功能是通过局域网络让不同的主机系统之间可以共享文件或目录。</p>
+<p>NFS系统和Windows网络共享、网络驱动器类似, 只不过windows用于局域网, NFS用于企业集群架构中, 如果是大型网站, 会用到更复杂的分布式文件系统FastDFS,glusterfs,HDFS</p>
+<h2 id="auto_id_2">1.2 为什么要使用NFS服务进行数据存储</h2>
+<p>1.实现多台服务器之间数据共享</p>
+<p>2.实现多台服务器之间数据的一致</p>
+<h2 id="auto_id_3">1.3 本地文件操作方式</h2>
+<p>当用户执行mkdir命令, 该命令会通过shell解释器翻译给内核,由内核解析完成后驱动硬件，完成相应的操作。</p>
+<h2 id="auto_id_4">1.4 NFS实现原理(需要先了解[程序|进程|线程])</h2>
+<p>1.用户进程访问NFS客户端，使用不同的函数对数据进行处理</p>
+<p>2.NFS客户端通过TCP/IP的方式传递给NFS服务端。</p>
+<p>3.NFS服务端接收到请求后，会先调用portmap进程进行端口映射。</p>
+<p>4.nfsd进程用于判断NFS客户端是否拥有权限连接NFS服务端。</p>
+<p>5.Rpc.mount进程判断客户端是否有对应的权限进行验证。</p>
+<p>6.idmap进程实现用户映射和压缩</p>
+<p>7.最后NFS服务端会将对应请求的函数转换为本地能识别的命令，传递至内核，由内核驱动硬件。</p>
+<p>rpc是一个远程过程调用，那么使用nfs必须有rpc服务</p>
+<h2 id="auto_id_5">1.5 NFS存储优点</h2>
+<p>1.NFS文件系统简单易用、方便部署、数据可靠、服务稳定、满足中小企业需求。</p>
+<p>2.NFS文件系统内存放的数据都在文件系统之上，所有数据都是能看得见。</p>
+<h2 id="auto_id_6">1.6 NFS存储局限</h2>
+<p>1.存在单点故障, 如果构建高可用维护麻烦。(web-》nfs()-》backup)</p>
+<p>2.NFS数据明文, 并不对数据做任何校验。</p>
+<p>3.客户端挂载无需账户密码, 安全性一般(内网使用)</p>
+<h2 id="auto_id_7">1.7 生产应用建议</h2>
+<p>1.生产场景应将静态数据尽可能往前端推, 减少后端存储压力</p>
+<p>2.必须将存储里的静态资源通过CDN缓存(jpg\png\mp4\avi\css\js)</p>
+<p>3.如果没有缓存或架构本身历史遗留问题太大, 在多存储也无用</p>
+<h1 id="auto_id_8">第2章 NFS基本使用</h1>
+<h2 id="auto_id_9">2.1 环境准备</h2>
+<table border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" width="161">
+<p>服务器系统</p>
+</td>
+<td valign="top" width="161">
+<p>角色</p>
+</td>
+<td valign="top" width="161">
+<p>外网IP</p>
+</td>
+<td valign="top" width="161">
+<p>内网IP</p>
+</td>
+<td valign="top" width="156">
+<p>主机名</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="161">
+<p>CentOS 7.5</p>
+</td>
+<td valign="top" width="161">
+<p>NFS服务端</p>
+</td>
+<td valign="top" width="161">
+<p>eth0:10.0.0.31</p>
+</td>
+<td valign="top" width="161">
+<p>eth1:172.16.1.31</p>
+</td>
+<td valign="top" width="156">
+<p>nfs</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="161">
+<p>CentOS 7.5</p>
+</td>
+<td valign="top" width="161">
+<p>NFS客户端</p>
+</td>
+<td valign="top" width="161">
+<p>eth0:10.0.0.7</p>
+</td>
+<td valign="top" width="161">
+<p>eth1:172.16.1.7</p>
+</td>
+<td valign="top" width="156">
+<p>web01</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="auto_id_10">2.2 关闭防火墙及selinux（客户端，服务端都要关闭）</h2>
+<h3 id="auto_id_11">2.2.1 关闭防火墙</h3>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">systemctl disable firewalld<br>
+systemctl stop firewalld</span></pre>
+</div>
+</div>
+<h3 id="auto_id_12">2.2.2 关闭selinux</h3>
+<div>
+<div class="cnblogs_code">
+<pre>sed -ri <span style="color: #800000;">'</span><span style="color: #800000;">#^SELINUX=#cSELINUX=Disabled</span><span style="color: #800000;">'</span> /etc/selinux/<span style="color: #000000;">config
+
+setenforce 0</span></pre>
+</div>
+</div>
+<h2 id="auto_id_13">2.3 服务端安装nfs</h2>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> yum -y install nfs-utils</span></pre>
+</div>
+</div>
+<h3 id="auto_id_14">2.3.1 配置nfs</h3>
+<p>我们可以按照共享目录的路径 允许访问的NFS客户端（共享权限参数）格式，定义要共享的目录与相应的权限。</p>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> echo '/data 172.16.1.0/24(rw,sync,all_squash)' &gt; /etc/exports</span>
+<span style="color: #000000;">
+[root@nfs </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> cat /etc/exports</span>
+
+/data 172.16.1.0/24(rw,sync,all_squash)</pre>
+</div>
+</div>
+<p>如果想要把/data目录共享给172.16.1.0/24网段内的所有主机</p>
+<p>1.主机都拥有读写权限</p>
+<p>2.在将数据写入到NFS服务器的硬盘中后才会结束操作，最大限度保证数据不丢失</p>
+<p>3.将所有用户映射为本地的匿名用户(nfsnobody)</p>
+<h3 id="auto_id_15">2.3.2 创建对应的目录</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> mkdir /data</span></pre>
+</div>
+</div>
+<h3 id="auto_id_16">2.3.3 启动服务，并将服务加入开机自启动</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> systemctl enable rpcbind nfs-server</span>
+<span style="color: #000000;">
+[root@nfs </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> systemctl start rpcbind nfs-server</span></pre>
+</div>
+</div>
+<h3 id="auto_id_17">2.3.4 检查端口</h3>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> netstat -lntp</span>
+<span style="color: #000000;">
+Active Internet connections (only servers)
+Proto Recv</span>-Q Send-Q Local Address      Foreign Address    State       PID/<span style="color: #000000;">Program name                  
+tcp        0      0 </span>0.0.0.0:2049            0.0.0.0:*     LISTEN      -<span style="color: #000000;">                     
+tcp        0      0 </span>0.0.0.0:111             0.0.0.0:*     LISTEN      653/rpcbind</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<h3 id="auto_id_18">2.3.5 检查共享的内容</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> cat /var/lib/nfs/etab</span>
+
+/data 172.16.1.0/24(rw,sync,wdelay,hide,nocrossmnt,secure,root_squash,all_squash,no_subtree_check,secure_locks,acl,no_pnfs,anonuid=65534,anongid=65534,sec=sys,secure,root_squash,all_squash)</pre>
+</div>
+</div>
+<h3 id="auto_id_19">2.3.6 检查匿名用户对应的真实账户,并授权共享目录为nfsnobody</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> grep "65534" /etc/passwd</span>
+<span style="color: #000000;">
+nfsnobody:x:</span>65534:65534:Anonymous NFS User:/var/lib/nfs:/sbin/<span style="color: #000000;">nologin
+
+[root@nfs </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> chown -R nfsnobody.nfsnobody /data</span></pre>
+</div>
+</div>
+<h2 id="auto_id_20">2.4 客户端安装nfs</h2>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> yum install nfs-utils -y</span></pre>
+</div>
+</div>
+<h3 id="auto_id_21">2.4.1 启动<code>rpcbind</code>服务</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> systemctl enable rpcbind</span>
+<span style="color: #000000;">
+[root@web01 </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> systemctl start rpcbind</span></pre>
+</div>
+</div>
+<h3 id="auto_id_22">2.4.2 使用<code>showmount -e</code>查看远程服务器<code>rpc</code>提供的可挂载<code>nfs</code>信息</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> showmount -e 172.16.1.31</span>
+<span style="color: #000000;">
+Export list </span><span style="color: #0000ff;">for</span> 172.16.1.31<span style="color: #000000;">:
+
+</span>/data 172.16.1.0/24</pre>
+</div>
+</div>
+<h3 id="auto_id_23">2.4.3 创建挂载点目录，执行挂载命令</h3>
+<p>mount命令并结合-t参数, 指定要挂载的文件系统的类型, 并在命令后面写上服务器的IP地址, 以及服务器上的共享目录, 最后需要写上要挂载到本地系统(客户端)的目录</p>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> mkdir /data</span>
+<span style="color: #000000;">
+[root@web01 </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> mount -t nfs 172.16.1.31:/data /data/</span>
+<span style="color: #000000;">
+[root@web01 </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> df -h</span>
+<span style="color: #000000;">
+文件系统                   容量  已用   可用    已用</span>%<span style="color: #000000;"> 挂载<br>
+</span>172.16.1.31:/data         50G  2.6G   48G    6% /data</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<h3 class="a" id="auto_id_24"><span style="font-size: 1.17em;">2.4.4 挂载成功后可以进行增删改操作，测试客户端是否拥有写的权限</span></h3>
+</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> echo "123" &gt; /data/test</span>
+<span style="color: #000000;">
+[root@web01 </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> ll /data/</span>
+<span style="color: #000000;">
+总用量 </span>4
+
+-rw-r--r-- 1 nfsnobody nfsnobody 4 9月   6 03:41 test</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<h3 id="auto_id_25">2.4.5 检查nfs服务端是否存在数据</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> ll /data/</span>
+<span style="color: #000000;">
+总用量 </span>4
+
+-rw-r--r-- 1 nfsnobody nfsnobody 4 9月   6 03:41 test</pre>
+</div>
+</div>
+<h3 id="auto_id_26">2.4.6 如果希望NFS文件共享服务能一直有效则永久挂载</h3>
+<p>（防止服务器重启挂载失效-&gt;服务器不会重启）</p>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> echo '172.16.1.31:/data       /data                   nfs     defaults        0 0</span><span style="color: #800000;">'</span><span style="color: #800000;"> &gt;&gt; /etc/fstab</span>
+<span style="color: #000000;">
+[root@web01 </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> tail -1 /etc/fstab</span>
+
+172.16.1.31:/data       /data                   nfs     defaults        0 0</pre>
+</div>
+</div>
+<p>验证fstab是否ok，前提要先卸载挂载</p>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> umount /data/</span></pre>
+</div>
+</div>
+<p>df -h 发现挂载没有了</p>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> mount -a</span></pre>
+</div>
+</div>
+<p>fstab如果ok，df -h查看会看到已经自动挂载了</p>
+<h3 id="auto_id_27">2.4.7 如果不希望使用<code>NFS</code>共享, 可进行卸载</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> umount /data/</span></pre>
+</div>
+</div>
+<p>卸载的时候如果提示”umount.nfs: /data: device is busy”&nbsp;</p>
+<p>1.切换至其他目录, 然后在进行卸载。</p>
+<p>2.NFS宕机, 强制卸载umount -lf /data</p>
+<h2 id="auto_id_28">2.5 配置多台客户端服务器的配置方法何上面客户端方法一致</h2>
+<p>注意：客户端的必须是服务端配置允许访问的NFS客户端网段内的所有主机</p>
+<h1 id="auto_id_29">第3章 NFS配置参数及验证</h1>
+<h2 id="auto_id_30">3.1 nfs共享参数及作用</h2>
+<p>执行man exports命令，然后切换到文件结尾，可以快速查看如下样例格式：</p>
+<table style="width: 823px;" border="1" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top" width="151">
+<p>共享参数</p>
+</td>
+<td valign="top" width="671">
+<p>参数作用</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>rw*</p>
+</td>
+<td valign="top" width="671">
+<p>读写权限</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>ro</p>
+</td>
+<td valign="top" width="671">
+<p>只读权限</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>root_squash</p>
+</td>
+<td valign="top" width="671">
+<p>当NFS客户端以root管理员访问时，映射为NFS服务器的匿名用户(不常用)</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>no_root_squash</p>
+</td>
+<td valign="top" width="671">
+<p>当NFS客户端以root管理员访问时，映射为NFS服务器的root管理员(不常用)</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>all_squash</p>
+</td>
+<td valign="top" width="671">
+<p>无论NFS客户端使用什么账户访问，均映射为NFS服务器的匿名用户(常用)</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>no_all_squash</p>
+</td>
+<td valign="top" width="671">
+<p>无论NFS客户端使用什么账户访问，都不进行压缩</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>sync*</p>
+</td>
+<td valign="top" width="671">
+<p>同时将数据写入到内存与硬盘中，保证不丢失数据</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>async</p>
+</td>
+<td valign="top" width="671">
+<p>优先将数据保存到内存，然后再写入硬盘；这样效率更高，但可能会丢失数据</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>anonuid*</p>
+</td>
+<td valign="top" width="671">
+<p>配置all_squash使用,指定NFS的用户UID,必须存在系统</p>
+</td>
+</tr>
+<tr>
+<td valign="top" width="151">
+<p>anongid*</p>
+</td>
+<td valign="top" width="671">
+<p>配置all_squash使用,指定NFS的用户UID,必须存在系统</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="auto_id_31">3.2 验证ro权限</h2>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> echo '/data 172.16.1.0/24(ro,sync,all_squash)' &gt; /etc/export</span>
+<span style="color: #000000;">
+[root@nfs </span>~]<span style="color: #008000;">#</span><span style="color: #008000;">cat /etc/exports</span>
+
+/data 172.16.1.0/24(ro,sync,all_squash)</pre>
+</div>
+</div>
+<h3 id="auto_id_32">3.2.1&nbsp;重载nfs（exportfs）</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> systemctl restart nfs-server</span></pre>
+</div>
+</div>
+<h3 id="auto_id_33">3.2.2 先卸载客户端已挂载好的共享</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> umount /data/</span></pre>
+</div>
+</div>
+<h3 id="auto_id_34">3.2.3&nbsp;重新进行挂载</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> mount -t nfs 172.16.1.31:/data /data/</span></pre>
+</div>
+</div>
+<h3 id="auto_id_35">3.2.4 测试是否能写数据</h3>
+<div class="cnblogs_code">
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> cd /data/</span>
+<span style="color: #000000;">
+[root@web01 data]</span><span style="color: #008000;">#</span><span style="color: #008000;"> touch file-test        <span style="color: #00ccff;">不允许写入数据</span></span>
+<span style="color: #000000;">
+touch: cannot touch </span><span style="color: #800000;">'</span><span style="color: #800000;">file-test</span><span style="color: #800000;">'</span>: Read-only file system</pre>
+</div>
+<h2 id="auto_id_36">3.3 验证all_squash,anonuid,anongid权限</h2>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> echo '/data 172.16.1.0/24(rw,sync,all_squash,anonuid=666,anongid=666)' &gt; /etc/exports</span>
+<span style="color: #000000;">
+[root@nfs </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> cat /etc/exports</span>
+
+/data 172.16.1.0/24(rw,sync,all_squash,anonuid=666,anongid=666)</pre>
+</div>
+</div>
+<h3 id="auto_id_37">3.3.1 需要添加一个uid是666，gid是666的用户</h3>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> groupadd -g 666 www</span>
+<span style="color: #000000;">
+[root@nfs </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> useradd -u666 -g666 www</span>
+<span style="color: #000000;">
+[root@nfs </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> id www</span>
+<span style="color: #000000;">
+uid</span>=666(www) gid=666(www) 组=666(www)</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<h3 id="auto_id_38">3.3.2 必须重新授权为www用户，否则无法写入文件</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> chown -R www.www /data/</span></pre>
+</div>
+</div>
+<h3 id="auto_id_39">3.3.3 重启服务</h3>
+<div>
+<div class="cnblogs_code">
+<pre>[root@nfs ~]<span style="color: #008000;">#</span><span style="color: #008000;"> systemctl restart nfs-server</span></pre>
+</div>
+</div>
+<h3 id="auto_id_40">3.3.4 客户端重新挂载</h3>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>[root@web01 /]<span style="color: #008000;">#</span><span style="color: #008000;"> umount /data/</span>
+<span style="color: #000000;">
+[root@web01 </span>/]<span style="color: #008000;">#</span><span style="color: #008000;"> mount -t nfs 172.16.1.31:/data /data/</span>
+<span style="color: #000000;">
+[root@web01 data]</span><span style="color: #008000;">#</span><span style="color: #008000;"> ll</span>
+<span style="color: #000000;">
+total </span>4
+
+-rw-r--r-- 1 666 666 4 Sep  6 03:41 test</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<h3 id="auto_id_41">3.3.5 测试是否能写入数据</h3>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>[root@web01 data]<span style="color: #008000;">#</span><span style="color: #008000;"> touch tes1</span>
+<span style="color: #000000;">
+[root@web01 data]</span><span style="color: #008000;">#</span><span style="color: #008000;"> ll</span>
+<span style="color: #000000;">
+total </span>4
+
+-rw-r--r-- 1 666 666 0 Sep  7 10:38<span style="color: #000000;"> tes1
+
+</span>-rw-r--r-- 1 666 666 4 Sep  6 03:41 test</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<h3 id="auto_id_42">3.3.6 为了防止权限不一致导致权限不足，建议在客户端创建一模一样的用户</h3>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> groupadd -g 666 www</span>
+<span style="color: #000000;">
+[root@web01 </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> useradd -u666 -g666 www</span>
+<span style="color: #000000;">
+[root@web01 </span>~]<span style="color: #008000;">#</span><span style="color: #008000;"> id www</span>
+<span style="color: #000000;">
+uid</span>=666(www) gid=666(www) groups=666(www)</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<h3 id="auto_id_43">3.3.7 在此检查文件身份</h3>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>[root@web01 ~]<span style="color: #008000;">#</span><span style="color: #008000;"> ll /data/</span>
+<span style="color: #000000;">
+total </span>4
+
+-rw-r--r-- 1 www www 0 Sep  7 10:38<span style="color: #000000;"> tes1
+
+</span>-rw-r--r-- 1 www www 4 Sep  6 03:41 test</pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div></div><div id="MySignature" style="display: block;"><p>作者：Alan.zhang</p>  
+
+                                                                                     
+
+
+
+
+<p>本人小白，欢迎大家转载以及纠正错误，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文连接</p></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/zeq912/category/1294405.html" target="_blank">集群架构</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(9606105,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;976a1fe4-1db7-447e-5287-08d5ddce222f&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/zeq912/" target="_blank"><img src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/20190709170149.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="https://home.cnblogs.com/u/zeq912/">Alan.zhang</a><br>
+            <a href="https://home.cnblogs.com/u/zeq912/followees">关注 - 12</a><br>
+            <a href="https://home.cnblogs.com/u/zeq912/followers">粉丝 - 53</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;976a1fe4-1db7-447e-5287-08d5ddce222f&#39;);return false;">+加关注</a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/zeq912/p/9593931.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/zeq912/p/9593931.html" title="发布于2018-09-05 19:12">CentOS7下rsync服务的基本详解和使用</a><br><a href="https://www.cnblogs.com/zeq912/p/9613804.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/zeq912/p/9613804.html" title="发布于2018-09-09 15:27">sersync实时同步实战</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2018-09-07 17:29</span> <a href="https://www.cnblogs.com/zeq912/">Alan.zhang</a> 阅读(<span id="post_view_count">1875</span>) 评论(<span id="post_comment_count">1</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=9606105" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/zeq912/p/9606105.html#" onclick="AddToWz(9606105);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=443008,cb_entryId=9606105,cb_blogApp=currentBlogApp,cb_blogUserGuid='976a1fe4-1db7-447e-5287-08d5ddce222f',cb_entryCreatedDate='2018/9/7 17:29:00';loadViewCount(cb_entryId);var cb_postType=1;var isMarkdown=false;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<div class="feedback_area_title">评论列表</div>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/zeq912/p/9606105.html#4061055" class="layer">#1楼</a><a name="4061055" id="comment_anchor_4061055"></a><span id="comment-maxId" style="display:none;">4061055</span><span id="comment-maxDate" style="display:none;">2018/9/7 18:03:29</span>  <span class="comment_date">2018-09-07 18:03</span> <a id="a_comment_author_4061055" href="http://home.cnblogs.com/u/1483401/" target="_blank">xiaodonghaiya</a> <a href="http://msg.cnblogs.com/send/xiaodonghaiya" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4061055" class="blog_comment_body">可以</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4061055,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4061055,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-工控&#39;)">【推荐】超50万C++/C#源码: 大型实时仿真组态图形源码</a><br><a href="https://group.cnblogs.com/topic/81899.html" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-Dell&#39;)">【活动】戴尔助力小企业，商务爆品5折秒，最低低至￥2399</a><br></div>
+<div id="opt_under_post"></div>
+<script async="async" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/gpt.js.下载"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(function() {
+        googletag.defineSlot('/1090369/C1', [300, 250], 'div-gpt-ad-1546353474406-0').addService(googletag.pubads());
+        googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+  });
+</script>
+<div id="cnblogs_c1" class="c_ad_block" style="">
+    <div id="div-gpt-ad-1546353474406-0" style="height:250px; width:300px;" data-google-query-id="CNGl5fCP4eMCFVwPKgodSyYHRQ"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C1_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C1_0" width="300" height="250" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" data-google-container-id="1" data-load-complete="true" style="border: 0px; vertical-align: bottom;" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/saved_resource.html"></iframe></div></div>
+</div>
+<div id="under_post_news"><div class="recomm-block"><b>相关博文：</b><br>·  <a href="https://www.cnblogs.com/yexiuer/p/10802143.html" target="_blank" onclick="clickRecomItmem(10802143)">NFS</a><br>·  <a href="https://www.cnblogs.com/wangguangtao/p/10187644.html" target="_blank" onclick="clickRecomItmem(10187644)">Llinux，NFS服务搭建（文件共享）</a><br>·  <a href="https://www.cnblogs.com/zmlctt/p/3855134.html" target="_blank" onclick="clickRecomItmem(3855134)">aix挂载centos 的nfs</a><br>·  <a href="https://www.cnblogs.com/huguangqin/p/7137670.html" target="_blank" onclick="clickRecomItmem(7137670)">网络文件系统（NFS）的使用</a><br>·  <a href="https://www.cnblogs.com/liang-io/p/9640274.html" target="_blank" onclick="clickRecomItmem(9640274)">Linux网络文件系统NFS详解</a><br></div></div>
+<div id="cnblogs_c2" class="c_ad_block" style="">
+    <div id="div-gpt-ad-1539008685004-0" style="height:60px; width:468px;" data-google-query-id="CNKl5fCP4eMCFVwPKgodSyYHRQ"><div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_/1090369/C2_0" title="3rd party ad content" name="google_ads_iframe_/1090369/C2_0" width="468" height="60" scrolling="no" marginwidth="0" marginheight="0" frameborder="0" data-google-container-id="2" style="border: 0px; vertical-align: bottom;" data-load-complete="true" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/saved_resource(1).html"></iframe></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block"><b>最新新闻</b>：<br> ·  <a href="https://news.cnblogs.com/n/629064/" target="_blank">大疆发布新一代FPV眼镜 能遥控飞机 还能开车开船</a><br> ·  <a href="https://news.cnblogs.com/n/629063/" target="_blank">首个科学新闻写作机器人“小柯”问世</a><br> ·  <a href="https://news.cnblogs.com/n/629062/" target="_blank">一线|滴滴与英国石油成立合资公司  布局新能源车充电网络</a><br> ·  <a href="https://news.cnblogs.com/n/629061/" target="_blank">AMD财报后股价暴跌10% 分析师仍看好未来发展</a><br> ·  <a href="https://news.cnblogs.com/n/629060/" target="_blank">新型人造细胞有望成为高效药物传递载体</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+ if(enablePostBottom()) {
+    codeHighlight();
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverT2();
+    deliverC1();
+    deliverC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);  
+}
+</script>
+</div>
+
+    
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news">
+
+
+
+<div class="head_img"><img width="250" height="180" alt="侧边栏图片" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/timg" class="img_avatar"><div>
+
+
+
+
+<p>欢迎大家来到我博客</p>
+<p>本人linux小白一枚</p>
+<p>不甘堕落，不思进取</p>
+<p>希望和志同道合的朋友一起交流</p>
+<p>热爱交友</p>
+<p>我会一直努力，学好linux</p>
+<p>希望大家多多支持</p>
+<p>点个赞加个关注呗❤</p>
+
+
+
+<p>个人小站</p>
+<p><a href="https://www.ichn.me/">https://www.ichn.me</a></p>
+
+<p>有事您Q我，我一直在~：</p>
+<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=1247592746&amp;site=qq&amp;menu=yes"><img border="0" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/pa" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
+<p>加群交流~：</p>
+<a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=ff8ebda725d7a4e3d7b4182b96287dc20335b77aedd8b8606a87242414dc6319"><img border="0" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/group.png" alt="linux从入门到放弃" title="linux从入门到放弃"></a><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/zeq912/">Alan.zhang</a><br>园龄：<a href="https://home.cnblogs.com/u/zeq912/" title="入园时间：2018-07-05">1年</a><br>粉丝：<a href="https://home.cnblogs.com/u/zeq912/followers/">53</a><br>关注：<a href="https://home.cnblogs.com/u/zeq912/followees/">12</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;976a1fe4-1db7-447e-5287-08d5ddce222f&#39;)">+加关注</a></div><script>getFollowStatus('976a1fe4-1db7-447e-5287-08d5ddce222f')</script></div></div></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2019/07/01&#39;);return false;">&lt;</a></td><td align="center">2019年8月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2019/09/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td class="CalTodayDay" align="center">1</td><td align="center">2</td><td class="CalWeekendDay" align="center">3</td></tr><tr><td class="CalWeekendDay" align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center">9</td><td class="CalWeekendDay" align="center">10</td></tr><tr><td class="CalWeekendDay" align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td align="center">16</td><td class="CalWeekendDay" align="center">17</td></tr><tr><td class="CalWeekendDay" align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td class="CalWeekendDay" align="center">24</td></tr><tr><td class="CalWeekendDay" align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalWeekendDay" align="center">31</td></tr><tr><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+
+</div>
+</div>
+
+</div><div id="sidebar_recentposts" class="sidebar-block">
+<div class="catListEssay">
+<h3 class="catListTitle">最新随笔</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/zeq912/p/11211331.html">1. 全网数据备份方案</a></li><li><a href="https://www.cnblogs.com/zeq912/p/11189692.html">2. RSYNC部署</a></li><li><a href="https://www.cnblogs.com/zeq912/p/11089026.html">3. Grafana数据迁移</a></li><li><a href="https://www.cnblogs.com/zeq912/p/11065199.html">4. Keepalived实现服务高可用</a></li><li><a href="https://www.cnblogs.com/zeq912/p/11062592.html">5. PHP7.1-soap扩展安装</a></li><li><a href="https://www.cnblogs.com/zeq912/p/10929522.html">6. lrzsz安装</a></li><li><a href="https://www.cnblogs.com/zeq912/p/10614019.html">7. prometheus监控redis</a></li><li><a href="https://www.cnblogs.com/zeq912/p/10595169.html">8. zabbix基本监控各指标简解</a></li><li><a href="https://www.cnblogs.com/zeq912/p/10593699.html">9. zabbix监控docker</a></li><li><a href="https://www.cnblogs.com/zeq912/p/10593647.html">10. Ubuntu下Zabbix结合percona监控mysql数据</a></li>
+</ul>
+</div>
+</div><div id="sidebar_toptags" class="sidebar-block"></div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(16)</span></h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/zeq912/category/1291774.html">linux三剑客(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/zeq912/category/1291772.html">linux习题库(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/zeq912/category/1276035.html">linux运维基础(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/zeq912/category/1294405.html">集群架构(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/zeq912/category/1291771.html">网络基础(1)</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_scorerank" class="sidebar-block">
+<div class="catListBlogRank">
+<h3 class="catListTitle">积分与排名</h3>
+<ul>
+	<li class="liScore">
+		积分 -	20957
+	</li>
+	<li class="liRank">
+		排名 -	30027
+	</li>
+</ul>
+</div>
+
+
+</div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/zeq912/p/9593931.html">1. CentOS7下rsync服务的基本详解和使用(3504)</a></li><li><a href="https://www.cnblogs.com/zeq912/p/9589999.html">2. CentOS7版本基础使用(2548)</a></li><li><a href="https://www.cnblogs.com/zeq912/p/9433472.html">3. linux基础练习题(2182)</a></li><li><a href="https://www.cnblogs.com/zeq912/p/9606105.html">4. NFS网络文件系统详解(1875)</a></li><li><a href="https://www.cnblogs.com/zeq912/p/9501915.html">5. linux-shell编程基础(1729)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/zeq912/p/9501915.html">1. linux-shell编程基础(6)</a></li><li><a href="https://www.cnblogs.com/zeq912/p/9593931.html">2. CentOS7下rsync服务的基本详解和使用(6)</a></li><li><a href="https://www.cnblogs.com/zeq912/p/9433472.html">3. linux基础练习题(4)</a></li><li><a href="https://www.cnblogs.com/zeq912/p/11065199.html">4. Keepalived实现服务高可用(3)</a></li><li><a href="https://www.cnblogs.com/zeq912/p/9589999.html">5. CentOS7版本基础使用(3)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	<div id="div_digg">
+    <div class="diggit" onclick="votePost(9606105,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">2</span>
+    </div>
+    <div class="buryit" onclick="votePost(9606105,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div></div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2019 Alan.zhang
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+<!--PageEndHtml Block Begin-->
+
+<script type="text/javascript" src="./NFS网络文件系统详解 - Alan.zhang - 博客园_files/lnh.cnblogs.js.下载"></script><div class="fixed-bar-warp"><div class="fixed-bar"><a class="item toc" href="javascript:lnh.toc.toggle();" title="目录"><i class="fa fa-hashtag"></i></a><a class="item comments" href="https://www.cnblogs.com/zeq912/p/9606105.html#comment_form_container" title="评论列表"><i class="fa fa-comments"></i></a><a class="item comment" href="https://www.cnblogs.com/zeq912/p/9606105.html#comment_form" title="写评论"><i class="fa fa-pencil"></i></a><a class="item top" href="javascript:scroll(0,0);" title="返回顶部"><i class="fa fa-arrow-circle-up"></i></a></div></div><div id="table_of_content_warp" class="lnh_toc_warp" style="display: inline-block;"><div class="title"># NFS网络文件系统详解</div><div class="toc"><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_0" id="toc_auto_id_0" class="item item-h1" title="第1章 NFS基本概述">第1章 NFS基本概述</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_1" id="toc_auto_id_1" class="item item-h2" title="1.1 什么是nfs">1.1 什么是nfs</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_2" id="toc_auto_id_2" class="item item-h2" title="1.2 为什么要使用NFS服务进行数据存储">1.2 为什么要使用NFS服务进行数据存储</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_3" id="toc_auto_id_3" class="item item-h2" title="1.3 本地文件操作方式">1.3 本地文件操作方式</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_4" id="toc_auto_id_4" class="item item-h2" title="1.4 NFS实现原理(需要先了解[程序|进程|线程])">1.4 NFS实现原理(需要先了解[程序|进程|线程])</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_5" id="toc_auto_id_5" class="item item-h2" title="1.5 NFS存储优点">1.5 NFS存储优点</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_6" id="toc_auto_id_6" class="item item-h2" title="1.6 NFS存储局限">1.6 NFS存储局限</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_7" id="toc_auto_id_7" class="item item-h2" title="1.7 生产应用建议">1.7 生产应用建议</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_8" id="toc_auto_id_8" class="item item-h1" title="第2章 NFS基本使用">第2章 NFS基本使用</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_9" id="toc_auto_id_9" class="item item-h2" title="2.1 环境准备">2.1 环境准备</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_10" id="toc_auto_id_10" class="item item-h2" title="2.2 关闭防火墙及selinux（客户端，服务端都要关闭）">2.2 关闭防火墙及selinux（客户端，服务端都要关闭）</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_11" id="toc_auto_id_11" class="item item-h3" title="2.2.1 关闭防火墙">2.2.1 关闭防火墙</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_12" id="toc_auto_id_12" class="item item-h3" title="2.2.2 关闭selinux">2.2.2 关闭selinux</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_13" id="toc_auto_id_13" class="item item-h2" title="2.3 服务端安装nfs">2.3 服务端安装nfs</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_14" id="toc_auto_id_14" class="item item-h3" title="2.3.1 配置nfs">2.3.1 配置nfs</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_15" id="toc_auto_id_15" class="item item-h3" title="2.3.2 创建对应的目录">2.3.2 创建对应的目录</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_16" id="toc_auto_id_16" class="item item-h3" title="2.3.3 启动服务，并将服务加入开机自启动">2.3.3 启动服务，并将服务加入开机自启动</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_17" id="toc_auto_id_17" class="item item-h3" title="2.3.4 检查端口">2.3.4 检查端口</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_18" id="toc_auto_id_18" class="item item-h3" title="2.3.5 检查共享的内容">2.3.5 检查共享的内容</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_19" id="toc_auto_id_19" class="item item-h3" title="2.3.6 检查匿名用户对应的真实账户,并授权共享目录为nfsnobody">2.3.6 检查匿名用户对应的真实账户,并授权共享目录为nfsnobody</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_20" id="toc_auto_id_20" class="item item-h2" title="2.4 客户端安装nfs">2.4 客户端安装nfs</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_21" id="toc_auto_id_21" class="item item-h3" title="2.4.1 启动rpcbind服务">2.4.1 启动rpcbind服务</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_22" id="toc_auto_id_22" class="item item-h3" title="2.4.2 使用showmount -e查看远程服务器rpc提供的可挂载nfs信息">2.4.2 使用showmount -e查看远程服务器rpc提供的可挂载nfs信息</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_23" id="toc_auto_id_23" class="item item-h3" title="2.4.3 创建挂载点目录，执行挂载命令">2.4.3 创建挂载点目录，执行挂载命令</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_24" id="toc_auto_id_24" class="item item-h3" title="2.4.4 挂载成功后可以进行增删改操作，测试客户端是否拥有写的权限">2.4.4 挂载成功后可以进行增删改操作，测试客户端是否拥有写的权限</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_25" id="toc_auto_id_25" class="item item-h3" title="2.4.5 检查nfs服务端是否存在数据">2.4.5 检查nfs服务端是否存在数据</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_26" id="toc_auto_id_26" class="item item-h3" title="2.4.6 如果希望NFS文件共享服务能一直有效则永久挂载">2.4.6 如果希望NFS文件共享服务能一直有效则永久挂载</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_27" id="toc_auto_id_27" class="item item-h3" title="2.4.7 如果不希望使用NFS共享, 可进行卸载">2.4.7 如果不希望使用NFS共享, 可进行卸载</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_28" id="toc_auto_id_28" class="item item-h2" title="2.5 配置多台客户端服务器的配置方法何上面客户端方法一致">2.5 配置多台客户端服务器的配置方法何上面客户端方法一致</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_29" id="toc_auto_id_29" class="item item-h1" title="第3章 NFS配置参数及验证">第3章 NFS配置参数及验证</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_30" id="toc_auto_id_30" class="item item-h2" title="3.1 nfs共享参数及作用">3.1 nfs共享参数及作用</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_31" id="toc_auto_id_31" class="item item-h2" title="3.2 验证ro权限">3.2 验证ro权限</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_32" id="toc_auto_id_32" class="item item-h3" title="3.2.1 重载nfs（exportfs）">3.2.1&nbsp;重载nfs（exportfs）</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_33" id="toc_auto_id_33" class="item item-h3" title="3.2.2 先卸载客户端已挂载好的共享">3.2.2 先卸载客户端已挂载好的共享</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_34" id="toc_auto_id_34" class="item item-h3" title="3.2.3 重新进行挂载">3.2.3&nbsp;重新进行挂载</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_35" id="toc_auto_id_35" class="item item-h3" title="3.2.4 测试是否能写数据">3.2.4 测试是否能写数据</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_36" id="toc_auto_id_36" class="item item-h2" title="3.3 验证all_squash,anonuid,anongid权限">3.3 验证all_squash,anonuid,anongid权限</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_37" id="toc_auto_id_37" class="item item-h3" title="3.3.1 需要添加一个uid是666，gid是666的用户">3.3.1 需要添加一个uid是666，gid是666的用户</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_38" id="toc_auto_id_38" class="item item-h3" title="3.3.2 必须重新授权为www用户，否则无法写入文件">3.3.2 必须重新授权为www用户，否则无法写入文件</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_39" id="toc_auto_id_39" class="item item-h3" title="3.3.3 重启服务">3.3.3 重启服务</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_40" id="toc_auto_id_40" class="item item-h3" title="3.3.4 客户端重新挂载">3.3.4 客户端重新挂载</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_41" id="toc_auto_id_41" class="item item-h3" title="3.3.5 测试是否能写入数据">3.3.5 测试是否能写入数据</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_42" id="toc_auto_id_42" class="item item-h3" title="3.3.6 为了防止权限不一致导致权限不足，建议在客户端创建一模一样的用户">3.3.6 为了防止权限不一致导致权限不足，建议在客户端创建一模一样的用户</a><a href="https://www.cnblogs.com/zeq912/p/9606105.html#auto_id_43" id="toc_auto_id_43" class="item item-h3" title="3.3.7 在此检查文件身份">3.3.7 在此检查文件身份</a></div></div>
+
+<script language="javascript" type="text/javascript">
+<!--PageEndHtml Block End-->
+</body>
+</html>
+</script><div class="__transltor"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzU4cHgiIGhlaWdodD0iMzU2cHgiIHZpZXdCb3g9IjAgMCAzNTggMzU2IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0OC4xICg0NzI1MCkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+TG9nby0yPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+CiAgICAgICAgPGNpcmNsZSBpZD0icGF0aC0xIiBjeD0iMTc5IiBjeT0iMTc5IiByPSIxNzkiPjwvY2lyY2xlPgogICAgPC9kZWZzPgogICAgPGcgaWQ9IlN5bWJvbHMiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJMb2dvLTIiPgogICAgICAgICAgICA8ZyBpZD0iR3JvdXAiPgogICAgICAgICAgICAgICAgPG1hc2sgaWQ9Im1hc2stMiIgZmlsbD0id2hpdGUiPgogICAgICAgICAgICAgICAgICAgIDx1c2UgeGxpbms6aHJlZj0iI3BhdGgtMSI+PC91c2U+CiAgICAgICAgICAgICAgICA8L21hc2s+CiAgICAgICAgICAgICAgICA8dXNlIGlkPSJPdmFsLTMiIGZpbGw9IiMxQTMwRDciIHhsaW5rOmhyZWY9IiNwYXRoLTEiPjwvdXNlPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTIwMi41MTI0NDksNDMwLjcyNzYzNiBDMTkxLjQyMjQ2NywzODEuNjM5MjM1IDIxOC4xMDE0MTEsMzA1LjE4NTE3OSAyMzQuODM1NjEzLDI5NC43Mzk5MDkgQzI2My4yOTU3ODMsMjkxLjgyMDc3MSAzMDguMjczOTY3LDI0NC43MjU1NTkgMzA4LjI3Mzk2NywxOTYuNDk2NjEgQzMwOC4yNzM5NjcsMTEzLjE5MjMyNCAyNjYuMTU1MjUxLDYzLjI3MDQyMTQgMjQwLjQzNDQ5Myw0Ni42MjY4OTgyIEMyMzAuNjc4OTcsNDAuMzE0MjQzIDIxOS43OTM5MTEsODMuMzAwMDc1MSAyMjIuNTgwNDc5LDEwMi42NDQ1ODkgQzE1Ni43Nzk4OTcsOTQuMTcxNDU0NyAxMjcuMDU3MzgzLDEzMC4zMDI1IDExNS45NjIyODgsMTM2LjYwMjI4NSBDMTEwLjE4OTYwNCwxMzIuMDM0MTI3IDY1LjE5NzMwOTgsODIuMTQ0NDQyNCA1MS40MTMwNjcxLDk0LjYwNDUwNDQgQzQzLjY1NDExMjYsMTI2LjA3NjM5OCA1OC42NDIyOCwyMjUuMTc4ODA3IDg3Ljc4NDg5MiwyNTEuMTA5MzUgQzc5LjA0NTE5NTMsMjgxLjEyNjY1OCAxMy4zNDgzMzQ1LDMxMy4zMTAwMDYgNiwzMTcuNjkzNDY0IiBpZD0iUGF0aC0xMSIgZmlsbD0iI0ZGRkZGRiIgbWFzaz0idXJsKCNtYXNrLTIpIj48L3BhdGg+CiAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMjQzLjc1MDE5OSwxODAuMDkxNzgzIEMyNDguNTM1MTYsMTgwLjI0MjYxMyAyNTMuMDYzMjY2LDE3NS42NzA3IDI1My4wNjMyNjYsMTcwLjA3MjMxOSBDMjUzLjA2MzI2NiwxNjQuNDczOTM4IDI0OC42ODg2NSwxNTkuMjEzMzU5IDI0My4xNDIxNzEsMTU5LjA0MTk0MyBDMjM3LjU5NTY5MywxNTguODcwNTI3IDIzMy45NjM0NjIsMTY0Ljc5MDM5OSAyMzMuNzY5MzY3LDE2OS41MjQ2MDcgQzIzMy41NzUyNzEsMTc0LjI1ODgxNSAyMzguOTY1MjM4LDE3OS45NDA5NTIgMjQzLjc1MDE5OSwxODAuMDkxNzgzIFoiIGlkPSJPdmFsLTQiIGZpbGw9IiMxQTMwRDciIG1hc2s9InVybCgjbWFzay0yKSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjQzLjQxMzc3MCwgMTY5LjU2Njg1Nykgcm90YXRlKC0yNC4wMDAwMDApIHRyYW5zbGF0ZSgtMjQzLjQxMzc3MCwgLTE2OS41NjY4NTcpICI+PC9wYXRoPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTE4OS41MzQxMzMsMjA4LjAzODExNyBDMTk1LjMzMzEyMywyMDguMDM4MTE3IDIwMC44ODI3MDgsMjAzLjkzNDk1OSAyMDAuODgyNzA4LDE5OC4xMzU5NjkgQzIwMC44ODI3MDgsMTkyLjMzNjk3OSAxOTQuODgxMTU2LDE4Ni43MDA0MTUgMTg5LjA4MjE2NiwxODYuNzAwNDE1IEMxODMuMjgzMTc2LDE4Ni43MDA0MTUgMTc4LjQ4NTk3OCwxOTEuNTQwNjg3IDE3OC40ODU5NzgsMTk3LjMzOTY3NyBDMTc4LjQ4NTk3OCwyMDMuMTM4NjY3IDE4My43MzUxNDQsMjA4LjAzODExNyAxODkuNTM0MTMzLDIwOC4wMzgxMTcgWiIgaWQ9Ik92YWwtNC1Db3B5IiBmaWxsPSIjMUEzMEQ3IiBtYXNrPSJ1cmwoI21hc2stMikiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE4OS42ODQzNDMsIDE5Ny4zNjkyNjYpIHJvdGF0ZSgxMy4wMDAwMDApIHRyYW5zbGF0ZSgtMTg5LjY4NDM0MywgLTE5Ny4zNjkyNjYpICI+PC9wYXRoPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTIzOS4wNjMxNTUsMjE3LjM1NDI5NSBDMjQzLjY5OTE0LDIxMy44NTc0OTcgMjQ0LjU4NDk4NCwyMDYuNDMwMzExIDI0Mi43NjU4MDgsMjAzLjk2Nzc4IEMyMzcuODU5NTE4LDIwMS45MjYxOCAyMjcuODU5MDkzLDIwNC45NTAxNDIgMjI2LjA4ODA3NiwyMTMuNDQxNzM1IEMyMjguNTc5NDg4LDIxNi4zOTU3MjMgMjMyLjgyODY5LDIxNy4yODk0MDkgMjM5LjA2MzE1NSwyMTcuMzU0Mjk1IFoiIGlkPSJPdmFsLTQtQ29weS0yIiBmaWxsPSIjMUEzMEQ3IiBtYXNrPSJ1cmwoI21hc2stMikiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIzNC44Njc1NzcsIDIxMC4zNTQwOTkpIHJvdGF0ZSgtMy4wMDAwMDApIHRyYW5zbGF0ZSgtMjM0Ljg2NzU3NywgLTIxMC4zNTQwOTkpICI+PC9wYXRoPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTIzOCwyMTQgTDI0MSwyMjEiIGlkPSJQYXRoLTMiIHN0cm9rZT0iIzFBMzBENyIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIG1hc2s9InVybCgjbWFzay0yKSI+PC9wYXRoPgogICAgICAgICAgICAgICAgPGNpcmNsZSBpZD0iT3ZhbC0xMSIgZmlsbD0iIzFBMzBENyIgb3BhY2l0eT0iMC4xMDE1MDU4ODgiIG1hc2s9InVybCgjbWFzay0yKSIgY3g9IjI1OCIgY3k9IjE5MCIgcj0iNiI+PC9jaXJjbGU+CiAgICAgICAgICAgICAgICA8Y2lyY2xlIGlkPSJPdmFsLTExLUNvcHkiIGZpbGw9IiMxQTMwRDciIG9wYWNpdHk9IjAuMDc5OTM2NTk0MiIgbWFzaz0idXJsKCNtYXNrLTIpIiBjeD0iMjA4LjUiIGN5PSIyMjIuNSIgcj0iNi41Ij48L2NpcmNsZT4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0zMDUsMjEwLjk3MTEwMiBMMzE3LjU3NjQ1MiwyMDkiIGlkPSJQYXRoLTE2IiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBtYXNrPSJ1cmwoI21hc2stMikiPjwvcGF0aD4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0zMDQsMjE0IEwzMTMuODgwNjI4LDIxNS41NjQ5MzgiIGlkPSJQYXRoLTE2LUNvcHkiIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG1hc2s9InVybCgjbWFzay0yKSI+PC9wYXRoPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTEzNy44NzMwNDgsMTI5LjcxODQyNSBMMTI0LDExMiIgaWQ9IlBhdGgtMTciIHN0cm9rZT0iI0ZGRkZGRiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG1hc2s9InVybCgjbWFzay0yKSI+PC9wYXRoPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTE0Mi41OTc4NzYsMTMyLjQ3MzA1MyBMMTMyLjcxMTg1NSwxMTIuMjU3NDQ5IiBpZD0iUGF0aC0xNy1Db3B5IiBzdHJva2U9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBtYXNrPSJ1cmwoI21hc2stMikiPjwvcGF0aD4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+" class="__transltor_button" style="left: 657px; top: 113px;"> <!----> <!----></div></body></html>
