@@ -170,8 +170,20 @@ DNS信息收集
 vulnx-u http://example.com --dns
 ```
 
+删除所有 Docker 镜像
 
-
+删除所有未打 `tag` 的镜像
+```
+docker rmi (docker images -q | awk '/^<none>/ { print $3 }')
+```
+删除所有镜像
+```
+docker rmi (docker images -q)
+```
+根据格式删除所有镜像
+```
+docker rm (docker ps -qf status=exite
+```
 
 
 

