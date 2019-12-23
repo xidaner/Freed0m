@@ -1,0 +1,100 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    height: 100%;
+}
+.section4{
+    height: 100%;
+    background:url(../images/sec-bg_03.jpg) no-repeat center;
+}
+
+.sec4-right{
+    width: 800px;
+    height: 900px;
+    position: relative;
+    left: 50%;
+    margin-left: -400px;
+}
+.sec4-right div{
+    position:absolute;
+}
+
+.sec4-img-1{
+    width: 30px;
+    height: 30px;
+    background:url(../images/sec4-icon-1.png) no-repeat center;
+    left:413px;
+    bottom:561px;
+}
+.sec4-img-2{
+    width: 70px;
+    height: 70px;
+    background:url(../images/sec4-icon-2.png) no-repeat center;
+    left:30px;
+    bottom:647px;
+}
+.sec4-img-3{
+    width: 110px;
+    height: 110px;
+    background:url(../images/sec4-icon-3.png) no-repeat center;
+    right:43px;
+    bottom:584px;
+}
+.sec4-img-4{
+    width: 135px;
+    height: 135px;
+    background:url(../images/sec4-icon-4.png) no-repeat center;
+    left:289px;
+    bottom:446px;
+}
+.sec4-img-5{
+    width: 105px;
+    height: 105px;
+    background:url(../images/sec4-icon-5.png) no-repeat center;
+    left:419px;
+    bottom:442px;
+}
+.sec4-img-6{
+    width: 180px;
+    height: 180px;
+    background:url(../images/sec4-icon-6.png) no-repeat center;
+    left:475px;
+    bottom:505px;
+}
+.sec4-img-7{
+    width: 240px;
+    height: 240px;
+    background:url(../images/sec4-icon-7.png) no-repeat center;
+    left:66px;
+    bottom:466px;
+}
+.sec4-img-8{
+	width: 100%;
+	height: 100%;
+	background: url(../images/sec4-img.png) no-repeat bottom right;
+	left: 0px;
+	bottom: 0px;
+}
+.sec4-img-9{
+    width: 30px;
+    height: 42px;
+    background:url(../images/sec4-icon-8.png) no-repeat bottom right;
+    left:285px;
+    bottom:460px;
+}
+.sec4-img-10{
+    width: 60px;
+    height: 60px;
+    background:url(../images/sec4-icon-9.png) no-repeat bottom right;
+    left:495px;
+    bottom:440px;
+}
+.sec4-img-11{
+    width: 70px;
+    height: 50px;
+    background:url(../images/sec4-icon-10.png) no-repeat bottom right;
+    right:111px;
+    bottom:501px;
+}
