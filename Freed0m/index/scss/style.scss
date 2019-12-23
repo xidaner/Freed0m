@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300');
+
+$size: 86px;
+
+body {
+	text-align: center;
+	background-color: hsl(210°, 5%, 8%);
+	color: hsla(210, 20%, 90%, 0.89);
+	font-family: 'Roboto Condensed', sans-serif;
+	font-weight: 300;
+	overflow: hidden;
+}
+
+.column,
+.colon {
+	display: inline-block;
+	vertical-align: top;
+	font-size: $size;
+	line-height: $size;
+}
+
+.column {
+	transition: transform 300ms;
+}
+
+.colon {
+	transition: transform 300ms;
+	transform: translateY(calc(50vh - #{$size / 2}));
+	
+	&:after {
+		content: ':';
+	}
+}
+
+.num {
+	transition: opacity 500ms, text-shadow 100ms;
+		opacity: 0.025;
+	
+	&.visible {
+		opacity: 1.0;
+		text-shadow: 1px 1px 0px hsl(210, 50%, 40%);
+	}
+	&.close {
+		opacity: 0.35;
+	}
+	&.far {
+		opacity: 0.15;
+	}
+	&.distant {
+		opacity: 0.1;
+	}
+}

