@@ -98,7 +98,7 @@ http://demo.testfire.net/search.jsp?query=1
 
 很多HTML标记中的属性都支持JavaScript脚本，所以我反手给你个xss你怎么说？上号：
 ```
-<img src = "javascript:alert(‘xss‘);">
+<img src = "http://58.221.227.52:82/functions/images/qysb/logo.png">
 ```
 其中只要执行了js代码就可以弹窗，如果引用文件都可以绕过`<>`
 

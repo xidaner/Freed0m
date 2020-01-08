@@ -400,8 +400,22 @@ var_dump(is_int($a))
 
 
 
+##  **-> 访问对象中的方法**
 
+`->` : 访问对象中的方法或属性
+```php
+ $object -> action();  // 访问对象 object 中的 action 方法
+```
 
+  
+##  **=> 定义数组键对值**
+  
+```php
+ $ary = [
+     'name' => 'Jack',  
+     'addr' => 'Beijing'
+ ];
+```
 
 
 
@@ -457,11 +471,37 @@ var_dump(is_int($a))
 
 
 
+**PHP是一种弱数据类型的语言**
+
+```php
+$a1 = "1a23";
+$a2 = 'a123';
+$a3 = 12a3;
+
+$a4 = $a1 * $a2 -$a3;
+echo  $a4;
+```
+在PHP中，若字符串中有数字参与加减乘除运算，会把字母前的所有数字识别成一个数
+列: $a1 转换后为 1， $a2 转换成0 ,$a3 会直接报错，因为如果不加` '',或""`会识别成数字。
 
 
+## **PHP的数据类型**
+
+PHP有8种数据类型：
+
+|标准数据类型: |字符串型| 整型 |浮点型 |布尔型|
+|-------------|-------|------|-------|-----|
+|复合数据类型: |数组|对象|
+
+|特殊数据类型: |资源    | NULL|          |    
+|--------------|-------|-----|---------|-----|
 
 
+其中，`标准数据类型和数组` 的传递格式都是"值传递" -- 单纯传输一个整数或字符串。
+其中，对象、资源，默认都是"引用传递"。
 
+
+什么是"值传递"？  将一个变量的值 复制一份，传递给另一个变量;俩个变量之间没有任何关系。修改其中一个变量值后另外一个不改变。毫无 `瓜` 系.
 
 
 
@@ -544,6 +584,9 @@ var_dump($a,$b);
 ## - **算数运算符**
 
 ![](img/笔记/7.png)
+
+
+
 
 
 
@@ -1265,5 +1308,152 @@ echo 'name is:',$valuw['name'],'and age is:',$value['age'],'<br/>';
 
 1. foreach 会重置指针：让指针指向第一个元素。
 
+
+
+
+
+## mysql
  
+### 一. 创建用户
+
+命令: `CREATE USER 'username'@'host' IDENTIFIED BY 'password';`
+
+
+
+说明：
+username：你将创建的用户名
+host：指定该用户在哪个主机上可以登陆，如果是本地用户可用localhost，如果想让该用户可以从任意远程主机登陆，可以使用通配符%
+password：该用户的登陆密码，密码可以为空，如果为空则该用户可以不需要密码登陆服务器
+例子：
+```mysql
+CREATE USER 'dog'@'localhost' IDENTIFIED BY '123456';
+CREATE USER 'pig'@'192.168.1.101_' IDENDIFIED BY '123456';
+CREATE USER 'pig'@'%' IDENTIFIED BY '123456';
+CREATE USER 'pig'@'%' IDENTIFIED BY '';
+CREATE USER 'pig'@'%';
+```
+
+### 二. 授权:
+
+命令:GRANT privileges ON databasename.tablename TO 'username'@'host'
+
+
+
+说明:
+privileges：用户的操作权限，如SELECT，INSERT，UPDATE等，如果要授予所的权限则使用ALL
+databasename：数据库名
+tablename：表名，如果要授予该用户对所有数据库和表的相应操作权限则可用*表示，如*.*
+例子:
+
+```mysql
+GRANT SELECT, INSERT ON test.user TO 'pig'@'%';
+GRANT ALL ON *.* TO 'pig'@'%';
+GRANT ALL ON maindataplus.* TO 'pig'@'%';
+注意:
+用以上命令授权的用户不能给其它用户授权，如果想让该用户可以授权，用以下命令:
+GRANT privileges ON databasename.tablename TO 'username'@'host' WITH GRANT OPTION;
+```
+
+### 实例 ：使用PHP编写一个面对对象的数据库连接
+
+```php
+<?PHP
+header('Content-type:text/html;charset=utf-8');
+class Db
+{//设置成员属性
+    //数据库连接属性
+   private $db_host;    //主机名
+   private $db_user;    //用户名
+   private $db_pass;    //密码
+   private $db_name;//数据库名
+    private $db_port;//端口号
+   private $charset;    //字符集
+    private $link; //连接1函数
+//构造连接方法
+    public function __construct($config)
+    {
+        $this->db_host = $config['db_host'];
+        $this->db_user = $config['db_user'];
+        $this->db_pass = $config['db_pass'];
+        $this->db_name = $config['db_name'];
+
+        $this->charset = $config['charset'];
+        $this->db_port = $config['db_port'];
+        $this->connectDb();//连接数据库
+        $this->selectDb();//选择数据库
+        $this->setCharset();//设置字符集
+
+    }
+
+//私有的连接数据库方法。
+private  function connectDb(){
+       //if(!@mysqli_connect($this->db_host,$this->db_user,$this->db_pass))
+    //$server = "127.0.0.1"; $username = "pig"; $password = "123456"; $database
+      //  = "users";
+ //   if(!@mysqli_connect($server,$username,$password,$database))
+    $this->link= mysqli_connect($this->db_host,$this->db_user,$this->db_pass) or die ('数据库连接失败');
+    //var_dump($this->link);
+        //取反报错显示连接失败
+}
+//私有的选择数据库的方法
+private function selectDb(){
+        if (!mysqli_select_db($this->link,$this->db_name))
+            dir("选择数据库{$this->db_name}失败!");
+
+}
+// pig 123456
+
+//设置数据库字符集的方法
+private function setCharset(){
+        mysqli_query($this->link,"set names {$this->charset}");
+
+}
+}
+//接收数据
+$arr = array(
+    'db_host' => $_POST['db_host'],
+    'db_user' => $_POST['db_user'],
+    'db_pass' => $_POST['db_pass'],
+    'db_name' => $_POST['db_name'],
+    'charset' => $_POST['charset'],
+    'db_port' => $_POST['db_port'],
+    );
+var_dump($_POST);
+//测试连接
+/*
+$arr = array(
+    'db_host' => 'localhost',
+    'db_user' => 'root',
+    'db_pass' => 'toor',
+    'db_name' => 'users',
+    'charset' => 'utf8',
+    'db_port' => '3306',
+);
+*/
+$obj = new Db($arr);
+var_dump($obj);
+?>
+//html传值代码
+<!--
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form  method="post" action="1.php" >输入数据库连接：
+    主机： <input placeholder="Basic usage" type="text" class="ant-input" value="" name=db_host>
+    端口： <input placeholder="Basic usage" type="text" class="ant-input" value="" name=db_port>
+    用户名：<input placeholder="Basic usage" type="text" class="ant-input" value="" name=db_user>
+    密码：<input placeholder="Basic usage" type="text" class="ant-input" value="" name=db_pass>
+    数据库名：<input placeholder="Basic usage" type="text" class="ant-input" value="" name=db_name>
+    编码：<input placeholder="Basic usage" type="text" class="ant-input" value="" name=charset>
+    <input class="button" type="submit"  value="连接"   οnclick="test()" />
+</form>
+</body>
+</html>
+-->
+```
+
 

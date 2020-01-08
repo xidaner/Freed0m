@@ -45,14 +45,14 @@ http://<IP地址!!!>/dvwa/vulnerabilities/xss_r/?name=%3Csc%3Cscript%3Eript%3Eal
 过滤了很多代码，使得<script> 注入XSS代码无法使用。只能通过 其他方法
 具体见上文
 
-<input onfocus="alert('xss');" autofocus>
+<input onfocus="https://www.baidu.com/" autofocus>
 
 
 2.存储型XSS漏洞
 对输入并没有做 XSS 方面的过滤与检查，且存储在数据库中，因此这里存在明显的存储型 XSS 漏洞
 
 
-
+```
 
 medium：
 
@@ -60,8 +60,8 @@ medium：
 很垃圾：
 双写绕过
 直接修改前端代码改 name 参数为 
-```
 
+```
 <sc<script>ript>alert(/xss/)</script>
 ```
  ,成功弹框
@@ -73,10 +73,15 @@ medium：
  ```
  成功弹框
 
+javas&Tab;crip:\u0061lert&#x28;1&#x29
+<a hret="javascript:\u0061lert&#x28;1&#x29">
+<img src="javas&Tab;crip:\u0061lert(1)">
+<img src="javas&Tab;crip:\u0061lert&#x28;1&#x29;">
 
 利用top
+
 ```html
-<script>top["al"+"ert"](`xss`);</script>
+<a top[al+ert](1);>
 ```
 
 
@@ -89,6 +94,7 @@ high的代码很有效的过滤了所有  script的标签，但是，他旺旺�
 
 ```
 <img src=1 onerror=alert(网安2019)> ,
+
 ```
 
 成功弹框
@@ -109,7 +115,7 @@ XSS注入常用语句（整理）
 
 ```html
 
-首先输入
+首先输入 
 
 ```
 < > ' " = : ; 

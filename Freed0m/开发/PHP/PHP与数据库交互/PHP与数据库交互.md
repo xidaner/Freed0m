@@ -1017,6 +1017,17 @@ setcookie(name,value[,expire[,path[,domain[,secure[,httponly]]]]]);   //[为选�
 ![](img/11.png)
 
 
+**获取cookie**
+```php
+<?php 
+require("config.php");//引入配置
+//获取用户信息 
+$user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : 0;
+$user_name = $_COOKIE['user_name'];
+$user_type = $_COOKIE['user_type']; 
+$type_name = $_COOKIE['type_name'];
+```
+
 
 
 3. **读取cookie**
