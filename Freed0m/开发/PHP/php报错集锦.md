@@ -169,114 +169,69 @@ mysqli 数据库连接错误。
 
 ---
 
-# 文件操作
+**Deprecated: Non-static method**
 
-- 即对文件进行的操作
-
-PHP提供了一套文件操作系统函数。通过这套函数来进行:
-
-对于文件的修改，对于文件的删除，对于文件的重命名，对于文件的移动等。都可以使用这套函数进行。
-
-文件的理解：
-
-系统识别的文件只有两种：
-
-1. 文件
-
-2. 文件夹
+不建议使用：非静态方法
 
 
 
 
-## 文件相关信息
+**Fatal error**
 
-1. file_exists(filename);
+ Cannot override final method XX::showInfo()
 
-说明:改函数用于判断一个文件是否存在。
-
-`filename` 必须为一个表示文件的完整名的一个。
+重写了最终方法导致报错
 
 
-```php
-<?php
-header('Content-type:text/html;charset=utf-8');
-// include_once 'link_mysql.php';
+## 抽象类和抽象方法
 
-$file = './1.txt'; //文件
-$file1 = file_exists($file); //判读是否存在
-var_dump($file1);//输出是否存在
-echo '</br>';
+### 1. 简介 
 
-if($file1 == false){
-    echo  'nmsl大傻逼乱输入些什么垃圾东西';
+Abstract 关键字修饰的类，就是抽象类；
+Abstract 关键字修饰的方法，就是抽象方法；
+抽象类: `该类只能被继承，不能直接实例化` 。常用于"基础类"。
 
-}else{
-    echo 'nmd文件不就在下面吗：';
-    include_once $file; //包含进来
-}
-;
-```
-
-![](img/3.png)
+举例说明:
 
 
----
+## 函数必须是字符串
 
-2. filemtime($filename)  获取文件修改时间
+Fatal error: Uncaught Error: Function name must be a string
 
-说明：用于获取文件修改时间的函数
-
-filename   是一个文件的包含文件名的完整路径。
-
-```php
-<?php
-header('Content-type:text/html;charset=utf-8');
-// include_once 'link_mysql.php';
-
-$file = './1.txt'; //文件
-$file1 = filemtime($file); //函数获取文件修改的时间
-echo date('Y_m-d H:i:s',$file1); //输出出文件信息
-
-if($file1 == false){
-    echo  'nmsl大傻逼乱输入些什么垃圾东西';
-
-}else{
-    echo 'nmd文件不就在下面吗：';
-    include_once $file; //包含进来
-}
-;
-```
+致命错误:未捕获错误:函数名必须是字符串
 
 
 
-3.  filesize($file)             获取文件大小
 
-```php
 
-$file = './1.txt'; //设定文件路径
-$size= filesize($file);//获取
-echo $size;//输出
-```
 
-4. basename(path)    获取文件名
-用于获取文件名
 
-```php
-$path = './1.txt';
-basename($path);
-echo $path;
-```
 
-5.  realpath(path)  判读路径是否真实存在
 
-```php
 
-$file1= '1.txt';
- realpath($file1); //获取文件路径
-var_dump($file1); //输出文件查看是否存在
-//输出为一个布尔值。
-```
-一般布尔值都可以用于判断而进行下一步操作这里不再细讲。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

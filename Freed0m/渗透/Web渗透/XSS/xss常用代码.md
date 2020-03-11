@@ -63,13 +63,14 @@ medium：
 
 ```
 <sc<script>ript>alert(/xss/)</script>
+<script>alert(/xss/)</script>
 ```
  ,成功弹框
 大小写混淆绕过
 直接修改前端代码改 name 参数为
 
 ```
- <Script>alert(/xss/)</script> ,
+ <script>alert(1)</script> ,
  ```
  成功弹框
 
