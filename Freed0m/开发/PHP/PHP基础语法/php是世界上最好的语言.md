@@ -25,6 +25,23 @@ php会更具用户要求和选择而动态的进行更新改变和相应。
 （`BUT`A君：在执行文件包含的时候，先顺序执行，在执行到包含文件的时候再报错。）
 
 
+**php插件安装**
+
+- sql server
+
+![插件下载地址](https://github.com/Microsoft/msphpsql/releases)
+
+复制下载文件进入 `php` 的 `ext` 文件夹下。
+
+在 `php.ini` 中 输入：
+```
+extension=php_pdo_sqlsrv_72_nts.dll
+extension=php_sqlsrv_72_nts.dll
+```
+重启apache 。
+
+
+
 
 
 ## **php代码标记**
@@ -1355,5 +1372,18 @@ GRANT privileges ON databasename.tablename TO 'username'@'host' WITH GRANT OPTIO
 ```
 
 
+### php执行shell
+
+```php
+exec("/usr/bin/sudo useradd pornhub"); 执行shell语句
+```
+
+### php获取远程文件信息(远程包含)
+
+> 函数：file_get_contents("URL路径")
+
+```php
+echo file_get_contents("http://xxxxx")
+```
 
 

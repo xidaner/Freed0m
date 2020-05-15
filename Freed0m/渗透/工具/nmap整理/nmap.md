@@ -19,7 +19,7 @@ nmap信息收集
 ```
 -F             端口扫描
 -sT            tcp端口扫描  
--sU            udp扫描
+-sU            udp扫描-
 -A             综合扫描
 -O             系统扫描
 -p             指定端口扫描
@@ -314,6 +314,8 @@ nmap -p3306 -sV -sC site.test.lan
 
 
 
+## 伪造扫描
 
+nmap -v -sn -PE -n -D 10.10.10.10,20.20.20.20,30.30.30.30 --min-hostgroup 1024 --min-parallelism 1024  192.168.1.1/24 -oN /root/1.txt
 
 

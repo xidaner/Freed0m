@@ -46,7 +46,39 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 
 
+一、安装java环境
 
+centos7安装java环境比较简单，我是通过virtualBox安装的最小的centos7，安装完毕后设置好IP，要能够访问外网，我上一篇文章里详细讲了如何通过centos7设置IP访问外网。好了，废话不多说，直接上命令:
+
+yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
+
+yum命令需要联网 该操作就是从网上下载jdk8到你的centos7并且安装到默认目录。
+
+我们在Windows系统内用eclipse开发还需要设置JAVA_HOME、CLASSPATH、PATH环境变量，同样的在centos7里面也一样，安装完毕之后，
+
+将下面的三行添加到 /etc/profile 中:
+
+export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.121-0.b13.el7_3.x86_64
+
+export CLASSPATH=.:$JAVA_HOME/jre/lib/rt.jar:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+
+export PATH=$PATH:$JAVA_HOME/bin
+
+保存关闭后，执行:source /etc/profile #让设置立即生效。
+
+这里稍微说明一下/etc/profile文件就是centos7的环境变量配置文件。这个文件是每个用户登录时都会运行的环境变量设置，如果仅仅是修改是不会立即生效的，需要重新登录的时候才能生效，通过命令:source /etc/profile可以让刚才的设置立即生效。
+
+至此，java环境安装完毕，和windows下一样，运执行命令:java -version
+
+会出现以下信息:
+
+openjdk version "1.8.0_121"
+
+OpenJDK Runtime Environment (build 1.8.0_121-b13)
+
+OpenJDK 64-Bit Server VM (build 25.121-b13, mixed mode)
+
+说明java环境安装成功!
 
 
 
