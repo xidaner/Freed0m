@@ -8,7 +8,7 @@
 
 ## 准备阶段
 
-1. 安装相关软件 工欲善其事必先利其器 一个好的工具可以事半功倍。在阅读和编写PHP建议使用：phpstorm
+1. 安装相关软件 工欲善其事必先利其器 一个好的工具可以事半功倍。在阅读和编写PHP建议使用：phpstor、msqlmap、burp等
 
 2. 为了方便环境部署推荐使用集成工具面板：phpstudy(强烈推荐、真的神器。配个PHP和apache/nginx环境真的要老命)、宝塔。
 
@@ -58,130 +58,131 @@
 
 而对于基于mvc写法的程序来说，跟读他的index(入口)文件，了解整个程序的运行流程跟目录结构，之后再深入去了解它的核心类库，如果核心类库存在漏洞的话，那在这套程序中找出个漏洞的希望就很大啊！了解了整个框架运行流程后，也没从核心类库中发现什么可利用的点的话，这时就可以从功能点入手了(这时可以把源码丢进seay源代码审计系统了)。
 
-一套组合拳打下了后还是没找到漏洞咋办？没事，换套程序继续。如果换了n套程序都找不出来，那就换个人吧……
+一套组合拳打下了后还是没找到漏洞咋办？没事，那就换个程序继续。如果换了n套程序都找不出来，那就换个人吧……
+
+
+需要掌握的语言/框架：
+1. 前端： HTML JavaScript dom 等。挖掘有没有XSS或 csrf。
+
+2. 后端：常见的语法。例如：不同语言中的 变量、常量、数组、对象、类的调用、引用等。 (例如 在python中就是 列表、元组、字典等)。 
+
+3. 框架： 常见的编写收发有两种，混编和MVC框架。 审计中MVV设计模式要熟练。以为大多数的CMS或集群式网站都是通过MVC框架编写的。包括 `PHP、java、python、C`等。需要知道该语言的功能点会以什么方法去写。可能出现的漏洞。如文件上传的方法中可能存在绕过上传马、在数据库链接和查询模块中看看有没有未作过滤或者过滤不全面导致的SQL注入等。
+
 
 ---
 
-# PHP代码审计中需注意的特殊函数
+在常规CTF中。代码审计的占比约是2题 PHP一题或两题.其他语言的一题。
 
-## 1. 常见需要注意的特殊函数
+审计过程
 
-1. PHP代码执行函数
+### 1. 一般拿到题目先在网页中打开。使用目录爆破或者扫描先看看能不能先搜索到有用的路径
 
-    1. `eval函数`   `mixed eval(string $code)`  该函数是把字符串当作PHP代码来执行。(已被列入黑名单)。
-
-    ```php
-    <?php @eval($_POST['pass']);?>
-    ```
-    2. `assert`函数 `(mixed $assertion[,$string $description])` 由于大多数杀软吧 `eval` 列入黑名单了，所以用 `assert` 来代替 `eval` 函数来执行操作。
-
-    ```php
-    <?php $_GET[a]($_GET[b]);?>
-    ```
-
-    3. preg_replace($pattern,$replacement,$subject[])
-    /e 修正符使`preg_replace()`将replacement 参数作为PHP代码
-    ```php
-    preg_replace("/test/e"，$_GET["h"],"just test");
-    ```
-    如果我们提交 `?h=phpinfo()`  , `phpinfo`就会被执行。
-
-
-    4. string create_function($args,$code)
-    创建一个匿名函数，并返回独一无二的函数名
-    ```php
-    $newfunc=create_function('$v','return system($v);');
-    ```   
-    `$newfunc('whomai');` 就相当于 `systeam('whoami');`
-
-    5. 回调函数 `call_user_func($callback)` 调用，把参数数组做(param_arr)为回调函数的参数传入。
-
----
-
-## 2. shell命令执行函数
-
-|函数|作用|示例(此处command由shell代替)|
-|---|---|---|
-|exec() | 执行一个外部程序|exec("shell")|
-|passthru() |执行外部程序并且显示其原始输出 , 此函数由来替代 exec() 或 system() 函数|passthru("shell")|
-|proc_open()|执行一个命令，并且打开用来输入或输出的文件。此函数默认被禁用，需更改PHP.ini|proc_open("shell", $descs,"$pipes")详情见下[1]|
-|shell_exec()&``|通过shell环境执行命令，并且将完整的输出以字符串的方式返回。|echo shell_exec("shell");
-|system()|执行外部程序，并且无需`echo`可显示执行输出结果|system("shell")|
-|popen()|通过popen()的参数传递一条命令，并对popen()所打开的文件进行执行文件执行。|$file = popen("shell","r"); pclose($file); 路径要写全。|
-
-[1] 对passthru()函数的解析
-
-```php
-<?php
-    $descs = array(
-                0 => array( 'pipe' , 'r' ) ,  #输入
-                1 => array( 'file' , 'output' , 'w' ) , #输出，可以为管道或任意文件
-                2 => array( 'file' , 'errors' , 'w' )   #错误日志，可以为管道或任意文件
-            );
-
-    $res = proc_open( 'ping 127.0.0.1' , $descs , $pipes );//第一个标签为shell命令。
-
-    if( is_resource( $res ) )
-    {
-        fputs( $pipes[ 0 ] , '<?php  \'shell \n\'; ?>' );//可以执行文件写入内容
-        fclose( $pipes[ 0 ] );
-
-
-        proc_close( $res );
-    }
-?>
-```
-![](img/2.png)
-
-可见 命令执行后 将命令输入至output文件。并写一个PHP文件。在CMS中多见。
-
----
-
-## 3. 文件操作函数(可能存在文件包含的函数)
-
-|函数|作用|示例|
-|---|---|---|
-|copy()|拷贝文件|copy('file','newfile')|
-|file_get_contents()| 将整个文件读入一个字符串|$h = file_get_contents('http://www.xx.com/'); echo $h|
-|file_put_contents()|将一个字符串写入文件|file_put_contents($file, 内容);|
-|file|将一整个文件读入一个数组中|$test = file('http://xx.xxx/'); 可以输出web 页面。|
-|fopen()|打开文件或者 URL|fopen("文件路径", "r");|
-|move_uploaded_file|将上传的文件移动到新位置| move_uploaded_file($tmp_name, "路径/新名称");|
-
-
-## 4. 特殊函数
-
-**信息泄露**
-
- `phpinfo()` 大量信息，略。
-
-
-**软连接- 读取文件内容**
-
- `symlink($target,$link)` 对于已有的target建立一个name = link的符合连接。
-
-`readlink($path)` 读取并返回连接内容。
-
-**环境变量**
-
-`putenv()`设置环境变量的值。
-`getenv()`读取环境变量的值。
-
-示例
-```php
-var_dump(getenv('test'));//查看test的环境变量的值
-putenv('test=123');//设置环境变量
-echo "\r\ntest=".getenv('test');//输出环境变量
-//此时test的环境变量从 false 变成了 test=123.
+### 2. 如果能爆破出目录则先从已爆破出的文件中入手。常见需要注意的接口文件名有: 
+ ```
+config       //配置文件
+access.log   //访问日志
+Dbclass      //数据库连接
+common       //CMS中常见的公共函数
+upload       //文件上传
 ```
 
-**数字判断**
+![](img/3.png)
 
-`is_numeric($var)` 判断是数字还是数字字符串。是为TRUE 否为FALSE
 
----
 
-**以下为不常见函数**
 
+### 3. 如果没有爆破出接口，则直接阅读主页 `index.php` 在MVC框架中 `index.php` 为网站的入口。
+
+
+### 4. 如果是题目固定分配的几页 `PHP` 网站。则全文阅读。在粗略看完一遍后确定其类型。是网站的主页还是网站的某个模块。如果是主页，直接丢入 `Seay代码审计`工具。按照提示查看模块分类
+
+
+
+
+### 5. 如果是接口丢进`Seay代码审计`工具那就是自讨苦吃。你能看到`满江红` 如果是单个接口就建议。先看其大致实现的功能。粗略从[特殊函数](PHP中的特殊函数)中获得判断：
+
+强烈推荐使用软件 [Sublime Text](http://www.sublimetext.com/) 使用快捷键 `ctrl+shift+f`。然后输入函数值。
+
+![](img/4.png)
+
+点击find后会进行全局搜索并追踪函数。可以清晰查看到该函数的运行。
+
+
+### 系统对文件操作函数 `$_FILES`  (多见于编辑文件和文件上传)
+
+|函数|含义|举例|
+|---|---|---|
+|`$_FILES['File']['name']`|客户端文件的原名称|一般会通过该名称来实现获取后该文件名操作|
+|`$_FILES['File']['type']`|文件的 MIME 类型|例如图片文件的`image/png`，进行文件类型的判断，查看是否为图片。|
+| `MAX_FILE_SIZE`|选项指定的文件的大小|以k为单位。如：`$maxsize =30720;MAX_FILE_SIZE<=$maxsize`|
+
+
+### 系统对于数据库的操作函数 `mysql`(PHP版本<5.5.0)
+
+|函数|含义|举例|
+|---|---|---|
+|mysql_connect |打开一个到 MySQL 服务器的连接|`mysql_connect('ip', 'user', 'pwd');`|
+
+
+在`PHP版本>5.5.0后被mysqli代替`
+现在常用数据库链接为 `PDO`。
+
+代码如下:
+```php
+$dsn = 'mysql:dbname=testdb;host=127.0.0.1';
+$user = 'dbuser';
+$password = 'dbpass';
+
+try {
+    $dbh = new PDO($dsn, $user, $password);
+} catch (PDOException $e) {
+    echo '连接失败' . $e->getMessage();
+}
+
+```
+
+
+
+
+### 6. 在区分出拿到的网页是干什么的之后。丢进本地运行环境 ，打开[Xedbug](https://segmentfault.com/a/1190000018725922).
+
+php.ini配置上班后补充
+
+在打开Xdebug的报告文件后。打开他查询需要的函数即可。或者在其中直接做PHP审计也行 [案例](https://www.bilibili.com/video/BV1K4411X7aS?p=5)
+
+
+
+
+
+### 7. 构造 `payload` 或者发现其中可能存在的类，d但是由于环境依赖关系，或者是特殊环境的构造要求，这就可能导致我们在测试环境下做验证是很困难的。只能进行单元的 `mock` 测试.
+
+常见输出函数如下:
+
+|函数|含义|实例|
+|---|---|---|
+|`echo`|输出多个字符串，参数，不需要括号 ，无返回值。|`echo $a;`|
+|`print()`|同时输出一个字符串，一个参数， 需要圆括号，有返回值， 当其执行失败时返回 `flase`。|`print('test')`|
+|`die()`|先输出内容再退出程序，常用在链接服务器，数据库|`mysqli_connect(xxx) or die(”连接服务器失败！“);`|
+| `printf()`|f 指 format 格式化,即是以什么格式输出什么数|`printf ("%x"[1], 1);`(则输出的是16进制的1)|
+| `sprintf()`|此函数不能直接输出，需要将值赋值给一个变量后输出变量|`$a=sprintf("%x","1");echo $a;`|
+| `print_r()`|只由于输出数组|`$a = array (1, 2, array ("a", "b", "c"));print_r ($a);`|
+|`var_dump()`|输出变量的容，类型或字符串的内容，类型，长度。常用来调试。|`var_dump($a)`|
+|`var_export()`|输出或返回一个变量的字符串|`$v = var_export($b, TRUE);echo $v;`|
+
+返回：|
+
+
+[1]printf的输出格式有:
+
+![](img/1.png)
+
+
+### 8. (CTF中)涉及到反序列化和逆向的后续补充
+
+在审计完类后坐下总结
+
+
+
+### 9. 编辑 payload 测试。GLHF！
 
 

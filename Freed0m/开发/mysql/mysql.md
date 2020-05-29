@@ -66,7 +66,7 @@ SELECT DISTINCT substr(GetDate,1,8) FROM NT_Data_01 ORDER BY GetDate DESC
 ```
 
 
-
+IT 整改 合规性改 
 
 
 
@@ -81,8 +81,10 @@ select CONCAT(extract(hour from 创建时间),'-',extract(hour from 创建时间
 ```
 
 
+**更新数据**
 
-
-
+```
+upload xxxx SET table
+```
 
 

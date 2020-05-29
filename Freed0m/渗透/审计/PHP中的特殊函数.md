@@ -125,3 +125,39 @@ echo "\r\ntest=".getenv('test');//输出环境变量
 列：`print_r(glob("*.php"));`查找当前目录下的所有php文件并打印。
 
 
+**登录等功能**
+
+必定会打开 `session_start()` 函数。
+
+
+**PHP项目软件**
+
+当项目安装时，头文件会判断是否已经安装过。如果跳转页面不加 `exit` 就有可能存在重装的风险。
+
+```php
+if(file_exists($_SERVER["DOCUMENT_ROOT"].'/sys/install.lock')){
+    header("Location: ../index.php");
+    exit;
+}
+```
+查看是否有信息是不做过滤或者是未作过滤写入配置文件中。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

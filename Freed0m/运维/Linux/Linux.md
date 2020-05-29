@@ -158,4 +158,24 @@ systemctl start php-fpm.service
 ```
 
 
+## 愉快使用网易云音乐
+
+centos环境
+```
+yum install epel-release
+yum install nodejs npm
+git clone https://github.com/nondanee/UnblockNeteaseMusic.git
+cd UnblockNeteaseMusic
+npm install forever -g
+npm install
+forever start app.js -p 18080   # 启动
+firewall-cmd --permanent --zone=public --add-port=18080/tcp
+firewall-cmd --reload
+forever stop app.js        # 关闭
+
+
+//启动代码
+ cd UnblockNeteaseMusic
+        forever start app.js -p 18080
+```
 
