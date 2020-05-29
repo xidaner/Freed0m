@@ -179,3 +179,22 @@ forever stop app.js        # 关闭
         forever start app.js -p 18080
 ```
 
+
+## PIP2安装
+
+```
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+pip2 -v
+```
+
+
+
+
+## PIP3安装
+
+```
+wget https://bootstrap.pypa.io/get-pip.py 
+python3 get-pip.py 
+pip3 -V
+```

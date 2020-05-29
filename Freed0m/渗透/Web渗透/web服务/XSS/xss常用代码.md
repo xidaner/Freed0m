@@ -94,11 +94,22 @@ high的代码很有效的过滤了所有  script的标签，但是，他旺旺�
 直接修改前端代码改 name 参数为 
 
 ```
-<img src=1 onerror=alert(网安2019)> ,
+
+ jquery-1.7.1~1.8.3
+    jquery-1.6.min.js，jquery-1.6.1.min.js，jquery-1.6.2.min.js
+    jquery-1.5所有版本
+    jquery-1.4所有版本
+    jquery-1.3所有版本
+    jquery-1.2所有版本
+
+<img src=1 onerror=alert(网安2020)> ,
 
 ```
 
 成功弹框
+
+http://localhost/#<img src=/ οnerrοr=alert(1)>
+
 
 3.DOM型xss漏洞
 DOM型XSS其实是一种特殊类型的反射型XSS，它是基于DOM文档对象模型的一种漏洞。
