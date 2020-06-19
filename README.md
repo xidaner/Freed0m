@@ -13,7 +13,17 @@
     - [杂项](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9)
 
     - [渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F)
-      - []
+      - [OS渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/OS%E6%B8%97%E9%80%8F)
+      - [Web渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F)
+      - [其他姿势](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E5%85%B6%E4%BB%96%E5%A7%BF%E5%8A%BF%E6%BC%8F%E6%B4%9E)
+      - [PHP代码审计](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E5%AE%A1%E8%AE%A1/PHP%E5%AE%A1%E8%AE%A1.md)
+      - [工具](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E5%B7%A5%E5%85%B7)
+      - [靶场](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E9%9D%B6%E5%9C%BA)
+      - [Labs 通关笔记](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E9%9D%B6%E5%9C%BA/labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0)
+      - [Vulhub 通关笔记](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E9%9D%B6%E5%9C%BA/vulnhub/vulhub.md)
+
+
+
 
 > If you are waiting for others to be saved, you will not be entitled to freedom at all.(如果你正在等待他人解救，你就根本不配获得自由！)
  自由让我向往天空。
