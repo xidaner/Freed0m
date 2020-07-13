@@ -2,11 +2,16 @@
 
 - [学习来源](https://www.bilibili.com/video/BV1o4411M71o?p=1)
 
-- ![](/../img/基础.jpg)
-- 👴 I hear her voice in the morning hours,She calls me
-<<[Take Me Home Country Roads](http://music.163.com/song?id=1313205002&userid=262256866)>> 
-专辑：Take Me Home: The John Denver Story
-歌手：David Meol
+<p align="center">
+    <img src="http://p2.music.126.net/AE0wCDxusSZj3MAGn0upZw==/870813209249684.jpg?param=130y130" width="25%">
+</p>
+
+<p align="center">👴 I hear her voice in the morning hours,She calls me</p>
+<p align="center"><a href="http://music.163.com/song?id=1313205002&userid=262256866"><font>《Take Me Home Country Roads》</font></a> </p>
+<p align="center">专辑：Take Me Home: The John Denver Story</p>
+<p align="center">歌手：David Meol</p>
+
+
 
 > 我比较喜欢的翻唱版本，墨水乐队翻唱，喜欢可以去苹果买正版！
 
