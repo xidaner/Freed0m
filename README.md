@@ -16,6 +16,8 @@
         - [PHP 文件上传](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/PHP/php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/PHP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0.md)
         - [PHP 类的定义和对象](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/PHP/%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%AF%B9%E8%B1%A1/%E7%B1%BB%E7%9A%84%E5%AE%9A%E4%B9%89.md)
         - [PHP 报错和排错](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/PHP/php%E6%8A%A5%E9%94%99%E9%9B%86%E9%94%A6.md)
+      - [Python](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python)
+        - [Python-入门](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%85%A5%E9%97%A8.md)
 
       - [MySql](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/mysql/mysql.md)
 
