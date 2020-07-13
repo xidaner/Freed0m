@@ -1,11 +1,14 @@
 # PHP审计中的登录密码爆破和绕过
 
-![](img/music/密码爆破.jpg)
-- 👴Yo, I'll tell you what I want, what I really really want！
-<<[Wannabe](http://music.163.com/song?id=501220770&userid=262256866)>> 
-专辑：Wannabe
-歌手：Why Mona/Unlike Pluto/Joanna Jones
 
+<p align="center">
+    <img src="http://p1.music.126.net/SmVvG7YSr__PaFtCZhIWxw==/109951163013515778.jpg?param=130y130" width="25%">
+</p>
+
+<p align="center">👴Yo, I'll tell you what I want, what I really really want！</p>
+<p align="center"><a href="http://music.163.com/song?id=501220770&userid=262256866"><font>《Wannabe》</font></a> </p>
+<p align="center">专辑：Wannabe</p>
+<p align="center">歌手：Why Mona/Unlike Pluto/Joanna Jones</p>
 
 ### 暴力猜解
 

@@ -1,9 +1,14 @@
 # PHP审计中的任意文件包含漏洞
 
-- 👴'm thinking life's too short its passing by ！
-<<[Go Big or Go Home](http://music.163.com/song?id=32166698&userid=262256866)>> 
-专辑：Go Big or Go Home 
-歌手：American Authors
+<p align="center">
+    <img src="http://p1.music.126.net/5_GOvyR1OG9bUSD6qxQ5pw==/7871403744088036.jpg?param=130y130" width="25%">
+</p>
+
+<p align="center">👴'm thinking life's too short its passing by ！ </p>
+<p align="center"><a href="http://music.163.com/song?id=32166698&userid=262256866"><font>《Go Big or Go Home》</font></a> </p>
+<p align="center">专辑：Go Big or Go Home </p>
+<p align="center">歌手：American Authors</p>
+
 
 ### [文件包含漏洞](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/PHP/php%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/PHP%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0.md)
 
