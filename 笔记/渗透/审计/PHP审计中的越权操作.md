@@ -1,40 +1,44 @@
 # PHP审计中的越权操作
 
+<p align="center">
+    <img src="img/music/越权操作.jpg" width="25%">
+</p>
 
-- ![](img/music/越权操作.jpg)
-- 👴 纯音乐
-<<[Darius-Hot Hands](http://music.163.com/song?id=1394252904&userid=262256866)>> 
-专辑：Hot Hands Remix
-歌手：Galaxy Knight
+<p align="center">👴 纯音乐</p>
+<p align="center"><a href="http://music.163.com/song?id=1394252904&userid=262256866"><font>《Darius-Hot Hands》</font></a> </p>
+<p align="center">专辑：Hot Hands Remix</p>
+<p align="center">歌手：Galaxy Knight</p>
 
 ### 逻辑漏洞 -- 越权漏洞
 
 **什么是越权漏洞**
-    Web中越权漏洞简单的讲就是绕过身份认证或盗用他人身份来进行操作。
-    越权漏洞也可以分两类：
 
-**垂直越权**
+Web中越权漏洞简单的讲就是绕过身份认证或盗用他人身份来进行操作。
 
-垂直越权及是不同级别或不同的角色之间的越权，垂直越权又可以分为向上越权和向下越权。比如
-某些论坛，删除，修改，发布文章等功能应该是管理员的权限进的事件。此时一个匿名用户通过越权也完成了类似的操作。这就是向上越权。
-而向下越权则反之，管理员活动了匿名用户的权力。
+越权漏洞也可以分两类：
 
-**水平越权**
+- **垂直越权**
 
-水平越权可以理解为，权限相同的用户之间越权。就比如张三和李四都是一个网站的普通会员。张三通过越权漏洞查看并修改了李四的个人信息。
-该漏洞就会导致大量用户信息泄露，严重的会导致用户信息大量泄露。
+    垂直越权及是不同级别或不同的角色之间的越权，垂直越权又可以分为向上越权和向下越权。比如
+    某些论坛，删除，修改，发布文章等功能应该是管理员的权限进的事件。此时一个匿名用户通过越权也完成了类似的操作。这就是向上越权。
+    而向下越权则反之，管理员活动了匿名用户的权力。
+
+- **水平越权**
+
+    水平越权可以理解为，权限相同的用户之间越权。就比如张三和李四都是一个网站的普通会员。张三通过越权漏洞查看并修改了李四的个人信息。
+    该漏洞就会导致大量用户信息泄露，严重的会导致用户信息大量泄露。
 
 #### 为什么会出现越权漏洞
 
 Web中的越权漏洞简单理解为身份验证漏洞。在认证身份的时候，仅凭用户ID或用户名来验证用户。此时身份验证就极易绕过。
 
-**Web中的身份认证**
+**Web 中的身份认证**
 
- Web身份认证通常使用Cookie、Session、Openid、OAuth、SSO、REST等进行认证，
- 而其中最常使用的是 `Cookie` 和 `Session` 。 Cookie和Session都能够进行会话跟踪，它们的区别在于：
- - `Session`是由服务器保存并分发的一个数，可以由于跟踪用户的状态，这个数据可以保存在集群数据库、文件中。
- - `Cookie`是由客户端(浏览器)保存用户信息的一种机制，由于记录用户的一些信息，可以配合Session进行身份验证。
+Web 身份认证通常使用 Cookie、Session、Openid、OAuth、SSO、REST 等进行认证，
 
+而其中最常使用的是 `Cookie` 和 `Session` 。 Cookie 和  Session 都能够进行会话跟踪，它们的区别在于：
+- `Session`是由服务器保存并分发的一个数，可以由于跟踪用户的状态，这个数据可以保存在集群数据库、文件中。
+- `Cookie`是由客户端(浏览器)保存用户信息的一种机制，由于记录用户的一些信息，可以配合Session进行身份验证。
 
 **Cookie中身份验证漏洞**
 
@@ -49,20 +53,18 @@ Web中的越权漏洞简单理解为身份验证漏洞。在认证身份的时�
     {
         $username = clean_input($_COOKIE['username']);//将cookie中的值赋给变量$username
         if($username == root) //如#username的值为root
-    
+
             echo "欢迎您登录系统".$_SESSION['username']."管理员!";    //如果$username的值为root则服务器分发session的参数为root用户
         if($username == test1)
-            echo "欢迎普通用户".$_SESSION['username']."！"; 
+            echo "欢迎普通用户".$_SESSION['username']."！";
             //如果$username的值为test1则服务器分发session的参数为test1用户
- 
-}; 
+    };
 ?>
 ```
 
-从上述代码中可见，页面直接获取cookie中的username字段进行身份判断，这种方式非常的不安全。可以通过修改Cookie中的值进行越权。[举例参考](https://blog.csdn.net/God_XiangYu/article/details/97989390)
+从上述代码中可见，页面直接获取 `Cookie` 中的 `username` 字段进行身份判断，这种方式非常的不安全。可以通过修改 Cookie 中的值进行越权。[举例参考](https://blog.csdn.net/God_XiangYu/article/details/97989390)
 
 ![](img/越权操作/1.png)
-
 
 **进阶**
 
@@ -94,42 +96,40 @@ if (isset($_POST['submit']) && !empty($_POST['username']) ) {//判断submit的�
 ```
 可见当前修改用户名之判断ID，只需要更改ID为其他用户的ID即可越权。如果轮询出管理员的ID还可以进一步的进行垂直越权。
 
-
 [乌云案例举例](http://wy.zone.ci/bug_detail.php?wybug_id=wooyun-2016-0212974)
-
 
 ![](img/越权操作/2.png)
 
-
 ### 修复建议
-  
+
 - 在Cookie身份认证中进行修复：
-在用户登录后我们通过添加session变量对cookie进行验证并绑定。如果后续修改Cookie中的值，匹配到的服务器端的session值不匹配，则关闭连接。
 
-```php
+    在用户登录后我们通过添加session变量对cookie进行验证并绑定。如果后续修改Cookie中的值，匹配到的服务器端的session值不匹配，则关闭连接。
 
-if(isset($_COOKIE['username'])) //判断username是否为空
-{    
-            $_SESSION['veri'] = $_COOKIE['username'];//将cookie复制给session并保存或编码
-            header("location: main.php");//跳转到主页面。
-}
-```
- 
-在后续进行身份验证操作时都验证 `session的值` 和 `Cookie` 中的是否匹配即可。这种修补方式因为Session保存在服务器，不易被修改。
-查看`main.php`页面：
+    ```php
 
-```php
-if($_COOKIE['username']==$_SESSION['username'])//判断cookie中的用户名和session中的是否相同
-{
- 
- 
-    if($_COOKIE['username'] == root)  //如果是root则xxxxx
-        echo "欢迎您登录系统".$_COOKIE['username'].""; 
-    if($_COOKIE['username'] == test1)//如果是test则xxxxx
-        echo "欢迎普通用户".$_COOKIE['username'].""; 
- 
-}
-else{
-    echo "登录失败！请尝试重新登录!";
-}
-```
+    if(isset($_COOKIE['username'])) //判断username是否为空
+    {
+                $_SESSION['veri'] = $_COOKIE['username'];//将cookie复制给session并保存或编码
+                header("location: main.php");//跳转到主页面。
+    }
+    ```
+
+- 在后续进行身份验证操作时都验证 `session的值` 和 `Cookie` 中的是否匹配即可。这种修补方式因为Session保存在服务器，不易被修改。
+
+    查看`main.php`页面：
+
+    ```php
+    if($_COOKIE['username']==$_SESSION['username'])//判断cookie中的用户名和session中的是否相同
+    {
+
+        if($_COOKIE['username'] == root)  //如果是root则xxxxx
+            echo "欢迎您登录系统".$_COOKIE['username']."";
+        if($_COOKIE['username'] == test1)//如果是test则xxxxx
+            echo "欢迎普通用户".$_COOKIE['username']."";
+
+    }
+    else{
+        echo "登录失败！请尝试重新登录!";
+    }
+    ```
