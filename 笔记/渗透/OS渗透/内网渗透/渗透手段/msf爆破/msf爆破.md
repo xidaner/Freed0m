@@ -9,5 +9,3 @@ set配置RHOST和RPORT两个值即可，RHOST是目标主机IP RPORT是目标主
 
 运行run得到结果
 ```
-
-## 
