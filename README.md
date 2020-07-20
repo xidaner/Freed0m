@@ -2,16 +2,6 @@
 
 🚀吃的太饱写的笔记，有问题可以提问。下下次也不一定回答。
 
-<p align="center">
-    <img src="http://p1.music.126.net/KrdYRIfb9ndkR36nrnTkxg==/18643319162556923.jpg?param=130y130" width="25%">
-</p>
-<audio id="audio" controls="" preload="none">
-      <source id="mp3" src="/img/1.mp3">
-</audio>
-<p align="center">👴 I am Looking For Freedom!</p>
-<p align="center"><a href="https://music.163.com/#/song?id=26145413&userid=262256866"><font>《Freedom》</font></a> </p>
-<p align="center">专辑：Django Unchained</p>
-<p align="center">歌手：Anthony Hamilton / Elayna Boynton</p>
 
 ## 免责声明
 
@@ -29,6 +19,7 @@
         - [PHP 报错和排错](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/PHP/php%E6%8A%A5%E9%94%99%E9%9B%86%E9%94%A6.md)
       - [Python](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python)
         - [Python-入门](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%85%A5%E9%97%A8.md)
+        - [Python-列表与元组](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%88%97%E8%A1%A8%E4%B8%8E%E5%85%83%E7%BB%84.md)
 
       - [MySql](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/mysql/mysql.md)
 
