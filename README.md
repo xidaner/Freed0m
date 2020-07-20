@@ -5,7 +5,7 @@
 <p align="center">
     <img src="http://p1.music.126.net/KrdYRIfb9ndkR36nrnTkxg==/18643319162556923.jpg?param=130y130" width="25%">
 </p>
-<audio src="https://music.163.com/#/song?id=26145413&userid=262256866" controls ></audio>
+<audio src="/img/1.mp3" controls ></audio>
 <p align="center">👴 I am Looking For Freedom!</p>
 <p align="center"><a href="https://music.163.com/#/song?id=26145413&userid=262256866"><font>《Freedom》</font></a> </p>
 <p align="center">专辑：Django Unchained</p>
