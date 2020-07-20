@@ -2,6 +2,15 @@
 
 🚀吃的太饱写的笔记，有问题可以提问。下下次也不一定回答。
 
+<p align="center">
+    <img src="http://p1.music.126.net/KrdYRIfb9ndkR36nrnTkxg==/18643319162556923.jpg?param=130y130" width="25%">
+</p>
+<audio src="https://music.163.com/#/song?id=26145413&userid=262256866" controls ></audio>
+<p align="center">👴 I am Looking For Freedom!</p>
+<p align="center"><a href="https://music.163.com/#/song?id=26145413&userid=262256866"><font>《Freedom》</font></a> </p>
+<p align="center">专辑：Django Unchained</p>
+<p align="center">歌手：Anthony Hamilton / Elayna Boynton</p>
+
 ## 免责声明
 
 `本人撰写的手册,仅供学习和研究使用,请勿使用文中的技术源码用于非法用途,任何人造成的任何负面影响,与本人无关.`
