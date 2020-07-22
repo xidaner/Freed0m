@@ -20,6 +20,7 @@
       - [Python](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python)
         - [Python-入门](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%85%A5%E9%97%A8.md)
         - [Python-列表与元组](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%88%97%E8%A1%A8%E4%B8%8E%E5%85%83%E7%BB%84.md)
+        -  [Python-字典与进阶](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%AD%97%E5%85%B8%E4%B8%8E%E8%BF%9B%E9%98%B6.md)
 
       - [MySql](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/mysql/mysql.md)
 
@@ -31,7 +32,7 @@
         - [WIFI 渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/OS%E6%B8%97%E9%80%8F/wifi%E6%B8%97%E9%80%8F)
       - [Web渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F)
         - [PHP Bypass D盾](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/PHP%E7%BB%95%E8%BF%87/Webshell/Bypass%20waf/PHP%E9%A9%AC.md)
-        - [Web](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1)  
+        - [Web](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1)
           - [HTTP 请求走私](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/HTTP%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81/HTTP%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81.md)
           - [SQL 注入指北](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/SQL%E6%B3%A8%E5%85%A5)
             - [SQL 通用注入指北](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/SQL%E6%B3%A8%E5%85%A5/SQL%E6%B3%A8%E5%85%A5%E6%8C%87%E5%8C%97%E7%BB%BC%E5%90%88%E7%AF%87.MD)
@@ -42,7 +43,7 @@
           - [XXE 实体编码注入](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/xxe_lab%20php/xxe_php.md)
           - [常见未授权访问](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/%E6%9C%8D%E5%8A%A1%E8%BD%AF%E4%BB%B6%E6%9C%AA%E6%8E%88%E6%9D%83/%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE.md)
           - [常见漏洞合集](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/%E6%BC%8F%E6%B4%9E%E5%90%88%E9%9B%86)
-    
+
       - [其他姿势](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E5%85%B6%E4%BB%96%E5%A7%BF%E5%8A%BF%E6%BC%8F%E6%B4%9E)
       - [PHP代码审计](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E5%AE%A1%E8%AE%A1/PHP%E5%AE%A1%E8%AE%A1.md)
         - [PHP代码审计之基础篇](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/%E5%AE%A1%E8%AE%A1/PHP%E5%AE%A1%E8%AE%A1.md)
