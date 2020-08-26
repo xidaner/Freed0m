@@ -59,7 +59,7 @@ medium：
 所以可以直接使用双写，大小写混写等直接绕过！
 很垃圾：
 双写绕过
-直接修改前端代码改 name 参数为 
+直接修改前端代码改 name 参数为
 
 ```
 <sc<script>ript>alert(/xss/)</script>

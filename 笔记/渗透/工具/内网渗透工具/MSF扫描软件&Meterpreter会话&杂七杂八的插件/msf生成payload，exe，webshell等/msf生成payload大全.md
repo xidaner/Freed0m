@@ -136,7 +136,7 @@ php shell.php
 
 # 脚本shell
 
-关于使用脚本反弹shell的方式，主要以p`ython、bash、perl`为例。
+关于使用脚本反弹shell的方式，主要以`python、bash、perl`为例。
 
 ## Python
 

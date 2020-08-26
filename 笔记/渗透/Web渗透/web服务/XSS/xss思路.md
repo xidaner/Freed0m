@@ -61,7 +61,7 @@ http://demo.testfire.net/search.jsp?query=1
 输入没什么过滤，但是无法直接弹窗可以尝试闭合标签然后使xss生效
 比如：
 ```
-"> <script>alert(1);</script>
+"> <script>alert(1)</script>
 ```
 
 ## **如何绕过**

