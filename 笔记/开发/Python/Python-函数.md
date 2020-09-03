@@ -802,15 +802,387 @@ test1(c)
 
 ## 函数进阶
 
+  - 目录
+    - 应用:学员管理系统
+    - 递归
+    - lambda 表达式
+    - 高阶函数
+
+### 学院管理系统
+
+  - 系统简介
+
+需求：进入系统显示系统功能界面，功能如下：
+  1. 添加学员
+  2. 删除学员
+  3. 修改学员信息
+  4. 查询学员信息
+  5. 显示所有学员信息
+  6. 退出系统
+
+### 步骤分析
+
+  1. 显示功能界面
+  2. 用户输入功能序号
+  3. 根据用户输入的功能序号，执行不同的功能(函数)
+     1. 定义函数
+     2. 调用函数 在需求地方调用函数即可
+
+### 需求实现
+
+按照需求按步实现
+
+```py
+# 定义功能界面函数
+
+# 1. 显示功能界面
+# 2. 用户输入功能序号
+# 3. 按照用户输入的功能序号，执行不同的功能(函数)
+
+# 定义功能界面函数
+def info_print():
+    print('请选择功能----------')
+    print('1. 添加学员')
+    print('2. 删除学员')
+    print('3. 修改学员信息')
+    print('4. 查询学员信息')
+    print('5. 显示所有学员信息')
+    print('6. 退出系统')
+    print('_'*20)
+
+# 等待存储所有学员信息
+info = []
+
+
+# 系统需要循环使用，直到用户输入6，才能退出
+while True:
+    # 1. 显示功能界面
+    info_print()
+
+    # 2. 用户输入功能序号
+    user_num = int(input('请输入功能序号：'))
+
+    # 3. 按照用户输入的功能序号，执行不同的功能(函数)
+    # 如果用户输入1 执行添加：如果用户输入2 则执行删除... -- 多重判断
+
+    if user_num == 1:
+        print('添加')
+    elif user_num == 2:
+        print('删除')
+    elif user_num == 3:
+        print('修改')
+    elif user_num == 4:
+        print('查询')
+    elif user_num == 5:
+        print('显示所有')
+    elif user_num == 6:
+        print('退出系统')
+    else:
+        print('输入的功能有误')
+```
+
+#### 定义不同功能的函数
+
+所有功能函数都是操作学员信息，所有存储所有学员信息应该是一个`全局变量`，数据类型为`列表`。
+```py
+info=[] # 使用列表
+```
+
+
+***添加学员功能实现***
+ - 需求分析
+    1. 接收用户输入学员信息，并保存
+    2. 判断是否添加学员信息
+       1. 如果学员姓名已经存在则进行报错提示
+       2. 如果学员姓名不存在则准备空字典，将用户输入的数据追加到字典，在列表追加到字典数据
+    3. 对应的if条件成立的位置调用该函数
+  - 代码实现
+
+```py
+# 等待存储所有学员信息
+info = []
+# 添加学员信息的函数
+def add_info():
+    '''添加学员函数'''
+    # 接收学员信息
+    new_id = input('输入学号')
+    new_name = input('请输入姓名')
+    new_tel = input('请输入手机号')
+
+    global info
+
+    # 如果用户输入的
+    info_dict = {}
+    info_dict['id'] = new_id
+    info_dict['name'] = new_name
+    info_dict['tel'] = new_tel
+    # print(info_dict)
+
+    # 将这个学员的字典数据追加到列表
+    info.append(info_dict)
+    print(info)
+```
+
+> 按照姓名查重
+```py
+    for i in info:
+        if new_name == i['name']:
+            print('该用户已经存在！')
+            # 此时return由于退出当前函数，后面添加信息的代码不执行
+            return # 不去执行添加
+```
+
+#### 删除学员
+
+- 需求分析
+按照用户输入的学员姓名进行删除
+  1. 用户输入目标学员姓名
+  2. 检测这个学员是否存在
+     1. 如果存在，则列表删除这个数据
+     2. 如果不存在，则提示"该用户不存在"
+  3. 对应的if条件成立的位置调用该函数
+
+- 代码实现
+    ```py
+    def del_info():
+    '''删除学员函数'''
+    # 1. 用户输入要删除的学员的姓名
+    del_name = input('请输入要删除的学员姓名')
+    # 2. 判断学员是否存在：存在则删除；不存在则提示
+    # 3. 声明info是全局变量
+    global info
+    # 4. 判断学员是否存在：存在则执行删除(列表里面的字典)；break：不存在提示
+    for i in info:
+        if del_name == i['name']:
+            info.remove(i)
+            break
+        else:
+            print('该学员不存在')
+    print(info)
+    ```
+
+#### 修改学员信息
+
+- 需求分析
+  - 用户输入目标学员姓名
+  - 检查整改学员是否存在
+    - 如果存在，则修改这位学员的信息，例如手机号
+    - 如果不存在，则报错
+  - 对应的if条件成立的位置调用该函数
+- 代码实现
+  ```py
+  # 修改函数
+    def modify_info():
+        '''修改函数'''
+        # 1. 用户输入要修改的学员的姓名
+        modify_name = input('请输入要修改的学员的姓名')
+        global info
+        # 判断是否存在：如果存在则修改输入的姓名的手机号，否则提示报错
+        for i in info:
+            if modify_name == i['name']:
+                i['tel'] = input('请输入新的手机号')
+                break
+            else:
+                print('该学员不存在')
+        print(info)
+  ```
+
+#### 查找学员信息
+
+- 需求分析
+- 检查学员是否存在
+  - 如果存在，则显示这个学员的信息
+  - 如果不存在，则报错提示
+- 对应的if条件成立的位置调用该函数
+- 代码实现
+```py
+def search_info():
+    '''查询学员'''
+    # 1. 输入要查询的学员的姓名
+    search_name = input('请输入要查找的学员姓名')
+    # 定义全局变量
+    global info
+    # 2.判断学员是否存在
+    for i in info:
+        if search_name == i['name']:
+            # 如果存在则打印信息
+            print('查询到的学员信息如下——————')
+            print(f"该学员的学号是{i['id']},姓名是{i['name']},手机号是{i['tel']}")
+            break
+    else:
+            print('该学员不存在')
+```
+
+#### 显示所有学员信息
+
+- 打印所有学员信息
+  - 代码实现
+    ```py
+    def print_all():
+    '''查询所有学员信息'''
+    # 打印tishi字符
+    print('学员\t姓名\t手机号\t')
+    # 打印所有学员的数据
+    for i in info:
+        print(f"学号是{i['id']},姓名是{i['name']},手机号是{i['tel']}")
+    ```
+
+#### 退出系统
+
+- 退出当前系统
+  - 代码实现
+    ```py
+    elif user_num == 6:
+    # print('退出系统')
+    exit_flag = input('确定要退出吗？Y/n')
+    if exit_flag == 'y':
+        break
+    if exit_flag == 'Y':
+        break
+    ```
+
+### 最终代码
+
+```py
+# 定义功能界面函数
+
+# 1. 显示功能界面
+# 2. 用户输入功能序号
+# 3. 按照用户输入的功能序号，执行不同的功能(函数)
+
+# 定义功能界面函数
+def info_print():
+    print('请选择功能----------')
+    print('1. 添加学员')
+    print('2. 删除学员')
+    print('3. 修改学员信息')
+    print('4. 查询学员信息')
+    print('5. 显示所有学员信息')
+    print('6. 退出系统')
+    print('_'*20)
+
+# 等待存储所有学员信息
+info = []
+# 添加学员信息的函数
+def add_info():
+    '''添加学员函数'''
+    # 接收学员信息
+    new_id = input('输入学号')
+    new_name = input('请输入姓名')
+    new_tel = input('请输入手机号')
+
+    global info
+
+    for i in info:
+        if new_name == i['name']:
+            print('该用户已经存在！')
+            # 此时return由于退出当前函数，后面添加信息的代码不执行
+            return # 不去执行添加
+
+    # 如果用户输入的
+    info_dict = {}
+    info_dict['id'] = new_id
+    info_dict['name'] = new_name
+    info_dict['tel'] = new_tel
+    # print(info_dict)
+
+    # 将这个学员的字典数据追加到列表
+
+    info.append(info_dict)
+
+    print(info)
+
+def del_info():
+    '''删除学员函数'''
+    # 1. 用户输入要删除的学员的姓名
+    del_name = input('请输入要删除的学员姓名')
+    # 2. 判断学员是否存在：存在则删除；不存在则提示
+    # 3. 声明info是全局变量
+    global info
+    # 4. 判断学员是否存在：存在则执行删除(列表里面的字典)；break：不存在提示
+    for i in info:
+        if del_name == i['name']:
+            info.remove(i)
+            break
+        else:
+            print('该学员不存在')
+    print(info)
+
+# 修改函数
+def modify_info():
+    '''修改函数'''
+    # 1. 用户输入要修改的学员的姓名
+    modify_name = input('请输入要修改的学员的姓名')
+    global info
+    # 判断是否存在：如果存在则修改输入的姓名的手机号，否则提示报错
+    for i in info:
+        if modify_name == i['name']:
+            i['tel'] = input('请输入新的手机号')
+            break
+        else:
+            print('该学员不存在')
+    print(info)
+
+# 查询学员
+def search_info():
+    '''查询学员'''
+    # 1. 输入要查询的学员的姓名
+    search_name = input('请输入要查找的学员姓名')
+    # 定义全局变量
+    global info
+    # 2.判断学员是否存在
+    for i in info:
+        if search_name == i['name']:
+            # 如果存在则打印信息
+            print('查询到的学员信息如下——————')
+            print(f"该学员的学号是{i['id']},姓名是{i['name']},手机号是{i['tel']}")
+            break
+    else:
+            print('该学员不存在')
+
+def print_all():
+    '''查询所有学员信息'''
+    # 打印tishi字符
+    print('学员\t姓名\t手机号\t')
+    # 打印所有学员的数据
+    for i in info:
+        print(f"学号是{i['id']},姓名是{i['name']},手机号是{i['tel']}")
 
 
 
+# 系统需要循环使用，直到用户输入6，才能退出
+while True:
+    # 1. 显示功能界面
+    info_print()
 
+    # 2. 用户输入功能序号
+    user_num = int(input('请输入功能序号：'))
 
+    # 3. 按照用户输入的功能序号，执行不同的功能(函数)
+    # 如果用户输入1 执行添加：如果用户输入2 则执行删除... -- 多重判断
 
+    if user_num == 1:
+        # print('添加')
+        add_info()
+    elif user_num == 2:
+        # print('删除')
+        del_info()
 
-
-
-
-
-
+    elif user_num == 3:
+        # print('修改')
+        modify_info()
+    elif user_num == 4:
+        search_info()
+    elif user_num == 5:
+        # print('显示所有')
+        print_all()
+    elif user_num == 6:
+        # print('退出系统')
+        exit_flag = input('确定要退出吗？Y/n')
+        if exit_flag == 'y':
+            break
+        if exit_flag == 'Y':
+            break
+    else:
+        print('输入的功能有误')
+```

