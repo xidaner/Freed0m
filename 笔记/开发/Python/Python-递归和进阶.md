@@ -449,6 +449,92 @@ print(content)
 
 
 
+**通过二进制数生成二维码**
+```py
+from PIL import Image
+x = 45
+y = 45
+im = Image.new('RGB', (x, y))
+white = (255, 255, 255)
+black = (0, 0, 0)
+with open('D:\py\新建文件夹\ss.txt') as f:
+    for i in range(x):
+        ff = f.readline()
+        for j in range(y):
+            if ff[j] == '1':
+                im.putpixel((i, j), black)
+            else:
+                im.putpixel((i, j), white)
+im.show()
+```
+
+**color**
+```py
+c1 = '11111111010111101111'
+c2 = '11111011111110111111'
+c3 = '00001100101010110001'
+c4 = '01001010010000001101'
+c5 = '11010011011101010111'
+c6 = '10011011011010110110'
+c7 = '00111001101101111101'
+
+flag = ''
+
+for i in range(0,20):
+    c = c1[i]+c2[i]+c3[i]+c4[i]+c5[i]+c6[i]+c7[i]
+    flag += chr(int(c,2))
+
+print (flag)
+```
+
+**怀疑人生**
+
+
+
+
+`flag{hacker`
+
+```
+..... ..... ....! ?!!.? ..... ..... ....? .?!.? ....! .?... ..... .....
+..!?! !.?.. ..... ..... ..?.? !.?.. ..... ..... ..... ..... !.?.. .....
+..... .!?!! .?!!! !!!!! !!!!? .?!.? !!!!! !!!!! !!!!! .?... ....! ?!!.?
+!!!!! !?.?! .?!!! !!!!! !!!!! .!!!. ?.... ..... ..... .!?!! .?... .....
+..... .?.?! .?!.? .
+```
+
+ook编码
+
+那么在线 解码 `https://www.splitbrain.org/services/ook`
+
+![](img/6.png)
+
+得到   3oD54e
+
+查了好久这个居然是base58
+
+还是base58在线解码  `https://www.jisuan.mobi/pbHzbBHbzHB6uSJx.html`
+
+得到 `misc`
+
+flag{hackermisc12580}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -652,7 +652,40 @@ print(dict1+dict2)  # 报错
   {xx for xx in ...}
   ```
 
+**python**
+python -- 对二进制，八进制，十六进制之间的转换。
 
+```py
+# 十进制转换成二进制
+num = 8
+v = bin(num)
+print(v)   ------0b1000------
 
+# 十进制转换成八进制
+num = 8
+v = oct(num)
+print(v)    ------0o10------
+
+# 十进制转换成十六进制
+num = 8
+v = hex(num)
+print(v)   ------0x8------
+b = b[2:]  #截取掉'0x'
+
+# 二进制转换成十进制
+v1 = '0b1111'
+result = int(v1,base=2)
+print(result)   ------15------
+
+# 八进制转换成十进制
+v1 = '0o1111'
+result = int(v1,base=8)
+print(result)   ------585------
+
+# 十六进制转换成十进制
+v1 = '0x1111'
+result = int(v1,base=16)
+print(result)    ------4369------
+```
 
 

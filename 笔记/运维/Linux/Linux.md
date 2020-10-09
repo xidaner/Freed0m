@@ -198,3 +198,36 @@ wget https://bootstrap.pypa.io/get-pip.py
 python3 get-pip.py 
 pip3 -V
 ```
+
+
+# base
+```
+rm -f /var/run/yum.pid
+
+yum clean all
+yum makecache
+
+rm -f /var/run/yum.pid
+
+yum groupinstall -y "Development Tools"
+yum install -y yum-utils
+yum install -y vim make gcc gcc-c++ curl git lrzsz wget unzip openssl-devel epel-release
+yum update
+```
+
+
+
+# proxychains
+```bash
+ git clone https://github.com/haad/proxychains
+
+rz
+
+unzip proxychains-ng.zip
+cd proxychains-ng-master
+./configure
+make && make install
+cp ./src/proxychains.conf /etc/proxychains.conf
+cd .. && rm -rf proxychains-ng
+vim /etc/proxychains.conf
+```

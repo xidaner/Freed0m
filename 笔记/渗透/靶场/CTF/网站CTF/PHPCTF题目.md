@@ -671,6 +671,185 @@ $KEY='ISecer:www.isecer.com';
 所以此时的 `unserialize($cookie)` 要全等于 `$key`
 
 
+----
+**BUUCTF**
+
+**[HCTF 2018]WarmUp**
+
+源码审计
+```php
+<?php
+    highlight_file(__FILE__);
+    class emmm
+    {
+        public static function checkFile(&$page)
+        {
+            $whitelist = ["source"=>"source.php","hint"=>"hint.php"];
+            if (! isset($page) || !is_string($page)) {
+                echo "you can't see it";
+                return false;
+            }
+            if (in_array($page, $whitelist)) {
+                return true;
+            }
+            $_page = mb_substr(
+                $page,
+                0,
+                mb_strpos($page . '?', '?')
+            );
+            if (in_array($_page, $whitelist)) {
+                return true;
+            }
+            $_page = urldecode($page);
+            $_page = mb_substr(
+                $_page,
+                0,
+                mb_strpos($_page . '?', '?')
+            );
+            if (in_array($_page, $whitelist)) {
+                return true;
+            }
+            echo "you can't see it";
+            return false;
+        }
+    }
+    if (! empty($_REQUEST['file'])
+        && is_string($_REQUEST['file'])
+        && emmm::checkFile($_REQUEST['file'])
+    ) {
+        include $_REQUEST['file'];
+        exit;
+    } else {
+        echo "<br><img src=\"https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\" />";
+    }
+?>
+```
+
+先查看 hint.php
+发现提示也就没啥
+![](img/4.png)
+
+**接下来继续审计 source.php 代码**
+```php
+if (! empty($_REQUEST['file'])  //$_REQUEST['file']值非空
+        && is_string($_REQUEST['file'])  //$_REQUEST['file']值为字符串
+        && emmm::checkFile($_REQUEST['file'])  //能够通过checkFile函数校验
+    ) {
+        include $_REQUEST['file'];  //包含$_REQUEST['file']文件
+        exit;
+    } else {
+        echo "<br><img src=\"https://i.loli.net/2018/11/01/5bdb0d93dc794.jpg\" />";
+        //打印滑稽表情
+    }
+```
+这段代码告诉们需要满足三个条件
+
+1. 值为非空
+2. 值为字符串
+3. 能够通过checkFile()函数校验
+否则打印滑稽
+
+审计` checkFile()函数`校验
+```php
+highlight_file(__FILE__); //打印代码
+class emmm  //定义emmm类
+{
+    public static function checkFile(&$page)//将传入的参数赋给$page
+    {
+        $whitelist = ["source"=>"source.php","hint"=>"hint.php"];//声明$whitelist（白名单）数组
+        if (! isset($page) || !is_string($page)) {//若$page变量不存在或非字符串
+            echo "you can't see it";//打印"you can't see it"
+            return false;//返回false
+        }
+ 
+        if (in_array($page, $whitelist)) {//若$page变量存在于$whitelist数组中
+            return true;//返回true
+        }
+ 
+        $_page = mb_substr(//该代码表示截取$page中'?'前部分，若无则截取整个$page
+            $page,
+            0,
+            mb_strpos($page . '?', '?')
+        );
+        if (in_array($_page, $whitelist)) {
+            return true;
+        }
+ 
+        $_page = urldecode($page);//url解码$page
+        $_page = mb_substr(
+            $_page,
+            0,
+            mb_strpos($_page . '?', '?')
+        );
+        if (in_array($_page, $whitelist)) {
+            return true;
+        }
+        echo "you can't see it";
+        return false;
+    }
+}
+ 
+```
+
+1. 第一个if语句对变量进行检验，要求$page为字符串，否则返回false
+2. 第二个if语句判断$page是否存在于$whitelist数组中，存在则返回true
+3. 第三个if语句判断截取后的$page是否存在于$whitelist数组中，截取$page中'?'前部分，存在则返回true
+4. 第四个if语句判断url解码并截取后的$page是否存在于$whitelist中，存在则返回true
+
+
+1. 若以上四个if语句均未返回值，则返回false
+2. 有三个if语句可以返回true，第二个语句直接判断$page，不可用
+3. 第三个语句截取'?'前部分，由于?被后部分被解析为get方式提交的参数，也不可利用
+4. 第四个if语句中，先进行url解码再截取，因此我们可以将?经过两次url编码，在服务器端提取参数时解码一次，checkFile函数中解码一次，仍会解码为'?'，仍可通过第四个if语句校验。（'?'两次编码值为'%253f'）,构造url：
+
+`http://xxxxxxxxxxxxxxxx/source.php?file=source.php%253f../../../../../ffffllllaaaagggg`
+
+
+
+
+
+
+
+
+(p-2)*(q-2)= 0x9360ce5eb573dcdb85af4cef9468a29323aa9d26f8cef9a2b004f3d9922c12c45f74b85c00db81fa34de4714a6a95b676618a3ea8155df7095056c079531233f3e80cc372263ccaf4d42e5b7aa637586b673e30820a2d7eba201691371e138e4b3e45ed756cc6faac6e6f4686dfb56e7fcd361ac312d0f7110e76f8fee5cff75894e8a2f4e50ffd0ef9db7f0eb685a6b3038892a96b355ea1d154b77db6e97a3facd36dd8ee14b94cb98a21f4cea1412e7c72ea4cad530995ade3f5aae3444204dfc0d6ede436427
+e= 0x2e43a6e5
+n= 0x9360ce5eb573dcdb85af4cef9468a29323aa9d26f8cef9a2b004f3d9922c12c45f74b85c00db81fa34de4714a6a95b676618a3ea8155df7095056c079531233f3e80cc372263ccaf4d42e5b7aa637586b673e30820a2d7eba201691371e138e4b3e45eda7d04ff5b6a850dd6c5d5dcaab3588c8acc1b56794cbef1337664afd984d491d8134e3c1d661414278836b76e0de6a4e9a16f1c3f6abe86448dd065f317515d09888955eba578c5579381f59a5355584d1b2003c93660ada247f13db12aadc74a6801803b
+c= 0x49c627fa815685ad85060c0891e2cd04b5cd722cd82cc809835cb43da79b21ce547f4139da69a67e201c5f4643ff91306b92ae7d1e3cc96a01e7074c7016058bf607038061fc3a99b6ac3ae1eaf6a3fddcc70303ed56281896183a4cd98c18e5f0378bf18d6a09c685c6fefdd0c0914b4b22e183ac5c88d5674b54141ef8291855bc394296b8031c0b0b6ec26889871137b91224321bb0d2a89ae1cf84eeba9fe459d0b8dff7fb1aadbae839956dfdfef5b0a8dbdfe8fd2613228e75f45195ee24cfa58b85a57e0f
+
+## PHP伪协议
+
+- https://blog.csdn.net/qq_45521281/article/details/105533626
+
+**php://**
+
+- php://filter
+
+访问输入输出流，有两个常用的子协议
+
+- 1. `php://filter/resource=xxx文件名`  设计用来过滤筛选文件
+
+- 2. `?file=php://filter/read=convert.base64-encode/resource=flag.php 文件名`
+
+如果想要读取运行php文件的源码，可以先base64编码，再传入include函数，这样就不会被认为是php文件，不会执行，会输出文件的base64编码，再解码即可。
+
+- php://input
+
+咋post 中加入自己构造的代码
+
+![](img/10.png)
+
+这个协议的利用方法是 将要执行的语法php代码写在post中提交，不用键与值的形式，只写代码即可。
+
+
+- file://
+
+- 与php:filter类似，访问本地文件，但是只能传入绝对路径
+
+
+
+
+
+
 
 
 
