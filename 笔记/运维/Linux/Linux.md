@@ -231,3 +231,28 @@ cp ./src/proxychains.conf /etc/proxychains.conf
 cd .. && rm -rf proxychains-ng
 vim /etc/proxychains.conf
 ```
+
+
+## linux安装maven
+
+
+1、安装wget命令
+```bash
+yum -y install wget
+```
+2、下载maven安装包
+```
+cd /opt
+ wget http://mirrors.cnnic.cn/apache/maven/maven-3/3.5.4/binaries/apache-maven-3.5.4-bin.tar.gz
+```
+
+3.解压maven安装包
+```
+tar -zxvf apache-maven-3.5.4-bin.tar.gz
+```
+
+
+
+
+
+
