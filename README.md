@@ -40,6 +40,8 @@
       - [Web渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F)
         - [PHP Bypass D盾](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/PHP%E7%BB%95%E8%BF%87/Webshell/Bypass%20waf/PHP%E9%A9%AC.md)
         - [Web](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1)
+          - [漏洞合集](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/%E6%BC%8F%E6%B4%9E%E5%90%88%E9%9B%86)
+          - [shiro反序列化](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/shiro%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/shiro.md)
           - [HTTP 请求走私](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/HTTP%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81/HTTP%E8%AF%B7%E6%B1%82%E8%B5%B0%E7%A7%81.md)
           - [SQL 注入指北](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/SQL%E6%B3%A8%E5%85%A5)
             - [SQL 通用注入指北](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/SQL%E6%B3%A8%E5%85%A5/SQL%E6%B3%A8%E5%85%A5%E6%8C%87%E5%8C%97%E7%BB%BC%E5%90%88%E7%AF%87.MD)
