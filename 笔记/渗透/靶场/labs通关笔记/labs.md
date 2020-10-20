@@ -404,8 +404,23 @@ if(isset($_POST['submit'])){
 
 
 
-
-
+.php
+.php5
+.php4
+.php3
+.php2
+.html
+.htm
+.phtml
+.pht
+.pHp
+.pHp5
+.pHp4
+.pHp3
+.pHp2
+.Html
+.Htm
+.pHtml
 
 
 
