@@ -23,13 +23,15 @@
         - [Python-列表与元组](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%88%97%E8%A1%A8%E4%B8%8E%E5%85%83%E7%BB%84.md)
         -  [Python-字典与进阶](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%AD%97%E5%85%B8%E4%B8%8E%E8%BF%9B%E9%98%B6.md)
         -  [Python-函数](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%87%BD%E6%95%B0.md)
-        -  Python-%E5%AD%97%E5%85%B8%E4%B8%8E%E8%BF%9B%E9%98%B6.md)
         -  [Python-递归和进阶](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E9%80%92%E5%BD%92%E5%92%8C%E8%BF%9B%E9%98%B6.md)
 
       - [MySql](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/mysql/mysql.md)
 
     - [杂项](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9)
       - [CTF]()
+        - [PWN](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/CTF/pwnCTF/pwn.md)
+        - [杂项](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/CTF/%E6%9D%82%E9%A1%B9CTF/%E6%9D%82%E9%A1%B9CTF.md)
+        - [WEB](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/CTF/%E7%BD%91%E7%AB%99CTF/PHPCTF%E9%A2%98%E7%9B%AE.md)
 
     - [渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F)
       - [OS渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%B8%97%E9%80%8F/OS%E6%B8%97%E9%80%8F)
