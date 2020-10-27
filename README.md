@@ -28,12 +28,13 @@
       - [MySql](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/mysql/mysql.md)
 
     - [杂项](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9)
-      - [CTF]()
-        - [PWN](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/CTF/pwnCTF/pwn.md)
-        - [杂项](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/CTF/%E6%9D%82%E9%A1%B9CTF/%E6%9D%82%E9%A1%B9CTF.md)
-        - [WEB](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/CTF/%E7%BD%91%E7%AB%99CTF/PHPCTF%E9%A2%98%E7%9B%AE.md)
 
     - [安全](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8)
+      - - [CTF]()
+        - [PWN](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/pwnCTF/pwn.md)
+        - [杂项](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/%E6%9D%82%E9%A1%B9CTF/%E6%9D%82%E9%A1%B9CTF.md)
+        - [WEB](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/%E7%BD%91%E7%AB%99CTF/PHPCTF%E9%A2%98%E7%9B%AE.md)
+
       - [OS渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F)
         - [Windows渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Windows%E6%B8%97%E9%80%8F)
         - [WIFI 渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/wifi%E6%B8%97%E9%80%8F)
