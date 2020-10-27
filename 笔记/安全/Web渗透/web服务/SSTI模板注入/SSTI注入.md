@@ -100,6 +100,8 @@ python ./tplmap.py -u 'http://4ed902ae-b677-45c3-a0c1-4c8a88af7f07.node3.buuoj.c
 - jinja2:`尝试{{7*'7'}}回显 7777777`
 
 
+2020.10.27
+- 更新SSTI服务器模板注入
 
 
 使用 jinja2举例
