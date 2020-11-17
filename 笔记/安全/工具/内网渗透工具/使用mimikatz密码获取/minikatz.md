@@ -44,7 +44,7 @@ hashdump    (普通hash获取)
 
 run hashdump    (获取普通hash值)
 
-post/windows/gather/credentials/domain_hashdump （获取域hash）
+post/windows/gather/credenti（获取域hash）
 ```
 
 ## CS下的操作

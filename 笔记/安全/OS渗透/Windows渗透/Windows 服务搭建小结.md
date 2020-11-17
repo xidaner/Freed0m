@@ -317,3 +317,33 @@
 1. 右键 C:\backup——共享——高级共享——共享此文件夹
 2. 右键 C:\backup——共享——共享——Administrator——共享
 ```
+
+
+## 编译cs文件
+
+1. 配置环境
+
+一般来说在`C:\Windows\Microsoft.NET\Framework\v4.0.30319`
+右键点击"计算机"--"属性"--"高级系统设置"--"环境变量"--"系统变量"，找到变量Path
+      将Path中加上路径:C:/WINDOWS/Microsoft.NET/Framework/v4.0.30319/
+cmd中执行一下查看是否环境配置成功。
+
+2. 用csc来编译你的cs文件
+
+
+## powershell 开启脚本
+
+允许运行签名脚本 
+    首次在计算机上启动 Windows PowerShell 时，现用执行策略很可能是 Restricted（默认设置）。
+
+    Restricted 策略不允许任何脚本运行。
+
+    若要了解计算机上的现用执行策略，请键入：
+
+get-executionpolicy
+    若要在本地计算机上运行您编写的未签名脚本和来自其他用户的签名脚本，请使用以下命令将计算机上的 
+    执行策略更改为 RemoteSigned,然后重新运行**.ps1，就可以了
+
+set-executionpolicy remotesigned
+
+

@@ -1386,4 +1386,4 @@ exec("/usr/bin/sudo useradd pornhub"); 执行shell语句
 echo file_get_contents("http://xxxxx")
 ```
 
-
+**highlight_string 把字串string中的php代码彩色显示**

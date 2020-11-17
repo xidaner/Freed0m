@@ -159,9 +159,7 @@ mysql>use 数据库
 
 mysql>source d:/dbname.sql
 
-   
 
-   
 
 1. 导入数据到数据库
 
@@ -230,10 +228,12 @@ mysql -u用户名 -p密码 数据库名 < 数据库名.sql
 #mysql -uabc_f -p abc < abc.sql
 ```
 
+### mysql修改密码
 
+将密码的难度调为低
+`set global validate_password_policy=LOW;`
 
-
-
+`set password for root@localhost = password('123');`
 
 
 

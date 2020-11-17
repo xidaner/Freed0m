@@ -140,7 +140,11 @@ SQLNET.ALLOWED_LOGON_VERSION_CLIENT=8
 **创建用户**
 
 oracle内部有两个建好的用户：system和sys。用户可直接登录到system用户以创建其他用户，因为system具有创建别 的用户的 权限。 在安装oracle时，用户或系统管理员首先可以为自己建立一个用户。
-
+超级管理员 sys / change_on_install
+普通管理员 system / manager
+普通用户 scott    / tiger         默认被锁定
+大数据用户 sh / sh
+hr模式下用户 hr/密码未知
 ```
 语法[创建用户]： create user 用户名 identified by 口令[即密码]；
 

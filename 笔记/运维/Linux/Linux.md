@@ -252,7 +252,9 @@ tar -zxvf apache-maven-3.5.4-bin.tar.gz
 ```
 
 
+**ping设置次数**
 
-
-
+```
+ping www.baidu.com -c1
+```
 

