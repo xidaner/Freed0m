@@ -368,7 +368,7 @@ echo shellshock($_REQUEST["cmd"]);
 
 ### FFI 绕过 disable_functions
 
-
+`PHP7.4` 的一个新特性 `FFI（Foreign Function Interface）`，即外部函数接口，可以让我们在 PHP 中调用 C 代码
 
 
 
