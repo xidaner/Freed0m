@@ -17,6 +17,7 @@
     * [别名](#别名)
     * [撤销Git操作](#撤销Git操作)
     * [跳转](#跳转)
+    * [导入他人仓库](#导入他人仓库)
 
 * **[远程操作](#远程操作)**
     * [clone](#clone)
@@ -328,6 +329,18 @@ git log     # 查看 commit 历史
 git checkout xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # 跳转到指定的 commit 版本中
 ```
 
+## 导入他人仓库
+
+又称`子模块`,可将一个 Git 仓库作为另一个 Git 仓库的子目录。 它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。
+
+```bash
+git submodule add https://github.com/chaconinc/DbConnector # 目标仓库地址
+
+git status # 查看仓库状态，会发现有个他人的仓库
+git add -A
+git communt -m "test"
+git push
+```
 ---
 
 # 远程操作
