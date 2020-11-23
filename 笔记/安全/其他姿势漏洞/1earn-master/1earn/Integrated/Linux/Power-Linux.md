@@ -2568,6 +2568,7 @@ yum install php70w -y
 yum install php70w-mysql -y
 yum install httpd -y
 systemctl restart httpd
+systemctl enable httpd.service
 yum install zip
 yum install lrzsz
 yum install vim
@@ -2578,7 +2579,7 @@ service firewalld stop
 yum install php -y
 yum install php-mysql -y
 yum install httpd -y
-
+systemctl enable httpd.service
 systemctl restart httpd
 yum install zip
 yum install lrzsz
