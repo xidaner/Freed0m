@@ -370,7 +370,12 @@ echo shellshock($_REQUEST["cmd"]);
 
 `PHP7.4` 的一个新特性 `FFI（Foreign Function Interface）`，即外部函数接口，可以让我们在 PHP 中调用 C 代码
 
+使用`docker` 部署服务：
+```bash
+apt-get install libffi-dev
 
+docker-php-ext-install ffi
+```
 
 
 
