@@ -217,3 +217,17 @@ windows下就是
 ping %USERNAME%.xxxxx.ceye.io
 ```
 这么搞，在真正无回显的情况下判断系统版本
+
+CMD 扫描主机
+```bash
+# 探测一个C网段有多少台主机
+
+for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.1.%I | findstr "TTL="
+```
+
+
+
+
+
+
+

