@@ -2673,6 +2673,193 @@ grep 'temporary password' /var/log/mysqld.log
 ```
 ---
 
+### docker
+
+使用docker 搭建`PHP`环境
+
+**PHP**
+
+- PHP 5.2
+
+|PHP版本|系统版本|	Apache 版本|Web路径|COMMAND|
+|-|-|-|-|-|
+|5.2.17|Ubuntu 16.04.5|2.2.22|	/var/www/html|/init.sh|
+```bash
+# 拉取镜像
+docker pull seti/php52:latest
+
+# 运行容器
+docker run -d -p 8080:80 --name PHP5.2 seti/php52:latestW
+```
+
+- PHP 5.6
+
+|PHP版本|系统版本|	Apache 版本|Web路径|COMMAND|
+|-|-|-|-|-|
+|5.6.40|Ubuntu 16.04.5|2.4.37|/var/www/app|/sbin/entrypoint.sh|
+
+```bash
+# 拉取镜像
+docker pull romeoz/docker-apache-php:5.6
+
+# 运行容器
+docker run -d -p 8080:80 --name PHP5.6 romeoz/docker-apache-php:5.6
+```
+
+- PHP 7.3
+
+|PHP版本|系统版本|	Apache 版本|Web路径|COMMAND|
+|-|-|-|-|-|
+|7.3.10|Ubuntu 18.04.3|2.4.4|/var/www/app|/sbin/entrypoint.sh|
+
+```bash
+# 拉取镜像
+docker pull romeoz/docker-apache-php:7.3
+
+# 运行容器
+docker run -d -p 8080:80 --name PHP7.3 romeoz/docker-apache-php:7.3
+```
+
+**LAMP**
+
+
+- PHP 5.6.28 + MariaDB 10.1.19
+
+|PHP版本|MariaDB版本|系统版本|Apache 版本	|Web路径|	COMMAND|
+|-|-|-|-|-|-|
+|5.6.28	|10.1.19	|Alpine Linux 3.4	|2.4.23|	/var/www/html|	/start.sh|
+
+MySQL 的用户名和密码信息：
+|用户名|密码|
+|-|-|
+|root|空|
+
+```bash
+# 拉取镜像
+docker pull janes/alpine-lamp:latest
+
+# 运行容器
+docker run -d -p 8080:80 --name LAMP janes/alpine-lamp:latest
+```
+
+
+- PHP 5.5.9 + MySQL 5.5.61
+
+|PHP版本|MySQL版本|系统版本|Apache 版本	|Web路径|	COMMAND|
+|-|-|-|-|-|-|
+|5.5.9	|5.5.61	|Ubuntu 14.04.5		|2.4.7|	/var/www/html|	/start.sh|
+
+MySQL 的用户名和密码信息：
+
+|用户名|密码|
+|-|-|
+|root|root|
+
+```bash
+# 拉取镜像
+docker pull medicean/vulapps:base_lamp
+
+# 运行容器
+docker run -d -p 8080:80 --name LAMP medicean/vulapps:base_lamp
+```
+
+- PHP 7.3.22 + MariaDB 10.4.15
+
+|PHP版本|MariaDB版本|系统版本|Apache 版本	|Web路径|	COMMAND|
+|-|-|-|-|-|-|
+|7.3.22	|10.4.15	|Alpine Linux 3.11|2.4.46|/var/www/localhost/htdocs|/entry.sh|
+
+MySQL 的用户名和密码信息：
+
+|用户名|密码|
+|-|-|
+|root|root|
+
+```bash
+# 拉取镜像
+docker pull sqlsec/alpine-lamp
+
+# 运行容器 记住要指定密码
+docker run -d -p 8080:80 --name LAMP -e MYSQL_ROOT_PASSWORD=root sqlsec/alpine-lamp
+```
+
+
+docker中的常用代码：
+```bash
+# 使用docker attach进入Docker容器
+docker ps
+
+# 获取目标机器的shell
+ docker attach 44fc0f0582d9 /bin/shell
+
+# 获取目标机器的shell
+ docker exec -it a75482c765e5febee126 /bin/bash
+
+# 基本操作
+docker run -d -p 物理端口1:容器端口1 -p 物理端口2:物理端口2 --name 容器名 <image-name>:<tag>
+docker exec -it 容器名/ID bash
+
+# 磁盘挂载
+docker run -d -p 8080:80 -v 本机路径:容器路径 --name 容器名  <image-name>:<tag>
+
+# 容器打包镜像
+docker commit -a "作者" -m "备注" 容器ID <image-name>:<tag>
+
+# 物理机拷贝到容器
+docker cp test.txt 容器ID:/var/www/html
+
+# 容器拷贝到物理机
+docker cp 容器ID:/var/www/html/test.txt 物理机路径
+
+# 查看容器 COMMAND
+ docker ps -a --no-trunc
+
+# 停止所有容器 以此类推
+docker stop $(dokcer ps -aq)
+
+# 将容器打包成规范的镜像
+docker commit <exiting-Container> <hub-user>/<repo-name>[:<tag>]
+
+# 将镜像修改成规范的镜像
+docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]
+
+# 登录 Docker Hub
+docker login
+
+# 上传推送镜像到公共仓库
+docker push <hub-user>/<repo-name>:<tag>
+
+# 当前目录的 Dockerfile 创建镜像
+docker build -t <image-name>:<tag> .
+
+# 指定文件构建镜像
+docker build -f /path/to/a/Dockerfile -t <image-name>:<tag> .
+
+# 将镜像保存 tar 包
+docker save -o image-name.tar <image-name>:<tag>
+
+# 导入 tar 镜像
+docker load --input image-name.tar
+
+
+# docker-compose 命令相关
+## 基本操作
+docker-compose up -d
+
+
+## 关闭并删除容器
+docker-compose down
+
+## 开启|关闭|重启已经存在的由docker-compose维护的容器
+docker-compose start|stop|restart
+
+## 运行当前内容，并重新构建
+docker-compose up -d --build
+
+
+```
+
+
 ## Mijisou
 
 <p align="center">
