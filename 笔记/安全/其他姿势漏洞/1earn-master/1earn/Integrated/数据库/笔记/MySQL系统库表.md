@@ -1,5 +1,7 @@
 ### MySQL 系统库表
 
+
+
 ---
 
 **information_schema**
@@ -16,7 +18,15 @@ information_schema.tables
 information_schema.columns
     -- 表名 : table_name
 ```
+设置mysql外联
+```sql
+# 设置mysql外联账户密码
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123456'
 
+# 重新加载权限数据
+flush privileges;
+
+```
 
 
 

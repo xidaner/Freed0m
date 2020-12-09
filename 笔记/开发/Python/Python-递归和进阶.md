@@ -585,6 +585,258 @@ for i in files:															#加入多线程
    t.start()
 ```
 
+---
+
+## Python 正则表达式
+
+正则表达式是从左到右来匹配一个字符串的。它能帮助你去检查或匹配出对应的字符串信息。
+
+python中只要加入 re 模块即可匹配全部的正则表达式。
+
+**re.match函数**
+
+函数语法：
+```py
+re.match(pattern,string,flags=0)
+```
+|参数|描述|
+|-|-|
+|pattern|匹配的正则表达式|
+|string|要匹配的字符串|
+|flags|标志位，用于控制正则表达式的匹配方式|
+
+> 匹配成功 `re.match` 方法返回一个匹配的对象，否则返回 `None`。
+
+我们可以使用group(num) 或 groups() 匹配对象函数来获取匹配表达式。
+
+|匹配对象方法	|描述|
+|-|-|
+|group(num=0)|	匹配的整个表达式的字符串，group() 可以一次输入多个组号，在这种情况下它将返回一个包含那些组所对应值的元组。
+|groups()	|返回一个包含所有小组字符串的元组，从 1 到 所含的小组号。
+
+
+```py
+import re
+print(re.match('aaa', 'aaa.bbb.ccc').span())  # 在起始位置匹配
+print(re.match('bbb', 'aaa.bbb.ccc').span())         # 不在起始位置匹配
+```
+返回：
+
+```
+(0, 3)
+none
+```
+
+**re.search函数**
+
+`re.search` 尝试去匹配全部字符串，去找到一个对应的成功匹配的结果。
+
+|参数	|描述|
+|-|-|
+|pattern	|匹配的正则表达式
+|string	|要匹配的字符串。
+|flags	|标志位，用于控制正则表达式的匹配方式
+
+> 匹配成功re.search方法返回一个匹配的对象，否则返回None。
+
+
+```py
+# 实例：
+import re
+print(re.search('bbb', 'aaa.bbb.ccc').span())  # 在起始位置匹配
+print(re.search('aaa', 'aaa.bbb.ccc').span())         # 不在起始位置匹配
+```
+返回：
+```
+(0, 3)
+(4, 7)
+```
+
+**修饰符： re.S，re.M，re.I**
+
+> 修饰标识符被指定成一个可选的范围，可以理解为通过按位OR(|) 他们来指定，如`re.S，re.M，re.I` 等等来识别修饰符。
+
+|修饰符	|描述
+|-|-|
+|re.I|	使匹配对大小写不敏感
+|re.L|	做本地化识别（locale-aware）匹配
+|re.M|	多行匹配，影响 ^ 和 $
+|re.S|	使 . 匹配包括换行在内的所有字符
+|re.U|	根据Unicode字符集解析字符。这个标志影响 \w, \W, \b, \B.
+|re.X|	该标志通过给予你更灵活的格式以便你将正则表达式写得更易于理解。
+
+
+
+示例：
+
+re.I(不区分大小写)
+```py
+import re
+a = "AcadsdfghgjhgjhGhHghGfFhKmNM";
+search = re.findall(r'[g]',a,re.I)
+print(search)
+
+'''
+输出结果
+['g', 'g', 'g', 'G', 'g', 'G']
+'''
+```
+
+### 检测和替换
+
+**re.sub 函数**
+
+语法;
+`re.sub(pattern, repl, string, count=0, flags=0)`
+
+|参数|作用
+|-|-|
+|pattern| : 正则中的模式字符串。
+|repl : |替换的字符串，`也可为一个函数`。
+|string : |要被查找替换的原始字符串。
+|count :| 模式匹配后替换的最大次数，默认 0 表示替换所有的匹配。
+
+示例：
+```py
+import re
+a = "AcadsdfghgjhgjhGhHghGfFhKmNM";
+search = re.sub(r'[g]','-',a)
+print(search)
+
+'''
+输出结果
+Acadsdf-h-jh-jhGhH-hGfFhKmNM
+'''
+```
+
+当 `repl` 参数为一个函数时
+
+将匹配到的数全部乘2
+```py
+import re
+def double(number):
+    value=int(number.group('value'))
+    return str(value*2)
+
+s = '12421w gf1wsdqr12315152315'
+print(re.sub('(?P<value>\d+)', double, s))
+
+'''
+输出结果
+24842w gf2wsdqr24630304630
+'''
+```
+
+**re.compile 函数**
+
+> 用于生成正则表达式的对象，用于提供 match()和search()函数使用。
+
+语法格式是：
+`re.compile(patten[,flag])`
+
+示例：
+
+```py
+import re
+patten = re.compile(r'[0-9]')
+number = patten.findall('o1o2o3o4o5o6')
+print(number)
+```
+
+**findall 函数**
+
+> `match` 和 `search` 是匹配一次，但是 `findall` 匹配所有。
+
+语法格式：
+`findall(string[, pos[, endpos]])`
+
+|参数|作用
+|-|-|
+|string |待匹配的字符串。
+|pos | 可选参数，指定字符串的起始位置，默认为 0。
+|endpos | 可选参数，指定字符串的结束位置，默认为字符串的长度。
+
+语法：
+
+```py
+import re
+
+pattern = re.compile(r'\d+')   # 只查找数字
+result1 = pattern.findall('1o2o3o4o5o6o7')
+result2 = pattern.findall('1o2o3o4o5o6o7', 1, 10) # 从第二位开始
+
+print(result1)
+print(result2)
+
+'''
+输出结果
+['1', '2', '3', '4', '5', '6', '7']
+['2', '3', '4', '5']
+'''
+```
+
+**re.finditer 函数**
+
+> 和 findall 类似,在字符串中找到正则表达式中匹配的所有字符串，把它们作为一个迭代器返回。
+
+语法规则：
+`re.finditer(pattern, string, flags=0)`
+
+|参数|作用
+|-|-|
+|pattern|	匹配的正则表达式
+|string	|要匹配的字符串。
+|flags	|标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。
+
+示例：
+```py
+import re
+
+it = re.finditer(r"\d+", "1o2o3o4o5o6o7o") # 在字符串中匹配数字
+for match in it:
+    print(match.group())
+'''
+输出结果
+1
+2
+3
+4
+5
+6
+7
+'''
+```
+
+
+**re.split 函数**
+
+> `split` 方法非常强大，可以使用()分组捕获。不需要使用span()一个一个捕获
+
+`re.split(pattern, string[, maxsplit=0, flags=0])`
+
+|参数|作用|
+|-|-|
+|pattern|	匹配的正则表达式
+|string	|要匹配的字符串。
+|maxsplit|	分隔次数，maxsplit=1 分隔一次，默认为 0，不限制|次数。
+|flags	|标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等。
+
+用于匹配多个条件
+```py
+import re
+def re_split_test():
+    a = '姓名张三性别男身份证123000000000000000电话13800000000'
+    re_split_pattern = re.compile('(姓名|性别|身份证|电话)')
+    list1=re.split(re_split_pattern, a)
+    print(list1)
+
+if __name__ == '__main__':
+    re_split_test()
+'''
+输出结果
+['', '姓名', ':张三,', '性别', ':男,', '身份证', ':123000000000000000,', '电话', ':13800000000']
+'''
+```
 
 
 
@@ -599,24 +851,3 @@ for i in files:															#加入多线程
 
 
 
-
-
-10356
-10970
-11169
-10991
-11170
-10822
-11062
-11095
-11142
-10187
-10265
-10315
-10177
-10202
-10469
-10676
-10950
-11194
-11304

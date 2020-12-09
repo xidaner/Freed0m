@@ -6,6 +6,7 @@
 
 2. `redis-rogue-server.py -h`
 
+ find / -name *redis* 找找绝对路径
 
 3. 使用
 

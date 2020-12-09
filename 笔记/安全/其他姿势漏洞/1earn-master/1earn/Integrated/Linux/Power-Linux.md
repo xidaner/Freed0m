@@ -2793,7 +2793,7 @@ docker ps
  docker attach 44fc0f0582d9 /bin/shell
 
 # 获取目标机器的shell
- docker exec -it a75482c765e5febee126 /bin/bash
+ docker exec -it a75482c765e5febee126 /bin/bash  /bin/sh
 
 # 基本操作
 docker run -d -p 物理端口1:容器端口1 -p 物理端口2:物理端口2 --name 容器名 <image-name>:<tag>
@@ -2818,10 +2818,15 @@ docker cp 容器ID:/var/www/html/test.txt 物理机路径
 docker stop $(dokcer ps -aq)
 
 # 将容器打包成规范的镜像
-docker commit <exiting-Container> <hub-user>/<repo-name>[:<tag>]
+docker commit -m <exiting-Container> <hub-user>/<repo-name>[:<tag>]
 
 # 将镜像修改成规范的镜像
 docker tag <existing-image> <hub-user>/<repo-name>[:<tag>]
+
+docker commit -m "test" -a "leon" ac12c8e1f24f harborinner.517la.com:1111/dev/cluserappweb:2020-10-09-18-15-17-new
+
+
+
 
 # 登录 Docker Hub
 docker login
@@ -2856,6 +2861,16 @@ docker-compose start|stop|restart
 ## 运行当前内容，并重新构建
 docker-compose up -d --build
 
+
+将会导致退出容器。采用下面两种方式可以不退出容器而更新 Apache。
+
+方法一：在容器内执行
+
+service apache2 reload
+1
+方法二：exit 退出容器后，执行：
+
+docker restart [container name]
 
 ```
 
@@ -3507,6 +3522,7 @@ mysql -u root -p  # 本地连接
   yum-config-manager --disable mysql80-community
   yum-config-manager --enable mysql57-community
   yum install mysql-community-server mysql-community-devel
+  yum -y install mysql-community-server
   ```
 
 **配置**
@@ -5879,3 +5895,5 @@ tar -zxf LuaJIT-2.0.5.tar.gz
 cd LuaJIT-2.0.5/
 sudo make && make install
 ```
+
+docker run -d -p 8000:80 --name sec --env NODE_COUNT=3 smallcham/sec:all-in-0.3 && docker logs -f sec --tail 10
