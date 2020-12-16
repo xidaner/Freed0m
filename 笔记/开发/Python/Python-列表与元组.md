@@ -496,3 +496,25 @@
     - 常用操作
       - index()
       - len()
+
+```
+Python项目依赖，生成requirements.txt 有两种方法
+
+1、进入需要生成文件的目录，执行 pip freeze > requirements.txt ，此方法会包含环境所有的依赖包。
+
+2、pip install pipreqs
+
+　进入需要生成文件的目录执行： pipreqs ./     (或者直接  pipreqs  D:\test(实际路径））
+
+在此时可能会遇见
+
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x80 in position 776: illegal multibyte sequence
+
+这个错误.
+
+解决方法：指定编码格式      pipreqs ./  --encoding=utf8
+
+
+如果要安装requirements.txt中的类库内容，那么你可以执行:  pip install -r requirements.txt
+
+```

