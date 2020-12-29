@@ -62,6 +62,36 @@ CSCRIPT OSPP.VBS /DSTATUS
 
     配置 http 代理 IP:18080
 
+cp /etc/yum.repos.d/CentOS-Base.repo.backup /etc/yum.repos.d/CentOS-Base.repo
+
+- centos6 安装nodejs npm
+
+nodejs和npm YUM安装
+
+```bash
+[root@c6-23 ~]# curl --silent --location https://rpm.nodesource.com/setup_9.x | bash -
+[root@c6-23 ~]# yum install nodejs -y
+[root@c6-23 ~]# node -v
+v9.11.2
+[root@c6-23 ~]# npm -v
+5.6.0
+### npm 升级
+[root@c6-23 ~]# npm i -g npm
+/usr/bin/npm -> /usr/lib/node_modules/npm/bin/npm-cli.js
+/usr/bin/npx -> /usr/lib/node_modules/npm/bin/npx-cli.js
++ npm@6.8.0
+added 314 packages, removed 364 packages and updated 52 packages in 22.254s
+```
+
+nodejs和npm 二进制安装
+
+```bash
+wget  https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz
+tar xvJf  node-v11.10.0-linux-x64.tar.xz
+cp node-v11.10.0-linux-x64 /Data/apps/node
+ln -sv  /Data/apps/node/bin/node  /usr/sbin/node
+ln -sv  /Data/apps/node/bin/npm   /usr/sbin/npm
+```
 # DNS
 
 **快速刷新 DNS 缓存**
