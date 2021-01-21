@@ -1,0 +1,42 @@
+import socket
+import struct
+
+import IPy as IPy
+import argparse
+
+class SMBScanner:
+    pkt = b'\x00\x00\x00\xc0\xfeSMB@\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00$\x00\x08\x00\x01\x00\x00\x00\x7f\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00x\x00\x00\x00\x02\x00\x00\x00\x02\x02\x10\x02"\x02$\x02\x00\x03\x02\x03\x10\x03\x11\x03\x00\x00\x00\x00\x01\x00&\x00\x00\x00\x00\x00\x01\x00 \x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x03\x00\n\x00\x00\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00'
+
+    def payload(self, ip):
+        try:
+            sock = socket.socket(socket.AF_INET)
+            sock.settimeout(3)
+            sock.connect((ip, 445))
+            sock.send(self.pkt)
+
+            nb, = struct.unpack(">I", sock.recv(4))
+            res = sock.recv(nb)
+
+            if not res[68:70] == b"\x11\x03":
+                print(ip + " : Not vulnerable.")
+            if not res[70:72] == b"\x02\x00":
+                print(ip + " : Not vulnerable.")
+            else:
+                print(ip + " : ***** Vulnerable ****")
+        except:
+            print(ip + " : Connection refused.")
+
+    def start(self, target):
+        ips = IPy.IP(target)
+        for ip in ips:
+            self.payload(str(ip))
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-t", "--target", required=True, help="target ip or ip/mask Example: 192.168.1.2 or 192.168.1.0/24")
+    args = parser.parse_args()
+    target = args.target
+    print("[*] Start to scan ...")
+
+    SMBScanner().start(target)

