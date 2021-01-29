@@ -1,6 +1,6 @@
 # go入门
 
-重学 go 语言。
+重学 go 语言。 面向接口的语言。
 
 ## Hello World
 
@@ -127,6 +127,20 @@ var (
 	s3 := "嘤嘤嘤"
 	fmt.Println(s3)
 ```
+
+**其他声明**
+
+```go
+var x int32 = 10
+fmt.Println(x)
+```
+
+```go
+var x = int32(10)
+fmt.Println(x)
+```
+
+
 
 ### 输出
 
@@ -1119,7 +1133,810 @@ func main() {
 */
 ```
 
-**函数进阶**
+## 函数进阶
+
+**defer**
+
+`defer` 把它后面的语句延迟倒函数即将返回时再执行
+
+```go
+package main
+
+import "fmt"
+
+// 函数进阶
+
+func main() {
+	deferDemo()
+}
+
+func deferDemo()  {
+	fmt.Println("start")
+	defer fmt.Println("芜湖！起飞！") // defer 把它后面的语句延迟倒函数即将返回时再执行
+	fmt.Println("end")
+}
+/*
+输出内容:
+start
+end
+芜湖！起飞！
+*/
+```
+
+> 用处: 比如当一个文件关闭，封装的方法。在前面先写好，后面就算忘了也不影响。
+
+**多个defer**
+
+
+对于多个 `defer` 可以发现，此时的执行顺序是按照 `先进后出` 的顺序进行
+
+```go
+package main
+
+import "fmt"
+
+// 函数进阶
+
+func main() {
+	deferDemo()
+}
+
+func deferDemo()  {
+	fmt.Println("start")
+	defer fmt.Println("芜湖！塔台1！") // defer 把它后面的语句延迟倒函数即将返回时再执行
+	defer fmt.Println("芜湖！塔台2！") // defer 把它后面的语句延迟倒函数即将返回时再执行
+	defer fmt.Println("请求起飞！") // defer 把它后面的语句延迟倒函数即将返回时再执行
+	fmt.Println("end")
+}
+```
+
+
+
+### 函数类型作为参数和返回值
+
+- 当函数作为参数类型
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// 函数进阶
+
+func f1()  {
+	fmt.Println("芜湖~")
+}
+
+func f2() int {
+	return 10 ;
+}
+
+// 函数也可以作为参数的类型
+func f3(x func() int)  {
+	ret := x()
+	fmt.Println(ret)
+}
+
+func  f4(x,y int) int {
+	ret := x + y
+	fmt.Println(ret)
+	return ret
+}
+
+func main() {
+	a := f1
+	fmt.Printf("%T\n",a)
+	b := f2
+	fmt.Printf("%T\n",b)
+
+	f3(f2)
+	f3(b)
+	fmt.Printf("%T\n",f4(1,2))
+	//f3(f4)
+}
+
+/*
+输出结果
+func()
+func() int
+10
+10
+3
+int
+*/
+```
+
+
+- 函数可以作为返回值
+
+```go
+// 函数还可以作为返回值
+func f5(x func() int) func(int,int) int {
+	return ff
+
+}
+```
+
+**匿名函数**
+
+匿名函数即是，使用赋值，var f1 = func 这种定义函数。
+此时如果需要调用函数，则直接调用变量名 `f1(10,20)`
+
+```go
+package main
+
+import "fmt"
+
+// 匿名函数
+
+func main() {
+	f1(10,20)
+}
+
+var f1 = func(x,y int) {
+	fmt.Println(x + y)
+}
+```
+
+> 但是在函数中是无法声明带名字的函数d
+
+### 闭包
+
+**闭包 = 函数 + 外部变量的引用**
+
+实例
+
+```go
+package main
+
+import "fmt"
+
+// 闭包是什么？
+// 闭包是一个函数，这个函数包含了他外部作用域的一个变量
+
+// 底层的原理
+// 1. 函数可以作为返回值
+// 2. 函数内部查找变量的顺序，先在自己内部找，找不到往外层找
+
+func f1(f func()){
+	fmt.Println("芜湖")
+	f()
+}
+
+func f2(x,y int)  {
+	fmt.Println("起飞")
+	fmt.Println(x + y)
+}
+
+// 需求
+// f1(f2)
+
+func f3(f func(int,int),x,y int)func(){
+	tmp := func() {
+		fmt.Println(x + y)
+	}
+	return tmp
+}
+
+func main() {
+	ret := f3(f2,100,200) // 吧原来需要传递两个 INT类型的参数包装成一个不需要传参的函数
+	fmt.Printf("%T\n",ret)
+	f1(ret)
+	ret()
+}
+```
+
+
+**闭包进阶**
+
+```go
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+// 底层的原理
+// 1. 函数可以作为返回值
+// 2. 函数内部查找变量的顺序，先在自己内部找，找不到往外层找
+
+func makefunc(suffix string) func(string) string {
+	return func(name string) string {
+		if !strings.HasSuffix(name,suffix){
+			return name + suffix
+		}
+		return name
+	}
+}
+
+func main(){
+	jpgFunc := makefunc(".jpg")
+	txtFunc := makefunc(".txt")
+
+	fmt.Println(jpgFunc("芜湖"))
+	fmt.Println(txtFunc("起飞"))
+}
+```
+
+
+
+### 总结
+
+**函数的定义**
+
+- **基本格式**
+- **参数的格式**
+  - 有参数的函数
+  - 参数类型简写
+  - 可变参数
+- **返回值的格式**
+  - 有返回值
+  - 多返回值
+  - 命名返回值
+- **变量作用域**
+  - 全局作用域
+  - 函数作用域
+    - 1.现在函数内部找变量，找不到往外层找
+    - 2.函数内部的变量，外部是访问不到的
+  - 代码块作用域
+- **高阶函数**
+  - 函数也是一种类型，它可以作为参数，也可以作为返回值。
+
+
+**defer**
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// 底层的原理
+// 1. 函数可以作为返回值
+// 2. 函数内部查找变量的顺序，先在自己内部找，找不到往外层找
+
+func main() {
+	a := 1
+	b := 2
+	defer calc("1",a,calc("10",a,b)) // 在调用函数时，还有函数调用另一个函数此时将两个函数同时调用
+	a = 0
+	defer calc("2",a,calc("20",a,b))
+	b = 1
+}
+
+func calc(index string,a,b int) int {
+	ret := a + b
+	fmt.Println(index,a,b,ret)
+	return ret
+}
+```
+
+### 内置函数
+
+|内置函数 	|介绍
+|-|-|
+|close		|用于关闭channel
+|len		|求长度，比如 string、array、slice、map
+|new		|用于分配内存，主要用于分配值类型，比如：int、struct
+|make		|用于分配内存，主要用于分配引用内心，比如：chan、map、slice
+|append		|用于追加元素到数组、slice中
+|panic和recover		|用来做错误处理
+
+
+函数崩溃时退出
+
+```go
+package main
+
+import "fmt"
+
+// 底层的原理
+// 1. 函数可以作为返回值
+// 2. 函数内部查找变量的顺序，先在自己内部找，找不到往外层找
+
+func funca(){
+	fmt.Println("a")
+}
+
+func funcb()  {
+	panic("出现了严重的错误") // 程序崩溃时退出
+	fmt.Println("b")
+}
+
+func funcC()  {
+	fmt.Println("c")
+}
+
+func main() {
+	funca()
+	funcb()
+	funcC()
+}
+/*
+a
+panic: 出现了严重的错误
+*/
+```
+
+panic 会在程序崩溃时退出，此时后面的代码都不会执行。
+
+```go
+package main
+
+import "fmt"
+
+// 底层的原理
+// 1. 函数可以作为返回值
+// 2. 函数内部查找变量的顺序，先在自己内部找，找不到往外层找
+
+func funca(){
+	fmt.Println("a")
+}
+
+func funcb()  {
+	defer func() {
+		err := recover()
+		fmt.Println(err)
+		fmt.Println("释放数据库连接中")
+	}()
+	panic("出现了严重的错误") // 程序崩溃时退出
+	fmt.Println("b")
+	}
+
+func funcC()  {
+	fmt.Println("c")
+}
+
+func main() {
+	funca()
+	funcb()
+	funcC()
+}
+```
+
+### 递归
+
+- 递归
+  - 函数自己调用自己
+  - 适合处理那种问题相同、问题的规模越来越小的场景
+  - 递归要有一个明确的退出条件
+
+**阶乘**
+
+```go
+package main
+
+// 底层的原理
+// 1. 函数可以作为返回值
+// 2. 函数内部查找变量的顺序，先在自己内部找，找不到往外层找
+
+func f(n uint64)  uint64{
+	if n <=1{
+		return 1
+	}
+	return n * f(n-1)
+
+}
+
+func main() {
+	ret := f(5)
+	println(ret)
+}
+```
+
+理解递归为函数自己调用自己，此时必须有一个出口。否则就变成一个死循环了。
+
+### 类型别名
+
+将 `int` 等类型重命名为 `myint`等其他名称
+
+
+```go
+type xxxint  int 	// 自定义类型
+type xxxrun = int32	// 类型别名
+
+package main
+
+import "fmt"
+
+// 类型编码
+
+type xxxint = int
+
+func main() {
+	var c xxxint
+	c = 100
+	fmt.Println(c)
+	fmt.Printf("%T\n",c)
+}
+/*
+输出结果：
+100
+int
+*/
+```
+
+### 结构体
+
+结果体的定义
+
+在go语言中提供了一种自定义数据类型，可以封装多个基本数据类型，这种数据类型叫结构体，英文名称 `strust` 也就是我们可以通过 `strust` 来定义自己的类型。
+
+**结构体定义**
+
+使用 `type` 和 `struct` 关键字来定义结构体，具体代码如下：
+
+结构体的语法：
+```go
+type 类型名 struct{
+	字段名 字段类型
+	字段名 字段类型
+}
+
+// 构造体
+type person struct {
+	name string
+	age int
+	gender string
+	hobby []string
+}
+```
+
+- 类型名：标识自定义结构体的名称，在同一个包中不能重复
+- 字段名：表示结构体字段名。结构中的字段名必须唯一
+- 字段类型：表示结构体字段的具体类型
+
+演示实例：
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// 构造体
+type person struct {
+	name string
+	age int
+	gender string
+	hobby []string
+}
+
+func main(){
+	var wuhu person // 变量名(wuhu) 类型名(person)
+	wuhu.name = "大司马"
+	wuhu.age = 40
+	wuhu.gender = "男童"
+	wuhu.hobby = []string{"起飞","送豆童子","吃大鸟"}
+
+	// 访问变量wuhu
+	fmt.Println(wuhu)
+	// 访问变量wuhu 字段
+	fmt.Println(wuhu.name)
+}
+```
+
+**函数的参数**
+
+go语言中函数的特性：
+
+> go语言中的函数参数永远是拷贝，进行修改后不会对原参数修改
+
+```go
+package main
+
+import "fmt"
+
+// 构造体
+type person struct {
+	name,gender string
+}
+
+// 此时通过函数去修改参数
+func f(x person)  {
+	x.gender = "冲冲冲" //修改的是副本的 gender
+}
+
+func main()  {
+	var wuhu person
+	wuhu.name = "余小c"
+	wuhu.gender = "声微`饭否"
+	f(wuhu)
+	fmt.Println(wuhu.gender)
+}
+
+/*
+输出结果：
+声微`饭否
+*/
+```
+
+那么是不是函数就不可以修改函数值了呢？实则不然 有一种方法可以修改：
+
+**通过内存寻址修改变量**
+
+如何修改内存地址中的值：
+```go
+func f1(x *person)  {
+	(*x).gender = "这无可匹敌的饭量"
+}
+
+func main()  {
+	f1(&wuhu) // 在调用时前面加上 &符号表示内存地址。
+	fmt.Println(wuhu.gender) // 输出修改后的结构体
+}
+```
+
+对比实例：
+
+```go
+package main
+
+import "fmt"
+
+// 构造体
+type person struct {
+	name,gender string
+}
+
+func f(x person)  {
+	x.gender = "这无可匹敌的饭量"
+}
+
+func f1(x *person)  {
+	(*x).gender = "这无可匹敌的饭量"
+}
+
+func main()  {
+	var wuhu person
+	wuhu.name = "余小c"
+	wuhu.gender = "声微`饭否"
+	f(wuhu)
+	fmt.Println(wuhu.gender)
+	f1(&wuhu)
+	fmt.Println(wuhu.gender)
+
+}
+/*
+输出结果:
+声微`饭否
+这无可匹敌的饭量
+*/
+```
+
+**创建结构体的指针**
+
+使用 `new` 关键字对结构体进行实体化，得到的是结构体的地址.格式如下：
+
+```go
+var p2 = new(person)
+fmt.printf("%T\n",p2)
+fmt.Printf("p2=%#v\n",p2)
+```
+
+从输出结果中发现：`p2`是一个结构体指针。
+
+需要注意的是在GO语言中支持对结构体指针中直接使用`.`来访问结构体的成员。
+
+```go
+package main
+
+import "fmt"
+
+// 构造体
+type person struct {
+	name,city strings
+	age int
+}
+func main()  {
+	var p2 = new(person)
+	p2.name = "霸哥"
+	p2.age = 38
+	p2.city = "强啊霸哥"
+	fmt.Printf("p2=%#v\n",p2)
+}
+
+/*
+输出内容：
+p2=&main.person{name:"霸哥", city:"强啊霸哥", age:38}
+*/
+```
+
+将a的16进制内存地址打印出来
+
+```go
+package main
+
+import "fmt"
+
+// 构造体
+func main() {
+	var a int
+	a = 100
+	b := &a
+	fmt.Printf("type a:%T type b:%T\n",a,b)
+}
+```
+
+**结构体的初始化**
+
+初始化的两种方法
+- 第一种：使用 key value的形式
+- 第二种：使用 列表的形式
+
+> 结构体中占用一块连续的内存空间
+
+```go
+package main
+
+import "fmt"
+
+// 构造体
+
+type x struct {
+	a int8
+	b int8
+	c int8
+}
+
+func main(){
+	m := x{
+		a: int8(10),
+		b: int8(20),
+		c: int8(30),
+	}
+	fmt.Printf("%p\n",&(m.a))
+	fmt.Printf("%p\n",&(m.b))
+	fmt.Printf("%p\n",&(m.c))
+}
+/*
+输出结果：
+0xc00000a0b0
+0xc00000a0b1
+0xc00000a0b2
+*/
+```
+
+- 结构体是值类型，赋值的时候都是拷贝
+- 构造函数：返回一个结构体变量的函数
+
+## 方法和接受者
+
+go 语言中的 `方法` 是一种作用于特定类型变量的函数。这种特点类型变量叫做 `接收者(receiver)`。接收者的概念就类似于其他语言中的 `this` 和 `self`.
+
+方法的定义如下：
+```go
+func (接收者变量 接收者类型) 方法名(参数列表) (返回参数){
+	函数体
+}
+```
+
+
+```go
+// 方法的定义
+// 接收者表示的是调用该方法的具体类型变量,多用类型名首字母小写表示
+func (d dog) f() {
+	fmt.Printf("%s:狗叫？",d.name)
+}
+```
+
+使用方法的定义
+
+```go
+package main
+
+import "fmt"
+
+// 构造体
+
+type dog struct {
+	name string
+}
+
+
+// 构造函数
+func newDog(name string) dog {
+	return dog{
+		name : name,
+	}
+}
+
+func f(){
+	fmt.Println("狗叫？")
+}
+
+// 方法的定义
+// 接收者表示的是调用该方法的具体类型变量,多用类型名首字母小写表示
+func (d dog) f() {
+	fmt.Printf("%s:狗叫？",d.name)
+}
+
+func main() {
+ d1 := newDog("芜湖")
+ d1.f()
+}
+```
+
+**方法的定义**
+
+- 标识符：变量名 函数名 类型名 方法名
+- Go 语言中如果标识符首字母是大写的，就表示对外部包可见(暴露的，公有的)
+
+
+## 实例 信息管理系统
+
+获取用户输入
+
+```go
+var choice int
+fmt.Scanln(&choice)
+```
+
+
+**os 库获取命令行参数**
+
+实例：
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+)
+
+func main()  {
+
+    // 获取命令行参数
+    fmt.Println("命令行参数数量:",len(os.Args))
+    for k,v:= range os.Args{
+        fmt.Printf("args[%v]=[%v]\n",k,v)
+    }
+}
+```
+
+```GO
+/*
+    定义变量接收控制台参数
+     */
+
+    // 用户
+    var username string
+    // 密码
+    var password string
+    // 主机名
+    var host string
+    // 端口号
+    var port int
+
+    // StringVar用指定的名称、控制台参数项目、默认值、使用信息注册一个string类型flag，并将flag的值保存到p指向的变量
+    flag.StringVar(&username, "u", "", "用户名,默认为空")
+    flag.StringVar(&password, "p", "", "密码,默认为空")
+    flag.StringVar(&host, "h", "127.0.0.1", "主机名,默认 127.0.0.1")
+    flag.IntVar(&port, "P", 3306, "端口号,默认为空")
+
+    // 从arguments中解析注册的flag。必须在所有flag都注册好而未访问其值时执行。未注册却使用flag -help时，会返回ErrHelp。
+    flag.Parse()
+
+    // 打印
+    fmt.Printf("username=%v password=%v host=%v port=%v", username, password, host, port)
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
