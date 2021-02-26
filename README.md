@@ -1,7 +1,7 @@
 # [Freed0m](http://music.163.com/song?id=26145413&userid=262256866)
 
 > 自由让我向往天空。
-> 
+
 <p align="center">
     <img src="./img/1.gif">
 </p>
@@ -17,7 +17,7 @@
 
 
 
-- 简介 : 🚀`被基金噶韭菜太狠开始勤奋` 写的笔记的xidaner，有问题可以提问。下下次也不一定回答。
+- 简介 : 🚀`被基金噶韭菜太狠开始勤奋` 写的笔记的X1DanE2，有问题可以提问。下下次也不一定回答。
 - 定位 : 个人维护的安全知识框架
 - 更新时间 : 不定期
 - 项目地址 : [xidaner/Freed0m](https://github.com/xidaner/Freed0m)
@@ -107,6 +107,15 @@
       - [应急处置](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E5%BA%94%E6%80%A5%E5%A4%84%E7%BD%AE)
         - [入侵检测](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E5%BA%94%E6%80%A5%E5%A4%84%E7%BD%AE/%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E6%8E%92%E6%9F%A5/Linux/Linux%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B.md)
         - [杀毒软件的安装和后门查杀](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E5%BA%94%E6%80%A5%E5%A4%84%E7%BD%AE/%E6%9D%80%E6%AF%92%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%90%8E%E9%97%A8%E6%9F%A5%E6%9D%80)
+
+## Disclaimer&License
+
+- <sup>本项目采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh) 协议.</sup>
+    - <sup>共享 — 在任何媒介以任何形式复制、发行本作品。</sup>
+    - <sup>演绎 — 修改、转换或以本作品为基础进行创作在任何用途下，甚至商业目的。</sup>
+    - <sup>署名 — 您必须给出适当的署名，提供指向本许可协议的链接，同时标明是否（对原始作品）作了修改。您可以用任何合理的方式来署名，但是不得以任何方式暗示许可人为您或您的使用背书。</sup>
+    - <sup>没有附加限制 — 您不得适用法律术语或者 技术措施 从而限制其他人做许可协议允许的事情。</sup>
+- <sup>注: 本项目所有文件仅供学习和研究使用,请勿使用项目中的技术源码用于非法用途,任何人造成的任何负面影响,与本人无关.</sup>
 
 
 - If you are waiting for others to be saved, you will not be entitled to freedom at all.
