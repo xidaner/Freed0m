@@ -1,9 +1,12 @@
 # [Freed0m](http://music.163.com/song?id=26145413&userid=262256866)
 
-
+> 自由让我向往天空。
+> 
 <p align="center">
     <img src="./img/1.gif">
 </p>
+
+
 
 <p align="center">
     <img src="https://img.shields.io/badge/Category-knowledge-red.svg">
@@ -41,22 +44,31 @@
         -  [Python-字典与进阶](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%AD%97%E5%85%B8%E4%B8%8E%E8%BF%9B%E9%98%B6.md)
         -  [Python-函数](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E5%87%BD%E6%95%B0.md)
         -  [Python-递归和进阶](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/Python/Python-%E9%80%92%E5%BD%92%E5%92%8C%E8%BF%9B%E9%98%B6.md)
+        - [GO](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/GO)
+          - [第一章 入门简单学习](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/GO/%E5%85%A5%E9%97%A8%E7%AC%AC%E4%B8%80%E7%AF%87/go.md)
+          - [第二章 进阶](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/GO/%E8%BF%9B%E9%98%B6%E5%87%BD%E6%95%B0/go-2.md)
+          - [go 免杀](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/GO/go%E5%85%8D%E6%9D%80.md)
 
       - [MySql](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/mysql/mysql.md)
+      - [JavaScript](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/JavaScript/JavaScript.md)
+      - [XML](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/XML/XML%E5%AD%A6%E4%B9%A0.MD)
 
     - [杂项](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9)
 
     - [安全](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8)
-      - - [CTF]()
-        - [PWN](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/pwnCTF/pwn.md)
-        - [杂项](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/%E6%9D%82%E9%A1%B9CTF/%E6%9D%82%E9%A1%B9CTF.md)
-        - [WEB](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/%E7%BD%91%E7%AB%99CTF/PHPCTF%E9%A2%98%E7%9B%AE.md)
+      -  [CTF](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF)
+           - [PWN](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/pwnCTF/pwn.md)
+           - [杂项](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/%E6%9D%82%E9%A1%B9CTF/%E6%9D%82%E9%A1%B9CTF.md)
+           - [WEB](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/%E7%BD%91%E7%AB%99CTF/PHPCTF%E9%A2%98%E7%9B%AE.md)
 
       - [OS渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F)
         - [Windows渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Windows%E6%B8%97%E9%80%8F)
         - [WIFI 渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/wifi%E6%B8%97%E9%80%8F)
+
       - [Web渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F)
         - [PHP Bypass D盾](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/PHP%E7%BB%95%E8%BF%87/Webshell/Bypass%20waf/PHP%E9%A9%AC.md)
+        - [PHP 绕过disable_function](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/PHP%E6%96%87%E7%AB%A0/disable_functions/disable_function.md)
+        - [PHP文件包含漏洞利用小结](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/PHP%E6%96%87%E7%AB%A0/PHP%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8.md)
         - [Web](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1)
           - [漏洞合集](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/%E6%BC%8F%E6%B4%9E%E5%90%88%E9%9B%86)
           - [shiro反序列化](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/web%E6%9C%8D%E5%8A%A1/shiro%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/shiro.md)
@@ -96,14 +108,6 @@
         - [入侵检测](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E5%BA%94%E6%80%A5%E5%A4%84%E7%BD%AE/%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E6%8E%92%E6%9F%A5/Linux/Linux%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B.md)
         - [杀毒软件的安装和后门查杀](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E5%BA%94%E6%80%A5%E5%A4%84%E7%BD%AE/%E6%9D%80%E6%AF%92%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%90%8E%E9%97%A8%E6%9F%A5%E6%9D%80)
 
-格言
+
 - If you are waiting for others to be saved, you will not be entitled to freedom at all.
 (如果你正在等待他人解救，你就根本不配获得自由！)
-
- - 自由让我向往天空。
-
-- 人生，像一艘逆流的小船，奋力前行。但只要他们有所停歇，注定会不停地倒退，回到过去......
-- 如果你不觉得以前的自己是个傻逼，那你真是毫无长进。
-
-
-
