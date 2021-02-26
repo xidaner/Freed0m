@@ -1,6 +1,23 @@
 # [Freed0m](http://music.163.com/song?id=26145413&userid=262256866)
 
-🚀吃的太饱写的笔记，有问题可以提问。下下次也不一定回答。
+
+<p align="center">
+    <img src="./img/1.gif">
+</p>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/Category-knowledge-red.svg">
+    <img src="https://img.shields.io/github/repo-size/xidaner/Freed0m?color=yellow">
+    <img src="https://img.shields.io/github/last-commit/xidaner/Freed0m.svg?color=blue">
+    <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg?color=brightgreen">
+</p>
+
+
+
+- 简介 : 🚀`被基金噶韭菜太狠开始勤奋` 写的笔记的xidaner，有问题可以提问。下下次也不一定回答。
+- 定位 : 个人维护的安全知识框架
+- 更新时间 : 不定期
+- 项目地址 : [xidaner/Freed0m](https://github.com/xidaner/Freed0m)
 
 
 ## 免责声明

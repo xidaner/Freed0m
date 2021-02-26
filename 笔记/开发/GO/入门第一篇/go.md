@@ -1878,7 +1878,7 @@ fmt.Scanln(&choice)
 ```
 
 
-**os 库获取命令行参数**
+**使用 os 库获取命令行参数**
 
 实例：
 ```go
@@ -1925,6 +1925,227 @@ func main()  {
     // 打印
     fmt.Printf("username=%v password=%v host=%v port=%v", username, password, host, port)
 ```
+
+实例：芜湖机场飞机存储程序
+
+```go
+package main
+
+import (
+	"flag"
+	"fmt"
+	"os"
+)
+// 函数版学生管理系统
+// 写一个系统能够查看\新增学生\删除学生
+var (
+	// 制造一个 allplane 类型，value是一个student的类型指针
+	allplane map[int64] *student
+)
+type student struct {
+	id int64
+	name string
+}
+// newPlane 是student类型的构造函数
+func newPlane(id int64, name string) *student {
+	return &student{
+		id :id,
+		name : name,
+	}
+}
+func scanln1(username,password,host string,
+	port int)  {
+	fmt.Println("输入用户名,默认为空",username)
+	fmt.Scanln(&username)
+	// 获取命令行参数
+	fmt.Println("密码,默认为空",password)
+	fmt.Scanln(&password)
+	fmt.Println("主机名,默认 127.0.0.1",host)
+	fmt.Scanln(&host)
+	fmt.Println("端口号,默认为空",port)
+	fmt.Scanln(&port)
+	if port != 0 {
+		port = 3306
+	}
+	fmt.Printf("username=%v password=%v host=%v port=%v\n", username, password, host, port)
+}
+func showAllplane()  {
+	for k,v := range allplane{
+		fmt.Printf("飞机编号:%d 飞机类型:%d \n",k,v.name)
+	}
+}
+func addNewplane() {
+	// 向 allplane中添加新飞机
+	// 1.创建一个新飞机
+	// 2.追加到allplane中
+	var (
+		id int64
+		name string
+	)
+	fmt.Println("请输入飞机编号:")
+	fmt.Scanln(&id)
+	fmt.Println("请输入飞机类型:")
+	fmt.Scanln(&name)
+
+	// 1.1 造飞机(调用student的构造函数)
+	newPle := newPlane(id,name)
+	// 2. 追加数据到 allplane这个函数中
+	allplane[id] = newPle
+
+}
+func deleteplane()  {
+}
+func main() {
+	allplane = make(map[int64]*student,50) // 初始化(扩展空间)
+	// 用户
+	var username string
+	// 密码
+	var password string
+	// 主机名
+	var host string
+	// 端口号
+	var port int
+	var mode1 int
+	flag.IntVar(&mode1, "d", 0, "-d 命令行模式")
+	flag.StringVar(&username, "u", "", "用户名,默认为空")
+	flag.StringVar(&password, "p", "", "密码,默认为空")
+	flag.StringVar(&host, "h", "127.0.0.1", "主机名,默认 127.0.0.1")
+	flag.IntVar(&port, "P", 3306, "端口号,默认为空")
+	//// 从arguments中解析注册的flag。必须在所有flag都注册好而未访问其值时执行。未注册却使用flag -help时，会返回ErrHelp。
+	flag.Parse()
+	if mode1 == 1{
+		fmt.Printf("username=%v password=%v host=%v port=%v\n", username, password, host, port)
+	} else {
+		scanln1(username,password,host,port)
+	}
+	// 程序主内容
+	for  {
+		fmt.Println("欢迎来到芜湖机场，请求起飞")
+		// 1.打印菜单
+		fmt.Println(`
+	1. 查看所有飞机
+	2. 新增飞机
+	3. 删除飞机
+	4. 退出系统
+	`)
+		var choice int
+		fmt.Scanln(&choice)
+		fmt.Println("你选择了%d这个选项\n",choice)
+		// 获取命令行参数
+		switch choice {
+		case 1:
+			showAllplane()
+		case 2:
+			addNewplane()
+		case 3:
+			deleteplane()
+		case 4:
+			os.Exit(1) // 退出的状态码
+		default:
+			fmt.Println("做梦呢")
+
+		}
+	}
+}
+```
+
+## 结构体的匿名字段和结构体嵌套
+
+使用结构体的匿名字段 实例：
+
+```go
+package main
+
+import "fmt"
+
+// 结构体中的匿名字段必须唯一
+
+type person struct {
+	string
+	int
+}
+
+func main() {
+	p1 := person{
+		"芜湖",
+		20,
+	}
+	fmt.Println(p1)
+	fmt.Println(p1.string)
+}
+```
+
+适用场景
+1. 结构体中的匿名字段必须唯一
+2. 字段比较少也比较简单的场景
+
+为了防止嵌套的冲突，将类型写全即可
+
+## 构造体模拟实现继承
+
+在 go 语言中没有继承这种方法，但是使用 结构体也可以实现其他编程语言中的面对对象的继承。
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+// 结构体模拟实现其他语言中的“继承”
+
+type animal struct {
+	name string
+}
+
+func (a animal)move()  {
+	fmt.Printf("%s会动!",a.name)
+}
+
+// 狗类
+type dog struct {
+	feet uint8
+	animal
+}
+
+func (d dog) wang()  {
+	fmt.Printf("%s叫？是炫狗在叫？",d.name)
+}
+
+func main() {
+	d1 := dog{
+		animal:animal{name: "炫狗"},
+		feet: 4,
+	}
+	fmt.Println(d1)
+	d1.wang()
+	d1.move()
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

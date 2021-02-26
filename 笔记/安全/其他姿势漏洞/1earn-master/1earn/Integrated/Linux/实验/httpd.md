@@ -438,6 +438,110 @@ firewall-cmd --reload
 
 访问 `机器相应ip/1.php`
 
+**Ubuntu 安装 Apache2**
+
+1. Ubuntu 安装 Apache2
+```
+apt-get install apache2
+```
+
+**给apache安装php扩展**
+
+```
+sudo apt-get install libapache2-mod-php
+注：这是apache解析php文件的关键，光修改配置文件不安装扩展是不起作用的。
+```
+
+目录位置：/etc/apache2/apache2.conf
+```
+<Directory /home/menco/workplace>
+    #    RewriteEngine on
+    #    RewriteCond %{REQUEST_FILENAME} !-f
+    #    RewriteCond %{REQUEST_FILENAME} !-d
+    #    RewriteRule . index.php
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+```
+说明：
+
+/home/menco/workplace 为自定义的apache访问根目录
+
+在文件末尾加：
+```
+AddHandler php-script .php .html
+
+AddType text/html .php .html
+```
+
+1. apache 的默认的一些目录
+
+默认文档根目录是在 ubuntu 上的 /var/www 目录
+配置文件是 / etc/apache2/apache2.conf
+配置存储在的子目录在/etc/apache2 目录
+
+3. 我怎么手动开启/关闭 Apache 服务器呢？
+
+(1)重启 Apache 服务器（常用）
+
+    sudo /etc/init.d/apache2 restart
+(2)开启 Apache 服务器
+
+    sudo /etc/init.d/apache2 start
+(3)关闭 Apache 服务器
+
+    sudo /etc/init.d/apache2 stop
+
+三、安装安装 php 7.0
+
+1. 这里安装比较多，也是为了以后少一些麻烦，使用命令
+
+```bash
+sudo apt-get install software-properties-common
+
+sudo add-apt-repository ppa:ondrej/php && sudo apt-get update
+
+sudo apt-get -y install php7.2
+
+# 如果之前有其他版本PHP，在这边禁用掉
+
+sudo a2dismod php5
+sudo a2enmod php7.2
+
+# 安装常用扩展（建议安装）
+sudo apt-get -y install php7.2-fpm php7.2-mysql php7.2-curl php7.2-json php7.2-mbstring php7.2-xml  php7.2-intl php7.2-odbc php7.2-cgi
+
+#  安装其他扩展（按需要安装）
+sudo apt-get install php7.2-gd
+sudo apt-get install php7.2-soap
+sudo apt-get install php7.2-gmp      
+sudo apt-get install php7.2-pspell     
+sudo apt-get install php7.2-bcmath   
+sudo apt-get install php7.2-enchant    
+sudo apt-get install php7.2-imap       
+sudo apt-get install php7.2-ldap       
+sudo apt-get install php7.2-opcache
+sudo apt-get install php7.2-readline   
+sudo apt-get install php7.2-sqlite3    
+sudo apt-get install php7.2-xmlrpc
+sudo apt-get install php7.2-bz2
+sudo apt-get install php7.2-interbase
+sudo apt-get install php7.2-pgsql      
+sudo apt-get install php7.2-recode     
+sudo apt-get install php7.2-sybase     
+sudo apt-get install php7.2-xsl     
+sudo apt-get install php7.2-dba 
+sudo apt-get install php7.2-phpdbg     
+sudo apt-get install php7.2-snmp       
+sudo apt-get install php7.2-tidy       
+sudo apt-get install php7.2-zip
+```
+
+
+
+
+
 ---
 
 **Source & Reference**
@@ -457,7 +561,7 @@ firewall-cmd --reload
 
     注意，此指令中的路径最后不要加 / 
 
-2. Listen：
+1. Listen：
 
     指定服务器监听的IP和端口。默认情况下Apache会在所有IP地址上监听。Listen是Apache2.0以后版本必须设置的指令，如果在配置文件中找不到这个指令，服务器将无法启动。
 

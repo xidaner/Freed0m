@@ -581,6 +581,32 @@ use auxiliary/admin/oracle/tnscmd   # 该漏洞可以远程获取到 oracle 的�
     run
 
 ```
+**一句话**
+
+- `msfconsole -x "use auxiliary/scanner/smb/smb_ms17_010; set rhost 127.0.0.1; set lport 4444; run;"`
+
+```bash
+msfconsole -x "use auxiliary/scanner/smb/smb_ms17_010; set rhost 127.0.0.1; set lport 4444; run; exit" >> 1.txt
+一句话调用并输出。
+```
+
+-  kali
+设置postgresql数据库
+
+```
+service postgresql start
+
+```
+
+
+
+
+
+
+
+
+
+
 
 
 **MS12-020 & CVE-2012-0002**
