@@ -8,6 +8,9 @@
 
 ./ffuf -w /path/to/wordlist(字典路径) -u https://target/FUZZ(在要爆破的路径后面加上`FUZZ`)
 
+-fc 401
+过滤401页面
+
 2. Linux 扫描
 
 ```

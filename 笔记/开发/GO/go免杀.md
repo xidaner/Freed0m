@@ -22,7 +22,7 @@ garble -literals -tiny build <build_flags> <package/main_file>
 ```
 
 
-来 cmd打开  输入这两局
+来 cmd打开  输入这两句
 
 
 
@@ -57,6 +57,18 @@ https://github.com/burrowers/garble
 **RtlCopyMemory与RtlMoveMemory区别**
 
 这两个函数是内核函数api，对应Win32 API是CopyMemory和MoveMemory。都能实现内存块的复制，两者的区别在于CopyMemory是非重叠内存区域的复制，MoveMemory可以不考虑是否重叠，都可以安全复制。
+
+
+
+
+## sm4
+
+https://www.cnblogs.com/mumuzifeng/p/14056154.html
+
+https://blog.csdn.net/bingfeilongxin/article/details/88527477
+
+https://blog.csdn.net/qq_41547659/article/details/113343699
+
 
 
 # Python代码安全

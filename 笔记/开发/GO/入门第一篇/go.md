@@ -2049,79 +2049,7 @@ func main() {
 }
 ```
 
-## 结构体的匿名字段和结构体嵌套
 
-使用结构体的匿名字段 实例：
-
-```go
-package main
-
-import "fmt"
-
-// 结构体中的匿名字段必须唯一
-
-type person struct {
-	string
-	int
-}
-
-func main() {
-	p1 := person{
-		"芜湖",
-		20,
-	}
-	fmt.Println(p1)
-	fmt.Println(p1.string)
-}
-```
-
-适用场景
-1. 结构体中的匿名字段必须唯一
-2. 字段比较少也比较简单的场景
-
-为了防止嵌套的冲突，将类型写全即可
-
-## 构造体模拟实现继承
-
-在 go 语言中没有继承这种方法，但是使用 结构体也可以实现其他编程语言中的面对对象的继承。
-
-```go
-package main
-
-import (
-	"fmt"
-)
-
-// 结构体模拟实现其他语言中的“继承”
-
-type animal struct {
-	name string
-}
-
-func (a animal)move()  {
-	fmt.Printf("%s会动!",a.name)
-}
-
-// 狗类
-type dog struct {
-	feet uint8
-	animal
-}
-
-func (d dog) wang()  {
-	fmt.Printf("%s叫？是炫狗在叫？",d.name)
-}
-
-func main() {
-	d1 := dog{
-		animal:animal{name: "炫狗"},
-		feet: 4,
-	}
-	fmt.Println(d1)
-	d1.wang()
-	d1.move()
-}
-```
 
 
 
