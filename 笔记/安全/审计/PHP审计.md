@@ -5,6 +5,13 @@
 代码审计是一种经验的对抗和压制：如果我知道的东西比你多，经验就能压制你，写出你看的头皮发麻的代码。如果你的功能没有考虑全面，那么就可能会存在漏洞。
 
 
+- [PHP 开源白盒审计工具初探 上](https://www.anquanke.com/post/id/240739)
+- [PHP 开源白盒审计工具初探 下](https://www.anquanke.com/post/id/241045)
+
+https://xz.aliyun.com/t/2502
+https://xz.aliyun.com/t/2605
+https://xz.aliyun.com/t/3991
+
 
 ## 准备阶段
 
@@ -16,7 +23,7 @@
 
 常见的代码结构有两种
 
-1. MVC架构 
+1. MVC架构
 
 吧代码拆分成 Model、View、Controller 三部分、是一种软件设计的典范，用一种业务逻辑、数据、界面显示分离的方式组织代码，将业务逻辑聚集到一个部件里。
 模型一般是数据库操作的相关代码。例如：jsp中的JavaBean来设计数据的属性、提供获取属性的设置属性和 get/set的方法。再传输给处理数据的模型、再由试图页面输出。
@@ -38,7 +45,7 @@
 - 公用的一些代码文件夹一般 `common`
 - 一些工具函数可能放在 `helper，util，tool`文件夹里
 - 配置文件放在`config`文件夹里。
-  
+
 ## 项目介绍
 
 电商项目：
@@ -64,7 +71,7 @@
 需要掌握的语言/框架：
 1. 前端： HTML JavaScript dom 等。挖掘有没有XSS或 csrf。
 
-2. 后端：常见的语法。例如：不同语言中的 变量、常量、数组、对象、类的调用、引用等。 (例如 在python中就是 列表、元组、字典等)。 
+2. 后端：常见的语法。例如：不同语言中的 变量、常量、数组、对象、类的调用、引用等。 (例如 在python中就是 列表、元组、字典等)。
 
 3. 框架： 常见的编写收发有两种，混编和MVC框架。 审计中MVV设计模式要熟练。以为大多数的CMS或集群式网站都是通过MVC框架编写的。包括 `PHP、java、python、C`等。需要知道该语言的功能点会以什么方法去写。可能出现的漏洞。如文件上传的方法中可能存在绕过上传马、在数据库链接和查询模块中看看有没有未作过滤或者过滤不全面导致的SQL注入等。
 
@@ -77,7 +84,7 @@
 
 ### 1. 一般拿到题目先在网页中打开。使用目录爆破或者扫描先看看能不能先搜索到有用的路径
 
-### 2. 如果能爆破出目录则先从已爆破出的文件中入手。常见需要注意的接口文件名有: 
+### 2. 如果能爆破出目录则先从已爆破出的文件中入手。常见需要注意的接口文件名有:
  ```
 config       //配置文件
 access.log   //访问日志
@@ -177,12 +184,83 @@ php.ini配置上班后补充
 ![](img/1.png)
 
 
-### 8. (CTF中)涉及到反序列化和逆向的后续补充
+## 8.审计工具整理
 
-在审计完类后坐下总结
+### 基于文本特征
+#### graudit
+
+```
+Github: https://github.com/wireghoul/graudit
+Language: Shell
+```
+
+`graudit` 从 09年在 Github 开源到现在为止已经有 10 年左右的历史，并且仍在不断的更新中。graudit 全称是 grep rough audit，顾名思义其主要是借助 Linux 内建的 grep 命令来实现白盒审计，其核心代码只有一个 200 行不到的 bash 脚本。
+`graudit` 支持的语言为 ASP, C, .NET, Java, JavaScript, Perl, PHP, Python, Ruby等。
 
 
+#### VisualCodeGrepper
 
-### 9. 编辑 payload 测试。GLHF！
+```
+Github: https://github.com/nccgroup/VCG
+Language: Visual Basic .NET
+```
+
+`VisualCodeGrepper` 简称 VCG ，它是基于 VB 开发的一款 window 下的白盒审计工具。相对于其他白盒审计工具，VCG 还会检查代码注释中是否存在诸如 “ToDo”, “FixMe”, “Kludge” 此类的语句，从而提醒安全人员此处有未完成代码，可能存在安全问题。VCG 支持的语言为 C/C++, Java, C#, VB, PL/SQL, COBOL。
+
+
+#### kiwi
+
+```
+Github: https://github.com/alpha1e0/kiwi
+Language: Python2
+```
+
+kiwi 是一款基于 Python 开发的白盒审计框架。作者在设计之初更多将其定义为一个代码搜索工具，而不是代码审计工具。其主要是为了帮助安全人员更快的定位可能的漏洞点，从而进行下一步的人工审计。
+
+#### wpBullet
+
+```
+Github: https://github.com/webarx-security/wpbullet
+Language: Python3
+```
+
+wpBullet 遍历整个源码的所有文件，针对 .php 后缀的文件进行分析。针对每个 PHP 文件，wpBullet 主要进行两个分析：
+
+1）wpBullet 通过正则提取 PHP 文件中有关通过 add_action 函数注册的 admin_action (admin_action_xxx)、ajax hooks (wp_ajax_xxx) 和 admin 初始化 (admin_init) 的信息，并分别存入相应的全局变量以便后续展示给安全人员；
+2）wpBullet 根据预定的检测规则分析该 PHP 文件是否存在漏洞。wpBullet 首先通过正则提取该文件中所有用户可控的变量，然后基于这些变量动态生成正则表达式，继而检测这些变量是否未经过检测规则中的安全函数处理而直接传入检测规则中的危险函数。如若是，则生成漏洞报告。
+
+
+### 基于静态分析
+
+#### Cobra
+
+```
+Github: https://github.com/WhaleShark-Team/cobra
+Language: Python2
+```
+
+|标题 |语言|
+|-  |-  |
+|开发语言|	PHP、Java、Python、JSP、C、Ruby、Perl、Lua、Go、Swift、C++、C#、Header、Objective-C、Scale、Ceylon、Kotlin、Shell、Bat、JavaScript、HTML、CSS|
+|文件   |	Image、Font、Conf、CMake、SQL、Compression、Executable、Log、Text、Office、Media、Certificate、Source、Thumb、Git|
+|框架   |		WordPress、Joomla、Drupal、CodeIgniter、ThinkPHP、Laravel、Kohana、Yii、Symfony、Phalcon、Slim、CakePHP、Django、Flask、Sprin|
+
+### Kunlun-M
+
+
+```
+Github: https://github.com/LoRexxar/Cobra-W
+Language: Python3
+```
+
+Cobra-W 是基于 Cobra 2.0 进一步优化来提高发现漏洞的准确率以及精度的白盒审计工具。两者的工作原理基本相同，其不同之处主要体现在：
+
+- 深度重写AST，大幅度减少漏洞误报率。
+- 提供更易于从代码层面定制审计思路的规则书写方式，更易于白帽子使用，易于拓展。
+- 底层 api 重写，支持 windows、linux 等多平台。
+- 多层语义解析、函数回溯，secret机制，新增多种机制应用于语义分析。
+- 新增 javascript 语义分析，用于扫描包含js相关代码。
+
+### phpcs-security-audit
 
 

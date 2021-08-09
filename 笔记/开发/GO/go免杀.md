@@ -35,10 +35,21 @@ go env -w GOPROXY=https://goproxy.io
 
 使用 `gobfuscate` 混淆
 
+
+
 ```
 go get -u github.com/unixpickle/gobfuscate
 gobfuscate [flags] pkg_name out_path
 ```
+
+**自动隐藏**
+
+```
+go build -ldflags "-H windowsgui"
+```
+
+
+
 
 **garble**
 

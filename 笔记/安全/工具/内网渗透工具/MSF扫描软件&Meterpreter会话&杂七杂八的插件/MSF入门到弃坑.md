@@ -702,3 +702,13 @@ set SESSION 1
 exploit
 ```
 
+**提权帮助模块**
+
+```bash
+ use post/multi/recon/local_exploit_suggester
+set session 1
+exploit
+```
+
+
+

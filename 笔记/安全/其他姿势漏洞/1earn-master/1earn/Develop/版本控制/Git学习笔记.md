@@ -158,6 +158,26 @@ git reset --hard HEAD^
 git push -f
 ```
 
+### 常见代码
+
+```git
+git config --list  # 检查配置信息
+git config --global http.proxy #查看当前代理
+
+git config --global user.name "username"
+git config --global user.email user@xx.com
+# 认证
+
+git config --global http.proxy socks5://127.0.0.1:10808 #设置当前代理http
+git config --global https.proxy socks5://127.0.0.1:10808 #设置当前代理https
+git config --global --unset https.proxy  #删掉代理
+
+# 上传题目三行命令
+git pull # 需要先将远程仓库更新到本地
+git add -A
+git commit -m "xxxx" 
+git push
+```
 ---
 
 ## 分支管理

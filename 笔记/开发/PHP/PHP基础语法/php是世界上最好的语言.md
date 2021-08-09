@@ -1271,8 +1271,237 @@ PHP在系统中提供了多种定义数组的方式：
 
 
 
+## PHP 数组排序函数：
+
+```php
+sort() - 以升序对数组排序
+
+rsort() - 以降序对数组排序
+
+asort() - 根据值，以升序对关联数组进行排序
+
+ksort() - 根据键，以升序对关联数组进行排序
+
+arsort() - 根据值，以降序对关联数组进行排序
+
+krsort() - 根据键，以降序对关联数组进行排序
+```
+
+**实例**：
+
+1. 对数组进行升序排序 - sort()
+
+(1)按照字母升序对数组 $cars 中的元素进行排序
+
+```php
+$cars=array("Car","BMW","Volvo");
+sort($cars);
+var_dump($cars);
+//输出
+array (size=3)
+0 => string 'BMW' (length=3)
+1 => string 'Car' (length=3)
+2 => string 'Volvo' (length=5)
+?>
+```
 
 
+(2)按照数字升序对数组 $numbers 中的元素进行排序
+
+```php
+$numbers=array(3,5,1,22,11);
+
+sort($numbers);
+
+var_dump($numbers);
+
+//输出
+
+array (size=5)
+
+0 => int 1
+
+1 => int 3
+
+2 => int 5
+
+3 => int 11
+
+4 => int 22
+
+?>
+```
+
+
+2. 对数组进行降序排序 - rsort()
+
+(1)按照字母降序对数组 $cars 中的元素进行排序
+
+```php
+$cars=array("Car","BMW","Volvo");
+
+rsort($cars);
+
+var_dump($cars);
+
+//输出
+
+array (size=3)
+
+0 => string 'Volvo' (length=5)
+
+1 => string 'Car' (length=3)
+
+2 => string 'BMW' (length=3)
+
+?>
+```
+
+(2)按照数字降序对数组 $numbers 中的元素进行排序
+
+```php
+$numbers=array(3,5,1,22,11);
+
+rsort($numbers);
+
+var_dump($numbers);
+
+//输出
+
+array (size=5)
+
+0 => int 22
+
+1 => int 11
+
+2 => int 5
+
+3 => int 3
+
+4 => int 1
+
+?>
+```
+
+3. 根据值对数组进行升序排序 - asort()
+
+```php
+$age=array("Bill"=>"63","Steve"=>"56","Elon"=>"47");
+
+asort($age);
+
+var_dump($age);
+
+//输出
+
+array (size=3)
+
+'Elon' => string '47' (length=2)
+
+'Steve' => string '56' (length=2)
+
+'Bill' => string '63' (length=2)
+
+?>
+```
+
+4. 根据键对数组进行升序排序 - ksort()
+
+```php
+$age=array("Bill"=>"63","Steve"=>"56","Elon"=>"47");
+
+ksort($age);
+
+var_dump($age);
+
+//输出
+
+array (size=3)
+
+'Bill' => string '63' (length=2)
+
+'Elon' => string '47' (length=2)
+
+'Steve' => string '56' (length=2)
+
+$numArr = [3=>'rrrrr',1=>'aaaaa',4=>'bbbbb'];
+
+ksort($numArr);
+
+var_dump($numArr);
+
+//输出
+
+array (size=3)
+
+1 => string 'aaaaa' (length=5)
+
+3 => string 'rrrrr' (length=5)
+
+4 => string 'bbbbb' (length=5)
+
+?>
+```
+
+5. 根据值对数组进行降序排序 - arsort()
+
+```php
+$age=array("Bill"=>"63","Steve"=>"56","Elon"=>"47");
+
+arsort($age);
+
+var_dump($age);
+
+//输出
+
+array (size=3)
+
+'Bill' => string '63' (length=2)
+
+'Steve' => string '56' (length=2)
+
+'Elon' => string '47' (length=2)
+
+?>
+```
+
+6、根据键对数组进行降序排序 - krsort()
+
+```php
+$age=array("Bill"=>"63","Steve"=>"56","Elon"=>"47");
+
+krsort($age);
+
+var_dump($age);
+
+//输出
+
+array (size=3)
+
+'Steve' => string '56' (length=2)
+
+'Elon' => string '47' (length=2)
+
+'Bill' => string '63' (length=2)
+
+?>
+```
+
+
+## PHP 循环查询数组个数
+
+```php
+    // 循环查询数组个数
+    $arr = $rowData[0];
+    foreach ($arr as $str) {
+        $str_arr = explode(',', $str);
+        foreach ($str_arr as $v) {
+            $result[$v] = isset($result[$v]) ? $result[$v] : 0;
+            $result[$v] = $result[$v] + 1;
+        }
+    }
+
+```
 
 
 ## **PHP数组特点**
@@ -1324,6 +1553,27 @@ echo 'name is:',$valuw['name'],'and age is:',$value['age'],'<br/>';
 ## foreach遍历原理
 
 1. foreach 会重置指针：让指针指向第一个元素。
+
+
+
+**在多维数组中找到具有特定值的项数的简单方法**
+
+
+```php
+<?php
+$list = array(
+array('id' => 1, 'userId' => 5),
+array('id' => 2, 'userId' => 5),
+array('id' => 3, 'userId' => 6),
+);
+$userids = array_column($list, 'userId');
+$count = array_count_values($userids);
+$find_userid = 5;
+echo $count[$find_userid];
+
+```
+
+---
 
 
 
@@ -1387,3 +1637,5 @@ echo file_get_contents("http://xxxxx")
 ```
 
 **highlight_string 把字串string中的php代码彩色显示**
+
+

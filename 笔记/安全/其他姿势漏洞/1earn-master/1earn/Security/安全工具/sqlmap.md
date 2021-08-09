@@ -40,7 +40,10 @@ sqlmap -u URL --dbms mysql --risk 3                     # 指定执行测试的�
 sqlmap -u URL --dbms mysql --prefix "%df%27" --technique U -v 3                 # 宽字节检测
 sqlmap -u URL --proxy "socks5://127.0.0.1:1080"         # 代理注入测试
 sqlmap -u URL --batch --smart       # 启发式判断注入
+sqlmap -u URL --force-ssl # HTTPS协议注入
 ```
+
+
 
 **获取信息**
 ```bash

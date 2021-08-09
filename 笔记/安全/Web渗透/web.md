@@ -183,3 +183,10 @@ DESKTOP-1HV****---select host_name();
 ```
 找Web端IP地址select * from information_schema.PROCESSLIST;
 ```
+
+
+
+
+
+
+

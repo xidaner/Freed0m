@@ -104,7 +104,42 @@
 
     > NAT 内网穿透 远程内网计算机 域名访问内网站点 反向代理内网服务 花生壳 端口转发 http代理 微信 小程序 
 
+- [ZhouYu](https://github.com/threedr3am/ZhouYu)
 
+    > Java - SpringBoot 持久化 WebShell
+
+- [CTF工具](https://github.com/zardus/ctf-tools)
+
+    > docker直接安装全包
+
+    **Docker (version 1.7+)**
+
+    ```bash
+    git clone https://github.com/zardus/ctf-tools
+    cd ctf-tools
+    docker build -t ctf-tools .
+    ```
+    And run it with:
+    ```
+    docker run -it ctf-tools
+    ```
+
+    ```
+    docker run -it zardus/ctf-tools
+    ```
+
+    > 或者vagrant
+    ```
+    Vagrant
+    You can build a Vagrant VM with:
+
+    wget https://raw.githubusercontent.com/zardus/ctf-tools/master/Vagrantfile
+    vagrant plugin install vagrant-vbguest
+    vagrant up
+    And connect to it via:
+
+    vagrant ssh
+    ```
 
 
 **流量抓取**
@@ -124,6 +159,10 @@
 - [weblogic-framework](https://github.com/0nise/weblogic-framework)
 
     > CVE-2020-2551、CVE-2020-2555、CVE-2020-2883
+
+- [CVE-2021-3449](https://github.com/terorie/cve-2021-3449)
+
+    >实施CVE-2021-3449的概念验证漏洞  OpenSSL <1.1.1k DoS攻击
 
 - [PocList](https://github.com/Yang0615777/PocList)
 
@@ -350,6 +389,10 @@ kill 1785进程 (自己的pid端口)
 - [ExpDemo-JavaFX](https://github.com/yhy0/ExpDemo-JavaFX)
 
     > 构建图形化漏洞利用的一个项目，已经写好架子，只需要往里填充exp即可，帮助安全人员快速构建一个图形化的、跨平台的漏洞利用工具。
+
+- [qrcp](https://github.com/claudiodangelis/qrcp)
+    > 通过wifi传文件
+    
 
 
 
