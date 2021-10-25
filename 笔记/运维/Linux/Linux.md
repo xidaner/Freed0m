@@ -21,7 +21,7 @@ dpkg-reconfigure locales
 
 安装中文字体
 
-apt-get install xfonts-intl-chinese 
+apt-get install xfonts-intl-chinese
 apt-get install ttf-wqy-microhei
 重启
 ```
