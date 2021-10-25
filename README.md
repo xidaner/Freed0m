@@ -53,17 +53,25 @@
       - [JavaScript](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/JavaScript/JavaScript.md)
       - [XML](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%BC%80%E5%8F%91/XML/XML%E5%AD%A6%E4%B9%A0.MD)
 
-    - [杂项](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9)
-
     - [安全](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8)
       -  [CTF](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF)
+          - [Crypto](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/crypto](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/crypto/readme.md))
            - [PWN](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/pwnCTF/pwn.md)
            - [杂项](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/%E6%9D%82%E9%A1%B9CTF/%E6%9D%82%E9%A1%B9CTF.md)
-           - [WEB](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/%E7%BD%91%E7%AB%99CTF/PHPCTF%E9%A2%98%E7%9B%AE.md)
+           - [WEB](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/WEB%20CTF)
+             - [PHPCTF题目](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/WEB%20CTF/PHPCTF%E9%A2%98%E7%9B%AE/PHPCTF%E9%A2%98%E7%9B%AE.md)
+             - [其他](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/CTF/WEB%20CTF/%E5%85%B6%E4%BB%96/readme.md)
 
       - [OS渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F)
         - [Windows渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Windows%E6%B8%97%E9%80%8F)
         - [WIFI 渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/wifi%E6%B8%97%E9%80%8F)
+        - [数据库](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E6%95%B0%E6%8D%AE%E5%BA%93)
+          - [redis](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis.md)
+        - [Linux](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Linux/linux.md)
+        - [内网渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F)
+          - [Windwos环境代理链](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E4%BB%A3%E7%90%86%E4%B8%8E%E9%9A%A7%E9%81%93/readme.md)
+          - [Linux环境代理链](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E4%BB%A3%E7%90%86%E9%93%BE/%E4%BB%A3%E7%90%86%E9%93%BE.md)
+          - [PTH](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E4%BB%A3%E7%90%86%E9%93%BE/%E5%86%85%E7%BD%91%E9%81%A8%E6%B8%B8.md)
 
       - [Web渗透](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F)
         - [PHP Bypass D盾](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/Web%E6%B8%97%E9%80%8F/PHP%E7%BB%95%E8%BF%87/Webshell/Bypass%20waf/PHP%E9%A9%AC.md)
@@ -101,12 +109,24 @@
         - [Labs 通关笔记](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/%E9%9D%B6%E5%9C%BA/labs%E9%80%9A%E5%85%B3%E7%AC%94%E8%AE%B0/labs.md)
         - [Vulhub 通关笔记](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/%E9%9D%B6%E5%9C%BA/vulnhub/vulhub.md)
     - [运维](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4)
-      - [Linux](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/Linux) 服务配置和安全加固
+      - [Linux](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/Linux)
+        - [Jenkins的搭建和Java 环境安装](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/Linux/Jenkins%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8Cjava%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/java.md)
+        - [Linux服务加固](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/Linux/Linux%E6%9C%8D%E5%8A%A1%E5%8A%A0%E5%9B%BA)
+        - [Linux环境搭建](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/Linux/Linux%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA)
+          - [GO](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/Linux/Linux%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/go.md)
+          - [JAVA](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/Linux/Linux%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/java.md)
+        - [Docker](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/Linux/docker.md)
       - [Windows](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/windos)
       - [服务搭建](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA)
       - [应急处置](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E5%BA%94%E6%80%A5%E5%A4%84%E7%BD%AE)
         - [入侵检测](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E5%BA%94%E6%80%A5%E5%A4%84%E7%BD%AE/%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B%E6%8E%92%E6%9F%A5/Linux/Linux%E5%85%A5%E4%BE%B5%E6%A3%80%E6%B5%8B.md)
         - [杀毒软件的安装和后门查杀](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E8%BF%90%E7%BB%B4/%E5%BA%94%E6%80%A5%E5%A4%84%E7%BD%AE/%E6%9D%80%E6%AF%92%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%90%8E%E9%97%A8%E6%9F%A5%E6%9D%80)
+
+    - [杂项](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9)
+      - [Oscp](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/Oscp/oscp.md)
+      - [damedane](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/damedane/first-order-model.md)
+      - [部分弱口令](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/%E5%BC%B1%E5%8F%A3%E4%BB%A4%E9%9B%86%E5%90%88.md)
+      - [每日小知识](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E6%9D%82%E9%A1%B9/%E6%AF%8F%E6%97%A5%E5%B0%8F%E7%9F%A5%E8%AF%86.md)
 
 ## Disclaimer&License
 
