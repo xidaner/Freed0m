@@ -24,7 +24,7 @@ cd (文件目录)
 
     sudo vi /etc/profile
 
->在文件最后，添加如下内容：       
+>在文件最后，添加如下内容：
 ```
 #Java Env
 export JAVA_HOME=/usr/jdk1.8.0_221
@@ -79,7 +79,3 @@ OpenJDK Runtime Environment (build 1.8.0_121-b13)
 OpenJDK 64-Bit Server VM (build 25.121-b13, mixed mode)
 
 说明java环境安装成功!
-
-
-
-

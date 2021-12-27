@@ -572,6 +572,15 @@ c__builtin__%0Aeval%0Ap0%0A%28S%22open%28%27/flag.txt%27%2C%27r%27%29.read%28%29
 
 ## ciscn2019华北赛区半决赛day2_web1 题解
 
-flag{8825ac9d-c0b1-45ec-8f0c-36af77de8703}
+
+
+
+
+
+
+
+
+
+
 
 

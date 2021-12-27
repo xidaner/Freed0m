@@ -1379,3 +1379,11 @@ mystr.ljust(10,'.')
   - 常用操作方法
     - find()
     - index()
+
+### 拓展
+
+python一句话开启http服务
+
+```
+python -m http.server 80
+```
