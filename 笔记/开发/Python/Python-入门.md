@@ -1387,3 +1387,19 @@ python一句话开启http服务
 ```
 python -m http.server 80
 ```
+
+python中 pip安装出错时
+
+```bash
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+impacket 0.9.23.dev1+20210517.123049.a0612f00 requires ldap3!=2.5.0,!=2.5.2,!=2.6,>=2.5, which is not installed.
+impacket 0.9.23.dev1+20210517.123049.a0612f00 requires ldapdomaindump>=0.9.0, which is not installed.
+
+
+
+# 单独安装其中的环境即可
+python3 -m pip install ldap3 -i https://pypi.doubanio.com/simple
+
+python3 -m pip install ldapdomaindump -i https://pypi.doubanio.com/simple
+
+```

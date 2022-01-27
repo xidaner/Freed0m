@@ -88,6 +88,10 @@ SSP 是一套认证协议，用于实现身份认证等安全功能的身份验�
 
 客户端知道需要 NTLM 认证，将发送授权头中的第一条消息，用 base64 编码，因为该消息不仅包含可打印字符。服务器将在 `WWW-Authenticate` 头中回应一个挑战，客户端将计算响应，并在授权头中发送。如果认证成功，服务器通常会返回一个 200 的返回码，表示一切顺利。
 
+**kerberos 跨域**
+
+https://www.geekby.site/2020/05/%E5%9F%BA%E4%BA%8E%E5%9F%9F%E4%BF%A1%E4%BB%BB%E5%85%B3%E7%B3%BB%E7%9A%84%E5%9F%9F%E6%94%BB%E5%87%BB/#%E8%B7%A8%E5%9F%9F%E8%AE%A4%E8%AF%81%E5%92%8C%E8%B5%84%E6%BA%90%E8%AE%BF%E9%97%AE%E6%8E%88%E6%9D%83
+
 
 ### Integration with SMB
 

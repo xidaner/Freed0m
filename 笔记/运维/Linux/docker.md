@@ -564,3 +564,30 @@ root@ubuntu:~/docker/0ctf_2016_unserialize#
 ```
 /etc/init.d/networking restart
 ```
+
+### docker-compose 安装
+
+```
+pip install docker-compose -i  https://pypi.douban.com/simple
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
