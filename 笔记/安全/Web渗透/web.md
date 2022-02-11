@@ -244,5 +244,72 @@ path:wp-config.php
 /SELECT\*FROM.*\$_GET/
 ```
 
+**2022-01-29**
+
+- WEB漏洞:
+[wordpress:SQL盲注--CVE-2022–21661](https://cn-sec.com/archives/736489.html)
+[CWP任意文件读取-CVE-2021-45467](https://octagon.net/blog/2022/01/22/cve-2021-45467-cwp-centos-web-panel-preauth-rce/)
+
+
+- 学习
+[点击导致RCE](https://medium.com/manomano-tech/the-tale-of-a-click-leading-to-rce-8f68fe93545d)
+[抓包修改导致接管网站子域](https://medium.com/@moSec/how-i-hacked-thousand-of-subdomains-6aa43b92282c)
+
+
+
+**2022-02-09**
+
+- 被动信息收集
+  - https://www.webpagetest.org/
+  - [shodan 信息收集的 API](https://internetdb.shodan.io/)
+- 基于 `xxx../xxx` 绕过 nginx 访问
+  - https://vulhub.org/#/environments/nginx/insecure-configuration/
+- [一篇非常精彩的漏洞挖掘文章](https://www.cyberark.com/resources/threat-research-blog/dont-trust-this-title-abusing-terminal-emulators-with-ansi-escape-characters)
+
+- [Macr0phag3/ja3box](https://github.com/Macr0phag3/ja3box) - ja3(s) 提取工具
+    ```bash
+    pip3 install scapy colorama cryptography
+    git clone https://github.com/Macr0phag3/ja3box.git
+    cd ja3box
+    python3 ja3box.py -i eth0 --json
+    ```
+
+- 从 raw 包转到 python 脚本
+    - https://medium.com/@wyv3rn/creating-easy-proof-of-concept-scripts-with-python-and-curl-5dca489c596b
+    - https://curl.se/h2c/
+    - https://curlconverter.com/
+    - https://github.com/curlconverter/curlconverter
+    - https://github.com/curl/h2c
+
+```bash
+npm install --global curlconverter
+wget -O h2c https://raw.githubusercontent.com/curl/h2c/master/h2c && chmod +x h2c
+
+sudo tee test.txt <<-'EOF'
+POST /test/site/post.cgi HTTP/1.1
+Host: example.com
+User-Agent: moo
+Shoesize: 12
+Cookie: a=12; b=23
+Content-Type: application/json
+Content-Length: 57
+
+{"I do not speak": "json"}
+{"I do not write it": "either"}
+EOF
+
+./h2c < test.txt | curlconverter
+./h2c < test.txt | curlconverter -l go
+```
+
+
+
+
+
+
+
+
+
+
 
 

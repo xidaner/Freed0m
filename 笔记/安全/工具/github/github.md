@@ -102,7 +102,7 @@
 
 - [FastTunnel](https://github.com/SpringHgui/FastTunnel)
 
-    > NAT 内网穿透 远程内网计算机 域名访问内网站点 反向代理内网服务 花生壳 端口转发 http代理 微信 小程序 
+    > NAT 内网穿透 远程内网计算机 域名访问内网站点 反向代理内网服务 花生壳 端口转发 http代理 微信 小程序
 
 - [ZhouYu](https://github.com/threedr3am/ZhouYu)
 
@@ -342,7 +342,7 @@ docker run --name adguardhome \
 
 访问http://127.0.0.1:3000
 ```
-> 报错：docker: Error response from daemon: driver failed programming external connectivity on endpoint lamp 
+> 报错：docker: Error response from daemon: driver failed programming external connectivity on endpoint lamp
 > 原因：docker服务启动时定义的自定义链DOCKER被清除
 重启即可`systemctl restart docker`
 
@@ -399,6 +399,23 @@ kill 1785进程 (自己的pid端口)
 
 - [qrcp](https://github.com/claudiodangelis/qrcp)
     > 通过wifi传文件
+
+- [开发小工具,ui挺好看的](https://github.com/veler/DevToys)
+
+- [crlf 漏扫工具](https://github.com/dwisiswant0/crlfuzz)
+
+- [生成json格式数据的小工具](https://github.com/jpmens/jo)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

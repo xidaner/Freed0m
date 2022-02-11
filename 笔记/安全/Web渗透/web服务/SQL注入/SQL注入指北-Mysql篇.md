@@ -323,11 +323,10 @@ a'union select 1,2,database() %23
 ```sql
 1)   union select 1,group_concat(table_name),3 from information_schema.tables where table_schema='challenges' --
 闭合  查询函数         连接字段     表名               查询信息试图表                          数据库名称
- 
 ```
 
 ```
-id = -1 union select 
+id = -1 union select
 ```
 
 - `查询整个数据库中所有库和所对应的表信息`
@@ -369,7 +368,6 @@ values('100','new','new');
 
 
 ?id=0" union select 1,group_concat(secret_D2E9),group_concat(sessid) from challenges.la5spfxomc --+
-      
 ```
 
 ## 绕过空格(注释符 /**/，%a0)
@@ -383,4 +381,76 @@ values('100','new','new');
 /*  注释 */
 
 ```
+
+## bypass sleep
+
+**benchmark**
+
+是替代sleep的首选。
+
+用法：benchmark(执行多少次，执行什么操作)
+
+通过修改执行的次数和执行的操作(比如`sha1(sha1(sha1(sha1())))`这样多套几层)，可以精准控制延时时间。
+
+**笛卡尔积**
+
+也就是所谓的 `HEAVY QUERY` ，用的不多。
+
+**get_lock**
+
+可以精准控制延时时间，但是不好用，因为需要维持MySQL的会话，基本用不到。
+
+**正则**
+
+通过正则的状态机不断进行状态转换，增加比配的时长，打到延时的目的。例如：
+
+```
+select rpad('a',4999999,'a') RLIKE concat(repeat('(a.*)+',30),'b');
+```
+
+## 字符串截取方法
+
+**substr()**
+
+`这是最最最最基本的截取函数!`
+
+使用方法：`substr(要截取的字符串，从哪一位开始截取，截取多长)`
+
+**mid()**
+
+和`substr()`用法基本一样，是`substr()`完美的替代品。
+
+**right()**
+
+表示截取字符串的右面几位。
+
+**= > <**
+
+最基本的比较方法！
+
+**like**
+
+基本上可以用来替代等号，如果没有`% _`之类的字符的话。
+
+**AND和减法运算**
+
+`and`也可以用`&&`来表示，是逻辑与的意思。
+
+**OR和减法运算**
+
+`or`也可以用`||`来表示，是逻辑或的意思。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

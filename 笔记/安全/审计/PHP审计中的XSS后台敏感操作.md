@@ -12,6 +12,7 @@
 
 
 - https://portswigger.net/web-security/cross-site-scripting/cheat-sheet
+- https://web.archive.org/web/20120910161811/http://ha.ckers.org/xss.html
 Burp官网的XSS备忘录
 
 ### 什么是跨站脚本
@@ -50,7 +51,7 @@ XSS形成的原因：
 ![](img/XSS/2.png)
 
 
-在可以控制输入变量的地方输入测试 `PayLoad` 
+在可以控制输入变量的地方输入测试 `PayLoad`
 
 ```php
 <?

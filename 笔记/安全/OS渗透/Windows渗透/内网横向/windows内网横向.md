@@ -5,7 +5,7 @@
   - [PTH攻击总结](https://blog.csdn.net/systemino/article/details/106366929)
   - [1earn](https://github.com/No-Github/1earn/blob/8026439435b6bb2f2d37cec07b577d24b49a783c/1earn/Security/RedTeam/OS%E5%AE%89%E5%85%A8/Windows%E5%AE%89%E5%85%A8.md)
 
-
+- https://0range-x.github.io/2022/01/26/Domain-penetration_one-stop/
 
 
 ### 工作组
