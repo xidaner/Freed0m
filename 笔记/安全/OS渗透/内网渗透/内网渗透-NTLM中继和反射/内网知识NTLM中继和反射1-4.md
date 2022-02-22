@@ -1,4 +1,4 @@
-# 内网知识1-4
+# 内网知识 - NTLM中继和反射应用
 
 > 作者：[XiDanEr](https://github.com/xidaner)
 > 更新日期 2021年8月2日

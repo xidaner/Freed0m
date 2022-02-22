@@ -1,5 +1,11 @@
 # 常见CS内网横向教程
 
+
+> 本文作者：[XiDanEr](https://github.com/xidaner)
+> 更新日期 2021年9月11日
+
+---
+
 <p align="center">
     <img src="img/banner.jpg" width="75%">
 </p>
@@ -51,7 +57,7 @@
   * 服务器：`F8X -cs`
   * 下载链接：https://raw.githubusercontent.com/No-Github/Archive/master/CS/CobaltStrike4.3.zip
 * 其他附件：
-  * 链接：https://pan.baidu.com/s/1aINv_0Ix9T5Sop9qUMP7Fw 
+  * 链接：https://pan.baidu.com/s/1aINv_0Ix9T5Sop9qUMP7Fw
 提取码：2580
 
 

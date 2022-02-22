@@ -1,5 +1,10 @@
 # WEB安全基础篇
 
+> 作者：[XiDanEr](https://github.com/xidaner)
+> 更新日期 2021年11月2日
+
+---
+
 ![](img/1/10.png)
 
 **目录**

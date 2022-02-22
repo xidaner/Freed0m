@@ -1,4 +1,4 @@
-# 内网知识1-3
+# 内网知识 - NTLM 协议
 
 > 本文作者:[XiDanEr](https://github.com/xidaner) 更新日期 2021年8月2日
 

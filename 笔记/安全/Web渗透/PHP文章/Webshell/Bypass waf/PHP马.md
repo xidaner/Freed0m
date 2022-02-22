@@ -1,10 +1,15 @@
 #  PHPweb渗透中的webshell编写
 
-<audio src="./img/1.mp3" controls ></audio>
-- 👴 wanna love you ！ 
-<<[Is This Love (Original Mix)](http://music.163.com/song?id=402073828&userid=262256866)>> 
-专辑：Is This Love (Original Mix)
-歌手：Vicetone / Bob Marley
+<p align="center">
+    <img src="http://p2.music.126.net/hcCVW2P6GyeS94veBDazNA==/528865147219621.jpg?param=130y130" width="25%">
+</p>
+
+<p align="center">👴 wanna love you ！</p>
+<p align="center"><a href="http://music.163.com/song?id=402073828"><font>Is This Love (Original Mix)</font></a> </p>
+<p align="center">专辑：Is This Love (Original Mix)</p>
+<p align="center">歌手：Vicetone / Bob Marley</p>
+
+---
 
 - 目录
   - Webshell介绍:
@@ -18,7 +23,7 @@
   - Bypass D盾和安全狗分享:
     - [BypassD盾](#BypassD盾)
     - [一键免杀工具推荐](#webshell_venom)
-    - 
+
 ## 啥是webshell
 
   简单来说，webshell就是一个以网业形式存在的shell，或者叫后门，小马。
@@ -30,7 +35,7 @@
 
 PHP中可以使用某些[特殊函数](PHP中的特殊函数.md)来执行外部的代码或函数.
 
-可以理解为，应用PHP语言中一些具有命令执行功能的函数时,将外部输入的代码执行为php可执行代码或系统命令，也就是俗称的 `webshell` 。在服务器不进行权限设置的时候。权限仅仅是 网页启动者的权限Linux 中为apache权限，权限很低，在windows中是，apache启动者的权限。 
+可以理解为，应用PHP语言中一些具有命令执行功能的函数时,将外部输入的代码执行为php可执行代码或系统命令，也就是俗称的 `webshell` 。在服务器不进行权限设置的时候。权限仅仅是 网页启动者的权限Linux 中为apache权限，权限很低，在windows中是，apache启动者的权限。
 
 例如:
 `<?php echo systean('whoami');?>`
@@ -46,7 +51,7 @@ PHP中可以使用某些[特殊函数](PHP中的特殊函数.md)来执行外部�
 |执行系统命令|system, passthru, shell_exec, exec, popen, proc_open|直接对系统执行命令|
 |代码执行与加密|eval, assert, call_user_func,base64_decode, gzinflate, gzuncompress, gzdecode, str_rot13|将代码作为PHP命令执行|
 
-`$_POST[' ']` 接收我们传递的数据，并把接收的数据传递给一句话木马中执行命令的函数，进而执行命令，`system()`是对系统进行命令操作，而`eval()`函数是对PHP网页进行操作。 
+`$_POST[' ']` 接收我们传递的数据，并把接收的数据传递给一句话木马中执行命令的函数，进而执行命令，`system()`是对系统进行命令操作，而`eval()`函数是对PHP网页进行操作。
 所以可以组合为:
 ```php
 <?php 
