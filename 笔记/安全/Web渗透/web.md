@@ -302,9 +302,40 @@ EOF
 ./h2c < test.txt | curlconverter -l go
 ```
 
+**2022-02-11**
+
+- WEB漏洞:
+  - [Thinkphp 5.0.X 反序列化的绕过](https://www.anquanke.com/post/id/265355#h2-8)
+  - [FTP在ssrf中的应用](https://zhuanlan.zhihu.com/p/403107001)
+
+- graphql 案例
+    - https://vfpf.nl/graphql
+    - [swisskyrepo/GraphQLmap](https://github.com/swisskyrepo/GraphQLmap)
+    - [doyensec/inql](https://github.com/doyensec/inql) - 用于 GraphQL 安全测试的扩展
+    - https://github.com/dolevf/Damn-Vulnerable-GraphQL-Application
+
+- https://grep.app/ - 很好用的 github 代码搜索引擎
+- https://github.com/daffainfo/all-about-apikey - 有关于各类 APIkey 密钥的利用方式
+
+ - [Google 云端硬盘 -- SSRF](https://github.com/httpvoid/writeups/blob/main/Hacking-Google-Drive-Integrations.md)
+ - [窃取 OAuth 令牌绕过 Airbnb 身份验证](https://zhuanlan.zhihu.com/p/27611465)
+ - [针对OAuth2的CSRF攻击](https://www.jianshu.com/p/c7c8f51713b6)
+ - https://www.anquanke.com/post/id/246658
+
+- HOST头攻击
+  - [burpsuite靶场之高级漏洞篇 - HTTP Host头攻击专题](https://www.anquanke.com/post/id/246515)
+
+[http2-3请求工具](https://github.com/neex/http2smugl)
 
 
+**2022-02-16**
 
+- WEB:
+  - 前端JS解密
+  - [记一次前端安全测试](https://xz.aliyun.com/t/10801)
+  - [JSFinder](https://github.com/Threezh1/JSFinder)
+  - [Postgresql注入](https://www.freebuf.com/articles/web/249371.html)
+  - 特斯拉未授权FOFA语句: "主页 · TeslaMate" && country="CN"
 
 
 

