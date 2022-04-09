@@ -1,0 +1,91 @@
+#home {
+    margin: 0 auto;
+    width: 95%;/*页面自适应*/
+    min-width: 980px;/*页面顶部的宽度*/
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 30px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
+}
+body {
+    background: rgba(12, 100, 129, 1) ;
+    background-position: 30% 5%; 
+    background-size: cover;
+}
+#blogTitle {
+    height: 100px;  /*高度*/
+    clear: both;
+    background-color: rgba(245, 245, 245, 0);
+}
+
+//博客园标题
+#cnblogs_post_body
+{
+    color: black;      
+    font: 0.875em/1.5em "微软雅黑" , "PTSans" , "Arial" ,sans-serif;
+    font-size: 15px;
+}
+#cnblogs_post_body h1    {
+    background: #333366;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+    color: #FFFFFF;
+    font-family: "微软雅黑" , "宋体" , "黑体" ,Arial;
+    font-size: 23px;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    margin: 18px 0 !important;
+    padding: 8px 0 5px 5px;
+    text-shadow: 2px 2px 3px #222222;
+}
+#cnblogs_post_body h2    {
+    background: #006699;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+    color: #FFFFFF;
+    font-family: "微软雅黑" , "宋体" , "黑体" ,Arial;
+    font-size: 20px;
+    font-weight: bold;
+    height: 25px;
+    line-height: 25px;
+    margin: 18px 0 !important;
+    padding: 8px 0 5px 5px;
+    text-shadow: 2px 2px 3px #222222;
+}
+#cnblogs_post_body h3    {
+    background: #008200;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+    color: #FFFFFF;
+    font-family: "微软雅黑" , "宋体" , "黑体" ,Arial;
+    font-size: 18px;
+    font-weight: bold;
+    height: 22px;
+    line-height: 25px;
+    margin: 18px 0 !important;
+    padding: 8px 0 5px 5px;
+    text-shadow: 2px 2px 3px #222222;
+}
+#cnblogs_post_body h4{
+    background: #2B6600;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+    color: #FFFFFF;
+    font-family: "微软雅黑" , "宋体" , "黑体" ,Arial;
+    font-size: 16px;
+    font-weight: bold;
+    height: 24px;
+    line-height: 23px;
+    margin: 12px 0 !important;
+    padding: 5px 0 5px 10px;
+    text-shadow: 2px 2px 3px #222222;
+}
+/* adblock */
+#ad_t2 {
+    display: none;
+}
+.c_ad_block {
+    display: none;
+}
