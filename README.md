@@ -44,7 +44,7 @@
           - [Powershell 应用](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Windows%E6%B8%97%E9%80%8F/PowerShell/PowerShell%E5%B8%B8%E7%94%A8%E4%BB%A3%E7%A0%81.md) - 渗透中常用PowerShell命令总结
           - [Windows 内网横向](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Windows%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91/windows%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91.md) - 包含 windows pth、ptt 命令与实验
           - [NTLM 协议](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F-NTLM%E5%8D%8F%E8%AE%AE/%E5%86%85%E7%BD%91%E7%9F%A5%E8%AF%86NTLM%E5%8D%8F%E8%AE%AE1-3.md)- NTLM 协议学习笔记
-          - MsSql 提权整理
+          - [MsSql 提权整理](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Windows%E6%B8%97%E9%80%8F/MSSql%20%E6%8F%90%E6%9D%83/Readme.md) - 当拿下一台MsSql后提权操作
           - [漏洞收集](https://github.com/xidaner/Freed0m/tree/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Windows%E6%B8%97%E9%80%8F/%E6%BC%8F%E6%B4%9E%E6%94%B6%E9%9B%86)
           - [Windows 安全](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/Windows%E6%B8%97%E9%80%8F/Windows.md) - 不知道记哪儿就放这儿 一些小技巧与学习记录，后渗透等
         - **Linux**
