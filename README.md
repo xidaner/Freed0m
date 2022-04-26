@@ -54,6 +54,7 @@
 
           - **数据库**
             - [redis](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/redis/redis.md) - redis 未授权/弱口令利用文章
+            - [postgresql 总结](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E6%95%B0%E6%8D%AE%E5%BA%93/postgresql/README.md) - postgresql 提权总结
 
         - **内网渗透**
           - [CS内网横向教程](https://github.com/xidaner/Freed0m/blob/master/%E7%AC%94%E8%AE%B0/%E5%AE%89%E5%85%A8/OS%E6%B8%97%E9%80%8F/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/CS-%E5%86%85%E7%BD%91%E6%A8%AA%E5%90%91/Readme.md) - 利用 CS 和插件进行内网横向笔记
