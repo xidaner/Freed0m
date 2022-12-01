@@ -400,10 +400,12 @@ cpau -u administrator -p password -ex notepad
    - 微软发布了针对 cve-2022-26809的补丁程序，据报道这是一个针对微软 RPC 服务的零点击漏洞。在这篇摘要发表的时候，还没有证据表明这个概念在野生环境中是可行的。
 
 
+**2022-06-06**
 
+- [office 365 用户枚举](https://whynotsecurity.com/blog/o365fedenum/)
 
-
-
+- ruby 漏洞: 反序列化、危险的打开和发送漏洞
+  - https://bishopfox.com/blog/ruby-vulnerabilities-exploits
 
 
 

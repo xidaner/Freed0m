@@ -13,7 +13,7 @@ https://github.com/mekhalleh/cve-2019-0708
 
 代码为 
 ```
-use exploit/jojo/cve_2019_0708_bluekeep_dos 
+use exploit/jojo/cve_2019__bluekeep_dos 
 
 info
 

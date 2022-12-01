@@ -87,6 +87,57 @@ python -m nuitka --remove-output --module --no-pyi-file --include-package=<packa
 
 买个白名单证书 打到软件里面面
 
+**GoFileBinder捆绑**
+
+- 使用GoFileBinder把exe捆绑个pdf文件
+
+```
+./GoFileBinder <evil_program> <bind_file> [x64/x86]
+```
+
+生成EXE免杀文件后将需要的PDF文件相互捆绑后进行负载
+
+> 注意：main.exe和Al.pdf前面不要加表示当前目录的"./"，加的话会导致编译失败。
+
+![](img/1.png)
+
+当文件在目标机器上执行时，它会将shell文件的释放到`C:\Users\Public\Music\`，然后在运行正常文件和shell.exe后自动删除。
+
+解压缩自运行
+
+**Shell木马自解压并运行**
+
+1. 选中需要压缩的软件，右键添加到压缩软件，
+点击创建自解压格式压缩文件
+
+![](img/2.png)
+
+2. 点击 `高级 -→ 自解压选项`
+
+![](img/3.png)
+
+3. 填入解压路径 , 绝对路劲，（C:\Windows\Temp 文件夹 windows 电脑都有）
+
+![](img/4.png)
+
+4. 点击设置--------提取后运行
+
+![](img/5.png)
+
+5. 点击模式，静默模式， 全部隐藏
+
+![](img/6.png)
+
+6. 点击更新，设置
+
+> 更新方式----解压并更新文件覆盖方式----覆盖所有文件
+
+![](img/7.png)
+
+确定，然后就把文件名改的像一点。
+
+
+
 ## 待学习项目
 
 go免杀项目
